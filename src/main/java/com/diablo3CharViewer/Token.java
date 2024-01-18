@@ -55,4 +55,12 @@ public class Token {
             }
         }
     }
+
+    public void useToken(String battleNETURL) {
+        HttpRequest request = HttpRequest.newBuilder()
+                .uri(URI.create(battleNETURL))
+                .GET()
+                .setHeader("Authorization", "Bearer " + accessToken)
+                .build();
+    }
 }
