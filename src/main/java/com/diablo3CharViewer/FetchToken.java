@@ -26,8 +26,6 @@ public class FetchToken {
     // Prepare the request payload
     String requestBody = "grant_type=client_credentials";
 
-    String accessToken;
-
     // Create the HTTP client
     HttpClient httpClient = HttpClient.newHttpClient();
 
@@ -82,12 +80,10 @@ public class FetchToken {
 
         try {
 
-            accessToken = requestToken().getAccess_token();
-
             HttpRequest request = HttpRequest.newBuilder()
                     .uri(URI.create(battleNETURL))
                     .GET()
-                    .setHeader("Authorization", "Bearer " + accessToken)
+                    .setHeader("Authorization", "Bearer " + requestToken().getAccess_token())
                     .header("Content-Type", "application/json;charset=UTF-8")
                     .build();
 
