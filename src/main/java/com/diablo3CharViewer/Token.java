@@ -2,7 +2,7 @@ package com.diablo3CharViewer;
 
 public class Token {
 
-    private String access_token;
+    private static String access_token;
     private String token_type;
     private int expires_in;
     private String sub;
@@ -23,7 +23,7 @@ public class Token {
         this.sub = sub;
     }
 
-    public String getAccess_token() {
+    public static String getAccess_token() {
         return access_token;
     }
 

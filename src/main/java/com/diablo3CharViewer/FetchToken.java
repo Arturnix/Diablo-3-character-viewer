@@ -76,7 +76,7 @@ public class FetchToken {
         return "";
     }
 
-    private String initializeApiServiceGET(String battleNETURL) {
+    public String initializeApiServiceGET(String battleNETURL) {
 
         try {
 
