@@ -4,6 +4,14 @@ import java.util.Scanner;
 
 public class CharacterViewerManager {
 
+    public void showMenu() {
+
+        System.out.println("1. Przegladaj profil podajac batlleTag bohatera");
+        System.out.println("2. Wyswietl postac dla wybranego profilu");
+        System.out.println("3. Wyswietl informacje o przedmiocie");
+        System.out.println("4. Opusc archiwum");
+    }
+
     public void showProfile(GetApiAccount getApiAccount, FetchToken fetchToken) {
 
         System.out.println("Witaj wedrowcze! Podaj battleTag aby wyszukac profil bohatera: ");
@@ -30,6 +38,17 @@ public class CharacterViewerManager {
         getApiHero.setHeroId(heroId);
         getApiHero.setRequestURL();
         System.out.println("Zostan na chwile i poczytaj:\n" + getApiHero.generateRequest(fetchToken) + '\n');
+    }
+
+    public void showItem(GetApiItem getApiItem, FetchToken fetchToken) {
+        System.out.println("Witaj wedrowcze! Podaj itemSlugAndId aby wysweitlic informacje o przedmiocie: ");
+        Scanner scanner = new Scanner(System.in);
+        String itemSlugAndId = scanner.nextLine();
+        scanner.reset();
+
+        getApiItem.setItemSlugAndId(itemSlugAndId);
+        getApiItem.setRequestURL();
+        System.out.println("Zostan na chwile i poczytaj:\n" + getApiItem.generateRequest(fetchToken) + '\n');
     }
 
 }

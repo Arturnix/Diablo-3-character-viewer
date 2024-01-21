@@ -9,6 +9,7 @@ public class Main {
         //fetchToken.requestToken();
         GetApiAccount getApiAccount = new GetApiAccount();
         GetApiHero getApiHero = new GetApiHero();
+        GetApiItem getApiItem = new GetApiItem(); //dac tworzenie klas po podaniu battleTag lub item Id z podaną wartoscia dla tego pola
         CharacterViewerManager characterViewerManager = new CharacterViewerManager();
 
         int wybor;
@@ -17,10 +18,8 @@ public class Main {
         System.out.println("Witaj w archiwum bohaterow swiata Sanktuarium!\nWybierz odpowiednia opcje z menu aby przejrzec zapisy archiwum:");
 
        do {
-            System.out.println("1. Przegladaj profil podajac batlleTag bohatera");
-            System.out.println("2. Wyswietl postac dla wybranego profilu");
-            System.out.println("3. Opusc archiwum");
 
+            characterViewerManager.showMenu();
             wybor = scanner.nextInt();
             scanner.nextLine(); //nextInt() doesnt consume new line char when hitting enter to confirm typed data. So this command consume left end line char.
 
@@ -32,6 +31,9 @@ public class Main {
                     characterViewerManager.showHero(getApiHero, fetchToken);
                     break;
                 case 3:
+                    characterViewerManager.showItem(getApiItem, fetchToken);
+                    break;
+                case 4:
                     System.out.println("Zegnaj wedrowcze...");
                     break;
                 default:
