@@ -8,6 +8,7 @@ public class Main {
         FetchToken fetchToken = new FetchToken();
         //fetchToken.requestToken();
         GetApiAccount getApiAccount = new GetApiAccount();
+        GetApiHero getApiHero = new GetApiHero();
         CharacterViewerManager characterViewerManager = new CharacterViewerManager();
 
         int wybor;
@@ -17,7 +18,8 @@ public class Main {
 
        do {
             System.out.println("1. Przegladaj profil podajac batlleTag bohatera");
-            System.out.println("2. Opusc archiwum");
+            System.out.println("2. Wyswietl postac dla wybranego profilu");
+            System.out.println("3. Opusc archiwum");
 
             wybor = scanner.nextInt();
             scanner.nextLine(); //nextInt() doesnt consume new line char when hitting enter to confirm typed data. So this command consume left end line char.
@@ -27,12 +29,15 @@ public class Main {
                     characterViewerManager.showProfile(getApiAccount, fetchToken);
                     break;
                 case 2:
+                    characterViewerManager.showHero(getApiHero, fetchToken);
+                    break;
+                case 3:
                     System.out.println("Zegnaj wedrowcze...");
                     break;
                 default:
                     System.out.println("Dokonaj poprawnego wyboru:");
             }
-        } while(wybor != 2);
+        } while(wybor != 3);
        scanner.close(); //closable wiec zrobic try with resources
     }
 }
