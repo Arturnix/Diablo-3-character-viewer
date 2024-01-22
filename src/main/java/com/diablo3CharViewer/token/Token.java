@@ -1,4 +1,4 @@
-package com.diablo3CharViewer;
+package com.diablo3CharViewer.token;
 
 public class Token {
 

@@ -1,5 +1,7 @@
 package com.diablo3CharViewer;
 
+import com.diablo3CharViewer.token.FetchToken;
+
 public class Main {
     public static void main(String[] args) {
 
