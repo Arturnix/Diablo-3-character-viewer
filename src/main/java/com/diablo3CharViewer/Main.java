@@ -1,5 +1,8 @@
 package com.diablo3CharViewer;
 
+import com.diablo3CharViewer.api_handlers.AccountHandlerApi;
+import com.diablo3CharViewer.token.FetchToken;
+
 import java.util.Scanner;
 
 public class Main {
@@ -7,7 +10,7 @@ public class Main {
 
         FetchToken fetchToken = new FetchToken();
         //fetchToken.requestToken();
-        GetApiAccount getApiAccount = new GetApiAccount();
+        AccountHandlerApi accountHandlerApi = new AccountHandlerApi();
         CharacterViewerManager characterViewerManager = new CharacterViewerManager();
 
         int wybor;
@@ -24,7 +27,7 @@ public class Main {
 
             switch (wybor) {
                 case 1:
-                    characterViewerManager.showProfile(getApiAccount, fetchToken);
+                    characterViewerManager.showProfile(scanner, accountHandlerApi, fetchToken);
                     break;
                 case 2:
                     System.out.println("Zegnaj wedrowcze...");
