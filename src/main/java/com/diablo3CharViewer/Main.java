@@ -1,5 +1,9 @@
 package com.diablo3CharViewer;
 
+import com.diablo3CharViewer.api_handlers.AccountHandlerApi;
+import com.diablo3CharViewer.api_handlers.HeroHandlerApi;
+import com.diablo3CharViewer.token.FetchToken;
+
 import java.util.Scanner;
 
 public class Main {
@@ -7,8 +11,8 @@ public class Main {
 
         FetchToken fetchToken = new FetchToken();
         //fetchToken.requestToken();
-        GetApiAccount getApiAccount = new GetApiAccount();
-        GetApiHero getApiHero = new GetApiHero();
+        AccountHandlerApi accountHandlerApi = new AccountHandlerApi();
+        HeroHandlerApi heroHandlerApi = new HeroHandlerApi();
         CharacterViewerManager characterViewerManager = new CharacterViewerManager();
 
         int wybor;
@@ -17,19 +21,17 @@ public class Main {
         System.out.println("Witaj w archiwum bohaterow swiata Sanktuarium!\nWybierz odpowiednia opcje z menu aby przejrzec zapisy archiwum:");
 
        do {
-            System.out.println("1. Przegladaj profil podajac batlleTag bohatera");
-            System.out.println("2. Wyswietl postac dla wybranego profilu");
-            System.out.println("3. Opusc archiwum");
+            characterViewerManager.showMenu();
 
             wybor = scanner.nextInt();
             scanner.nextLine(); //nextInt() doesnt consume new line char when hitting enter to confirm typed data. So this command consume left end line char.
 
             switch (wybor) {
                 case 1:
-                    characterViewerManager.showProfile(getApiAccount, fetchToken);
+                    characterViewerManager.showProfile(scanner, accountHandlerApi, fetchToken);
                     break;
                 case 2:
-                    characterViewerManager.showHero(getApiHero, fetchToken);
+                    characterViewerManager.showHero(scanner, heroHandlerApi, fetchToken);
                     break;
                 case 3:
                     System.out.println("Zegnaj wedrowcze...");
@@ -38,6 +40,5 @@ public class Main {
                     System.out.println("Dokonaj poprawnego wyboru:");
             }
         } while(wybor != 3);
-       scanner.close(); //closable wiec zrobic try with resources
     }
 }

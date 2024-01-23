@@ -1,5 +1,6 @@
-package com.diablo3CharViewer;
+package com.diablo3CharViewer.token;
 
+import com.diablo3CharViewer.ClientCredentials;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
