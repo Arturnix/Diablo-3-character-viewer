@@ -1,8 +1,6 @@
 package com.diablo3CharViewer.token;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonInclude;
 
 public class Token {
     private String access_token;
