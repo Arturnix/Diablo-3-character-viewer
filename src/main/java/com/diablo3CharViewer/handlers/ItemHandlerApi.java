@@ -1,10 +1,12 @@
-package com.diablo3CharViewer;
+package com.diablo3CharViewer.handlers;
 
-public class GetApiHero {
+import com.diablo3CharViewer.token.FetchToken;
+import com.diablo3CharViewer.token.Token;
+
+public class ItemHandlerApi {
     private String region = "eu";
     private String locale = "pl_PL";
-    private String account;
-    private String heroId; //162864678
+    private String itemSlugAndId; //corrupted-ashbringer-Unique_Sword_2H_104_x1
 
     private String requestURL;
 
@@ -13,21 +15,17 @@ public class GetApiHero {
         this.region = region;
     }
 
-    public void setLocale(String locale) {
+    public void setLocale(String locale) { //locale PL daje polskie opisy
         this.locale = locale;
     }
 
-    public void setAccount(String account) {
-        this.account = account;
-    }
-
-    public void setHeroId(String heroId) {
-        this.heroId = heroId;
+    public void setItemSlugAndId(String itemSlugAndId) {
+        this.itemSlugAndId = itemSlugAndId;
     }
 
     public void setRequestURL() {
-        this.requestURL = "https://eu.api.blizzard.com/d3/profile/" +
-                account + "/hero/" + heroId + "?locale=pl_PL&access_token=" + Token.getAccess_token();
+        this.requestURL = "https://eu.api.blizzard.com/d3/data/item/" +
+                itemSlugAndId + "?locale=pl_PL&access_token=" + Token.getAccess_token();
     }
 
     public String getRegion() {
@@ -38,8 +36,8 @@ public class GetApiHero {
         return locale;
     }
 
-    public String getAccount() {
-        return account;
+    public String getItemSlugAndId() {
+        return itemSlugAndId;
     }
 
     public String getRequestURL() {

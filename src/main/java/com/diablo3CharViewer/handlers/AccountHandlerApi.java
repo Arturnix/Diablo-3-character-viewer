@@ -1,6 +1,9 @@
-package com.diablo3CharViewer;
+package com.diablo3CharViewer.handlers;
 
-public class GetApiAccount {
+import com.diablo3CharViewer.token.FetchToken;
+import com.diablo3CharViewer.token.Token;
+
+public class AccountHandlerApi {
 
     private String region = "eu";
     private String locale = "pl_PL";
