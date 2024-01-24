@@ -1,6 +1,9 @@
-package com.diablo3CharViewer;
+package com.diablo3CharViewer.handlers;
 
-public class GetApiItem {
+import com.diablo3CharViewer.token.FetchToken;
+import com.diablo3CharViewer.token.Token;
+
+public class ItemHandlerApi {
     private String region = "eu";
     private String locale = "pl_PL";
     private String itemSlugAndId; //corrupted-ashbringer-Unique_Sword_2H_104_x1

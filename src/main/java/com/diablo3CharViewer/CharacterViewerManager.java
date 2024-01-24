@@ -1,5 +1,10 @@
 package com.diablo3CharViewer;
 
+import com.diablo3CharViewer.handlers.AccountHandlerApi;
+import com.diablo3CharViewer.handlers.HeroHandlerApi;
+import com.diablo3CharViewer.handlers.ItemHandlerApi;
+import com.diablo3CharViewer.token.FetchToken;
+
 import java.util.Scanner;
 
 public class CharacterViewerManager {
@@ -12,19 +17,19 @@ public class CharacterViewerManager {
         System.out.println("4. Opusc archiwum");
     }
 
-    public void showProfile(GetApiAccount getApiAccount, FetchToken fetchToken) {
+    public void showProfile(AccountHandlerApi accountHandlerApi, FetchToken fetchToken) {
 
         System.out.println("Witaj wedrowcze! Podaj battleTag aby wyszukac profil bohatera: ");
         Scanner scanner = new Scanner(System.in);
         String battleTag = scanner.nextLine();
         scanner.reset();
-        getApiAccount.setAccount(battleTag);
-        getApiAccount.setRequestURL();
+        accountHandlerApi.setAccount(battleTag);
+        accountHandlerApi.setRequestURL();
 
-        System.out.println("Zostan na chwile i poczytaj:\n" + getApiAccount.generateRequest(fetchToken) + '\n');
+        System.out.println("Zostan na chwile i poczytaj:\n" + accountHandlerApi.generateRequest(fetchToken) + '\n');
     }
 
-    public void showHero(GetApiHero getApiHero, FetchToken fetchToken) {
+    public void showHero(HeroHandlerApi heroHandlerApi, FetchToken fetchToken) {
         System.out.println("Witaj wedrowcze! Podaj battleTag aby wyszukac profil bohatera: ");
         Scanner scanner = new Scanner(System.in);
         String battleTag = scanner.nextLine();
@@ -34,21 +39,21 @@ public class CharacterViewerManager {
         String heroId = scanner.nextLine();
         scanner.reset();
 
-        getApiHero.setAccount(battleTag);
-        getApiHero.setHeroId(heroId);
-        getApiHero.setRequestURL();
-        System.out.println("Zostan na chwile i poczytaj:\n" + getApiHero.generateRequest(fetchToken) + '\n');
+        heroHandlerApi.setAccount(battleTag);
+        heroHandlerApi.setHeroId(heroId);
+        heroHandlerApi.setRequestURL();
+        System.out.println("Zostan na chwile i poczytaj:\n" + heroHandlerApi.generateRequest(fetchToken) + '\n');
     }
 
-    public void showItem(GetApiItem getApiItem, FetchToken fetchToken) {
+    public void showItem(ItemHandlerApi itemHandlerApi, FetchToken fetchToken) {
         System.out.println("Witaj wedrowcze! Podaj itemSlugAndId aby wysweitlic informacje o przedmiocie: ");
         Scanner scanner = new Scanner(System.in);
         String itemSlugAndId = scanner.nextLine();
         scanner.reset();
 
-        getApiItem.setItemSlugAndId(itemSlugAndId);
-        getApiItem.setRequestURL();
-        System.out.println("Zostan na chwile i poczytaj:\n" + getApiItem.generateRequest(fetchToken) + '\n');
+        itemHandlerApi.setItemSlugAndId(itemSlugAndId);
+        itemHandlerApi.setRequestURL();
+        System.out.println("Zostan na chwile i poczytaj:\n" + itemHandlerApi.generateRequest(fetchToken) + '\n');
     }
 
 }

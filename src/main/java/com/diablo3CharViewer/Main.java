@@ -1,5 +1,10 @@
 package com.diablo3CharViewer;
 
+import com.diablo3CharViewer.handlers.AccountHandlerApi;
+import com.diablo3CharViewer.handlers.HeroHandlerApi;
+import com.diablo3CharViewer.handlers.ItemHandlerApi;
+import com.diablo3CharViewer.token.FetchToken;
+
 import java.util.Scanner;
 
 public class Main {
@@ -7,9 +12,9 @@ public class Main {
 
         FetchToken fetchToken = new FetchToken();
         //fetchToken.requestToken();
-        GetApiAccount getApiAccount = new GetApiAccount();
-        GetApiHero getApiHero = new GetApiHero();
-        GetApiItem getApiItem = new GetApiItem(); //dac tworzenie klas po podaniu battleTag lub item Id z podaną wartoscia dla tego pola
+        AccountHandlerApi accountHandlerApi = new AccountHandlerApi();
+        HeroHandlerApi heroHandlerApi = new HeroHandlerApi();
+        ItemHandlerApi itemHandlerApi = new ItemHandlerApi(); //dac tworzenie klas po podaniu battleTag lub item Id z podaną wartoscia dla tego pola
         CharacterViewerManager characterViewerManager = new CharacterViewerManager();
 
         int wybor;
@@ -25,13 +30,13 @@ public class Main {
 
             switch (wybor) {
                 case 1:
-                    characterViewerManager.showProfile(getApiAccount, fetchToken);
+                    characterViewerManager.showProfile(accountHandlerApi, fetchToken);
                     break;
                 case 2:
-                    characterViewerManager.showHero(getApiHero, fetchToken);
+                    characterViewerManager.showHero(heroHandlerApi, fetchToken);
                     break;
                 case 3:
-                    characterViewerManager.showItem(getApiItem, fetchToken);
+                    characterViewerManager.showItem(itemHandlerApi, fetchToken);
                     break;
                 case 4:
                     System.out.println("Zegnaj wedrowcze...");
