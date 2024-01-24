@@ -7,7 +7,7 @@ public class FetchTokenTest {
     private FetchToken testObject = new FetchToken();
 
     @Test
-    public void corrrectTokenFetched() {
+    public void correctTokenFetched() {
 
         String token = "EU7S6RQ5lRGROtbckZEJMezVfURWyk3yit"; //use actual token value
 
