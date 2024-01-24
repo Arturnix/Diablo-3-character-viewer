@@ -78,7 +78,7 @@ public class FetchToken {
         return "";
     }
 
-    private String fetchAPIResourceRequest(String battleNETURL) {
+    public String fetchAPIResourceRequest(String battleNETURL) {
 
         try {
             HttpRequest request = HttpRequest.newBuilder()
