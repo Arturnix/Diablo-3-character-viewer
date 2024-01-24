@@ -1,8 +1,8 @@
 package com.diablo3CharViewer;
 
-import com.diablo3CharViewer.handlers.AccountHandlerApi;
-import com.diablo3CharViewer.handlers.HeroHandlerApi;
-import com.diablo3CharViewer.handlers.ItemHandlerApi;
+import com.diablo3CharViewer.api_handlers.AccountHandlerApi;
+import com.diablo3CharViewer.api_handlers.HeroHandlerApi;
+import com.diablo3CharViewer.api_handlers.ItemHandlerApi;
 import com.diablo3CharViewer.token.FetchToken;
 
 import java.util.Scanner;
@@ -23,20 +23,19 @@ public class Main {
         System.out.println("Witaj w archiwum bohaterow swiata Sanktuarium!\nWybierz odpowiednia opcje z menu aby przejrzec zapisy archiwum:");
 
        do {
-
             characterViewerManager.showMenu();
             wybor = scanner.nextInt();
             scanner.nextLine(); //nextInt() doesnt consume new line char when hitting enter to confirm typed data. So this command consume left end line char.
 
             switch (wybor) {
                 case 1:
-                    characterViewerManager.showProfile(accountHandlerApi, fetchToken);
+                    characterViewerManager.showProfile(scanner, accountHandlerApi, fetchToken);
                     break;
                 case 2:
-                    characterViewerManager.showHero(heroHandlerApi, fetchToken);
+                    characterViewerManager.showHero(scanner, heroHandlerApi, fetchToken);
                     break;
                 case 3:
-                    characterViewerManager.showItem(itemHandlerApi, fetchToken);
+                    characterViewerManager.showItem(scanner, itemHandlerApi, fetchToken);
                     break;
                 case 4:
                     System.out.println("Zegnaj wedrowcze...");
@@ -44,7 +43,6 @@ public class Main {
                 default:
                     System.out.println("Dokonaj poprawnego wyboru:");
             }
-        } while(wybor != 3);
-       scanner.close(); //closable wiec zrobic try with resources
+        } while(wybor != 4);
     }
 }
