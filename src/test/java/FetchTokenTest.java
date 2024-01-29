@@ -9,7 +9,7 @@ public class FetchTokenTest {
     @Test
     public void correctTokenFetched() {
 
-        String token = "EU7S6RQ5lRGROtbckZEJMezVfURWyk3yit"; //use actual token value
+        String token = "EUCejbh2bft2F7hhtPl1Y0Wu8FAGW0AWJW"; //use actual token value
 
         Assertions.assertEquals(token, testObject.requestToken().getAccess_token());
     }

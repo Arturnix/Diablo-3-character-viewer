@@ -3,8 +3,7 @@ package com.diablo3CharViewer.token;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 public class Token {
-    private static String access_token;
-
+    private static String access_token = "EUY4G9gg3VGNX7SV6Rvf4OW02bXgZMB2A2";
     @JsonIgnore
     private String token_type;
     @JsonIgnore
@@ -34,4 +33,5 @@ public class Token {
     public void setSub(String sub) {
         this.sub = sub;
     }
+
 }
