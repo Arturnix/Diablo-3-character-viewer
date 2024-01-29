@@ -8,6 +8,6 @@ public class HeroHandlerApi {
     //zrobic jako static?
     public String generateRequest(String battleTag, String heroId, FetchToken fetchToken) { //token przypisywać ze zmiennej. Pobieram token kiedy program startuje i wrzucam go do stałej.
         return fetchToken.fetchAPIResourceRequest("https://eu.api.blizzard.com/d3/profile/" +
-                battleTag + "/hero/" + heroId + "?locale=pl_PL&access_token=" + Token.getAccess_token());
+                battleTag.replace('#', '-') + "/hero/" + heroId + "?locale=pl_PL&access_token=" + Token.getAccess_token());
     }
 }
