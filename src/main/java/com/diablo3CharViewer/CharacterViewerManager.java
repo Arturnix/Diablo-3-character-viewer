@@ -21,25 +21,33 @@ public class CharacterViewerManager {
         System.out.println("Zostan na chwile i poczytaj:\n" + itemHandlerApi.generateRequest(itemSlugAndIdProvider(scanner), fetchToken) + '\n');
     }
 
-    private String battleTagProvider(Scanner scanner) { //zrobic funkcje anonimowe z tego?
+    /*private String battleTagProvider(Scanner scanner) { //zrobic funkcje anonimowe z tego?
         System.out.println("Podaj battleTag aby wyszukac profil bohatera: ");
         String battleTag = scanner.nextLine();
 
         return battleTag;
+    }*/
+
+    private String battleTagProvider(Scanner scanner) { //zrobic funkcje anonimowe z tego?
+        System.out.println("Podaj battleTag aby wyszukac profil bohatera: ");
+
+        return dataProvider(scanner);
     }
 
     private String heroIdProvider(Scanner scanner) {
         System.out.println("Podaj heroId aby wyswietlic postac: ");
-        String heroId = scanner.nextLine();
 
-        return heroId;
+        return dataProvider(scanner);
     }
 
     private String itemSlugAndIdProvider(Scanner scanner) {
         System.out.println("Podaj itemSlugAndId aby wysweitlic informacje o przedmiocie: ");
-        String itemSlugAndId = scanner.nextLine();
 
-        return itemSlugAndId;
+        return dataProvider(scanner);
+    }
+
+    private String dataProvider(Scanner scanner) {
+        return scanner.nextLine();
     }
 
     public void showMenu() {
