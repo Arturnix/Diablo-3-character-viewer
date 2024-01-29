@@ -21,13 +21,6 @@ public class CharacterViewerManager {
         System.out.println("Zostan na chwile i poczytaj:\n" + itemHandlerApi.generateRequest(itemSlugAndIdProvider(scanner), fetchToken) + '\n');
     }
 
-    /*private String battleTagProvider(Scanner scanner) { //zrobic funkcje anonimowe z tego?
-        System.out.println("Podaj battleTag aby wyszukac profil bohatera: ");
-        String battleTag = scanner.nextLine();
-
-        return battleTag;
-    }*/
-
     private String battleTagProvider(Scanner scanner) { //zrobic funkcje anonimowe z tego?
         System.out.println("Podaj battleTag aby wyszukac profil bohatera: ");
 
