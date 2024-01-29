@@ -91,7 +91,8 @@ public class FetchToken {
             HttpResponse<String> response = httpClient.send(request, HttpResponse.BodyHandlers.ofString());
 
             if(response.statusCode() != HttpURLConnection.HTTP_OK) {
-                throw new RuntimeException("HttpResponseCode: " + response.statusCode());
+                System.out.println("Bohater o podanym battleTagu nie istanieje w świecie Sanktuarium");
+                //throw new RuntimeException("HttpResponseCode: " + response.statusCode());
             } else {
                 return response.body();
             }
