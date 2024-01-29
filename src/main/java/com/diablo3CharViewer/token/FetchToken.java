@@ -5,6 +5,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import java.io.IOException;
+import java.net.HttpURLConnection;
 import java.net.URI;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
@@ -14,26 +15,26 @@ import java.util.Base64;
 public class FetchToken {
 
     //make const and add to git ignore
-    String clientId = ClientCredentials.getClientId(); //"your_client_id";
-    String clientSecret = ClientCredentials.getClientSecret(); //"your_client_secret";
+    private final String clientId = ClientCredentials.getClientId(); //"your_client_id";
+    private final String clientSecret = ClientCredentials.getClientSecret(); //"your_client_secret";
 
     // Combine client_id and client_secret into base64-encoded string
-    String credentials = clientId + ":" + clientSecret;
-    String base64Credentials = Base64.getEncoder().encodeToString(credentials.getBytes());
+    private final String credentials = clientId + ":" + clientSecret;
+    private final String base64Credentials = Base64.getEncoder().encodeToString(credentials.getBytes());
 
     // Battle.net token endpoint
-    String tokenUrl = "https://oauth.battle.net/token";
+    private final String tokenUrl = "https://oauth.battle.net/token";
 
     // Prepare the request payload
-    String requestBody = "grant_type=client_credentials";
+    private final String requestBody = "grant_type=client_credentials";
 
     // Create the HTTP client
-    HttpClient httpClient = HttpClient.newHttpClient();
+    private final HttpClient httpClient = HttpClient.newHttpClient();
 
     public Token requestToken() {
 
         // Create the HTTP request and fetch token
-        String json = initializeApiServicePOST();
+        String json = fetchTokenRequest();
 
         ObjectMapper objectMapper = new ObjectMapper();
         Token token = null;
@@ -48,7 +49,7 @@ public class FetchToken {
         return token;
     }
 
-    private String initializeApiServicePOST() {
+    private String fetchTokenRequest() {
 
         try {
             // Create the HTTP request
@@ -61,7 +62,7 @@ public class FetchToken {
 
             HttpResponse<String> response = httpClient.send(request, HttpResponse.BodyHandlers.ofString());
 
-            if(response.statusCode() != 200) {
+            if(response.statusCode() != HttpURLConnection.HTTP_OK) {
                 throw new RuntimeException("HttpResponseCode: " + response.statusCode());
             } else {
                 return response.body();
@@ -77,10 +78,9 @@ public class FetchToken {
         return "";
     }
 
-    public String initializeApiServiceGET(String battleNETURL) {
+    private String fetchAPIResourceRequest(String battleNETURL) {
 
         try {
-
             HttpRequest request = HttpRequest.newBuilder()
                     .uri(URI.create(battleNETURL))
                     .GET()
@@ -90,7 +90,7 @@ public class FetchToken {
 
             HttpResponse<String> response = httpClient.send(request, HttpResponse.BodyHandlers.ofString());
 
-            if(response.statusCode() != 200) {
+            if(response.statusCode() != HttpURLConnection.HTTP_OK) {
                 throw new RuntimeException("HttpResponseCode: " + response.statusCode());
             } else {
                 return response.body();
@@ -105,5 +105,4 @@ public class FetchToken {
         }
         return "";
     }
-
 }

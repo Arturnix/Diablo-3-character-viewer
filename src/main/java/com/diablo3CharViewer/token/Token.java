@@ -1,42 +1,39 @@
 package com.diablo3CharViewer.token;
 
-public class Token {
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonInclude;
 
-    private static String access_token;
+public class Token {
+    private String access_token;
+
+    @JsonIgnore
     private String token_type;
-    private int expires_in;
+    @JsonIgnore
+    private String expires_in;
+    @JsonIgnore
     private String sub;
 
     public void setAccess_token(String access_token) {
         this.access_token = access_token;
     }
 
+    public String getAccess_token() {
+        return access_token;
+    }
+
+    @JsonIgnore
     public void setToken_type(String token_type) {
         this.token_type = token_type;
     }
 
-    public void setExpires_in(int expires_in) {
+    @JsonIgnore
+    public void setExpires_in(String expires_in) {
         this.expires_in = expires_in;
     }
 
+    @JsonIgnore
     public void setSub(String sub) {
         this.sub = sub;
     }
-
-    public static String getAccess_token() {
-        return access_token;
-    }
-
-    public String getToken_type() {
-        return token_type;
-    }
-
-    public int getExpires_in() {
-        return expires_in;
-    }
-
-    public String getSub() {
-        return sub;
-    }
-
 }
