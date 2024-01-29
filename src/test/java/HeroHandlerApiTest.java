@@ -1,21 +1,19 @@
-import com.diablo3CharViewer.api_handlers.AccountHandlerApi;
 import com.diablo3CharViewer.token.FetchToken;
-import com.diablo3CharViewer.token.Token;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-public class AccountHandlerApiTest {
+public class HeroHandlerApiTest {
+
     private FetchToken testObject = new FetchToken();
 
     @Test
     public void correctAccountFetched() {
 
-        String battleTag = "Jokefish#2265";
+        String heroId = "162864678";
         String token = testObject.requestToken().getAccess_token();
 
         Assertions.assertTrue(testObject.fetchAPIResourceRequest(
-                "https://eu.api.blizzard.com/d3/profile/Jokefish-2265/?locale=pl_PL&access_token="
-                + token)
-                .contains(battleTag));
+                        "https://eu.api.blizzard.com/d3/profile/Jokefish-2265/hero/" + heroId +
+                                "?locale=pl_PL&access_token=" + token).contains("162864678"));
     }
 }
