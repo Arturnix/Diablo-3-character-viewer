@@ -55,11 +55,29 @@ public class AccountHandlerApiTest {
     public void fetchAccountFailed4() {
 
         AccountHandlerApi testAccountHandlerApi = new AccountHandlerApi();
+        String battleTag = null;
 
         String fetchedAccountOK = testAccountHandlerApi.generateRequest("Jokefish-2265", testObject);
-        String fetchedAccountNOK = testAccountHandlerApi.generateRequest("", testObject);
+        String fetchedAccountNOK = testObject.fetchAPIResourceRequest(BaseUrlParts.getBaseProfileApi() + battleTag
+                + BaseUrlParts.getBaseLocaleAndToken() + Token.getAccess_token());
 
         Assertions.assertNotEquals(fetchedAccountOK, fetchedAccountNOK);
+    }
+
+    @Test
+    public void fetchAccountFailed5() {
+
+        AccountHandlerApi testAccountHandlerApi = new AccountHandlerApi();
+        String battleTag = null;
+
+        Exception exception = Assertions.assertThrows(NullPointerException.class, ()-> {
+            testAccountHandlerApi.generateRequest(battleTag, testObject);
+        });
+
+        String expectedMessage = "Cannot invoke \"String.replace(char, char)\" because \"battleTag\" is null";
+        String actualMessage = exception.getMessage();
+
+        Assertions.assertTrue(actualMessage.contains(expectedMessage));
     }
 
 }

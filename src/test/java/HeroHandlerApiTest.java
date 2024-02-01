@@ -1,3 +1,4 @@
+import com.diablo3CharViewer.api_handlers.AccountHandlerApi;
 import com.diablo3CharViewer.api_handlers.BaseUrlParts;
 import com.diablo3CharViewer.api_handlers.HeroHandlerApi;
 import com.diablo3CharViewer.token.FetchToken;
@@ -71,8 +72,24 @@ public class HeroHandlerApiTest {
         HeroHandlerApi testHeroHandlerApi = new HeroHandlerApi();
 
         String fetchedHeroOK = testHeroHandlerApi.generateRequest("Jokefish-2265", "162864678", testObject);
-        String fetchedHeroNOK = testHeroHandlerApi.generateRequest("", "162864678", testObject);
+        String fetchedHeroNOK = testHeroHandlerApi.generateRequest("Jokefish-2265", null, testObject);
 
         Assertions.assertNotEquals(fetchedHeroOK, fetchedHeroNOK);
+    }
+
+    @Test
+    public void fetchHeroFailed6() {
+
+        HeroHandlerApi testHeroHandlerApi = new HeroHandlerApi();
+        String heroId = "162864678";
+
+        Exception exception = Assertions.assertThrows(NullPointerException.class, ()-> {
+            testHeroHandlerApi.generateRequest(null, heroId, testObject);
+        });
+
+        String expectedMessage = "Cannot invoke \"String.replace(char, char)\" because \"battleTag\" is null";
+        String actualMessage = exception.getMessage();
+
+        Assertions.assertTrue(actualMessage.contains(expectedMessage));
     }
 }

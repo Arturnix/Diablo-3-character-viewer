@@ -36,7 +36,7 @@ public class ItemHandlerApiTest {
 
         String fetchedItemNOK = testObject.fetchAPIResourceRequest(BaseUrlParts.getBaseItemApi());
 
-        Assertions.assertFalse(fetchedItemOK == fetchedItemNOK);
+        Assertions.assertNotEquals(fetchedItemOK, fetchedItemNOK);
     }
 
     @Test
@@ -46,13 +46,18 @@ public class ItemHandlerApiTest {
 
         String fetchedItemOK = testItemHandlerApi.generateRequest("corrupted-ashbringer-Unique_Sword_2H_104_x1", testObject);
         String fetchedItemNOK = testItemHandlerApi.generateRequest(" ", testObject);
+
+        Assertions.assertNotEquals(fetchedItemOK, fetchedItemNOK);
     }
 
+    @Test
     public void fetchItemFailed4() {
 
         ItemHandlerApi testItemHandlerApi = new ItemHandlerApi();
 
         String fetchedItemOK = testItemHandlerApi.generateRequest("corrupted-ashbringer-Unique_Sword_2H_104_x1", testObject);
-        String fetchedItemNOK = testItemHandlerApi.generateRequest("", testObject);
+        String fetchedItemNOK = testItemHandlerApi.generateRequest(null, testObject);
+
+        Assertions.assertNotEquals(fetchedItemOK, fetchedItemNOK);
     }
 }
