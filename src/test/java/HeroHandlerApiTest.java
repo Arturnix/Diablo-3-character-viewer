@@ -1,31 +1,44 @@
-import com.diablo3CharViewer.api_handlers.AccountHandlerApi;
 import com.diablo3CharViewer.api_handlers.BaseUrlParts;
 import com.diablo3CharViewer.api_handlers.HeroHandlerApi;
 import com.diablo3CharViewer.token.FetchToken;
 import com.diablo3CharViewer.token.Token;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.Mock;
+import org.mockito.Mockito;
+import org.mockito.junit.jupiter.MockitoExtension;
 
+@ExtendWith(MockitoExtension.class)
 public class HeroHandlerApiTest {
 
+    @Mock
     private FetchToken testObject = new FetchToken();
+    @Mock
+    private HeroHandlerApi testHeroHandlerApi = new HeroHandlerApi();
 
     @Test
     public void correctAccountFetchedContainsProvidedHeroId() {
 
         String heroId = "162864678";
-        String token = testObject.requestToken().getAccess_token();
+        String token = Token.getAccess_token();
+        String requestUrl = "https://eu.api.blizzard.com/d3/profile/Jokefish-2265/hero/" + heroId +
+                "?locale=pl_PL&access_token=" + token;
 
-        Assertions.assertTrue(testObject.fetchAPIResourceRequest(
-                        "https://eu.api.blizzard.com/d3/profile/Jokefish-2265/hero/" + heroId +
-                                "?locale=pl_PL&access_token=" + token).contains("162864678"));
+        Mockito.when(testObject.fetchAPIResourceRequest(requestUrl)).thenReturn("162864678");
+
+        Assertions.assertTrue(testObject.fetchAPIResourceRequest(requestUrl).contains("162864678"));
     }
 
     @Test
     public void fetchHeroFailedMissedCredentialsNotContainDesiredField() {
 
-        String fetchedHero = testObject.fetchAPIResourceRequest(BaseUrlParts.getBaseProfileApi() + BaseUrlParts.getBaseHeroApi()
-                + BaseUrlParts.getBaseLocaleAndToken());
+        String requestUrl = BaseUrlParts.getBaseProfileApi() + BaseUrlParts.getBaseHeroApi()
+                            + BaseUrlParts.getBaseLocaleAndToken();
+
+        Mockito.when(testObject.fetchAPIResourceRequest(requestUrl)).thenReturn("");
+
+        String fetchedHero = testObject.fetchAPIResourceRequest(requestUrl);
 
         Assertions.assertFalse(fetchedHero.contains("id"));
     }
@@ -33,13 +46,19 @@ public class HeroHandlerApiTest {
     @Test
     public void fetchHeroFailedMissedCredentials() {
 
-        String fetchedHeroOK = testObject.fetchAPIResourceRequest(BaseUrlParts.getBaseProfileApi() + "Jokefish-2265"
+        String requestUrlOK = BaseUrlParts.getBaseProfileApi() + "Jokefish-2265"
                 + BaseUrlParts.getBaseHeroApi() + "162864678"
-                + BaseUrlParts.getBaseLocaleAndToken() + Token.getAccess_token());
+                + BaseUrlParts.getBaseLocaleAndToken() + Token.getAccess_token();
 
-        String fetchedHeroNOK = testObject.fetchAPIResourceRequest(BaseUrlParts.getBaseProfileApi()
+        String requestUrlNOK = BaseUrlParts.getBaseProfileApi()
                 + BaseUrlParts.getBaseHeroApi()
-                + BaseUrlParts.getBaseLocaleAndToken());
+                + BaseUrlParts.getBaseLocaleAndToken();
+
+        Mockito.when(testObject.fetchAPIResourceRequest(requestUrlOK)).thenReturn("162864678");
+        Mockito.when(testObject.fetchAPIResourceRequest(requestUrlNOK)).thenReturn("");
+
+        String fetchedHeroOK = testObject.fetchAPIResourceRequest(requestUrlOK);
+        String fetchedHeroNOK = testObject.fetchAPIResourceRequest(requestUrlNOK);
 
         Assertions.assertNotEquals(fetchedHeroOK, fetchedHeroNOK);
     }
@@ -47,7 +66,10 @@ public class HeroHandlerApiTest {
     @Test
     public void fetchHeroFailedWrongHeroIdProvided() {
 
-        HeroHandlerApi testHeroHandlerApi = new HeroHandlerApi();
+        Mockito.when(testHeroHandlerApi.generateRequest("Jokefish-2265", "162864678", testObject))
+                .thenReturn("162864678");
+        Mockito.when(testHeroHandlerApi.generateRequest("Jokefish-2265", " ", testObject))
+                .thenReturn("");
 
         String fetchedHeroOK = testHeroHandlerApi.generateRequest("Jokefish-2265", "162864678", testObject);
         String fetchedHeroNOK = testHeroHandlerApi.generateRequest("Jokefish-2265", " ", testObject);
@@ -58,7 +80,10 @@ public class HeroHandlerApiTest {
     @Test
     public void fetchHeroFailedWrongBattleTagProvided() {
 
-        HeroHandlerApi testHeroHandlerApi = new HeroHandlerApi();
+        Mockito.when(testHeroHandlerApi.generateRequest("Jokefish-2265", "162864678", testObject))
+                .thenReturn("162864678");
+        Mockito.when(testHeroHandlerApi.generateRequest(" ", "162864678", testObject))
+                .thenReturn("");
 
         String fetchedHeroOK = testHeroHandlerApi.generateRequest("Jokefish-2265", "162864678", testObject);
         String fetchedHeroNOK = testHeroHandlerApi.generateRequest(" ", "162864678", testObject);
@@ -69,7 +94,10 @@ public class HeroHandlerApiTest {
     @Test
     public void fetchHeroFailedNullHeroId() {
 
-        HeroHandlerApi testHeroHandlerApi = new HeroHandlerApi();
+        Mockito.when(testHeroHandlerApi.generateRequest("Jokefish-2265", "162864678", testObject))
+                .thenReturn("162864678");
+        Mockito.when(testHeroHandlerApi.generateRequest("Jokefish-2265", null, testObject))
+                .thenReturn("");
 
         String fetchedHeroOK = testHeroHandlerApi.generateRequest("Jokefish-2265", "162864678", testObject);
         String fetchedHeroNOK = testHeroHandlerApi.generateRequest("Jokefish-2265", null, testObject);

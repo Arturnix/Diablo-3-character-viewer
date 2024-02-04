@@ -4,24 +4,40 @@ import com.diablo3CharViewer.token.FetchToken;
 import com.diablo3CharViewer.token.Token;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.Mock;
+import org.mockito.Mockito;
+import org.mockito.junit.jupiter.MockitoExtension;
 
+
+@ExtendWith(MockitoExtension.class)
 public class AccountHandlerApiTest {
+
+    @Mock //wskazac dokladnie, niezaleznie od stanu obiektu. Nie jest rzeczywsitym obiektem, nie ma żadnego stanu. Z punktu widzenia programu to jest null
     private FetchToken testObject = new FetchToken();
+    @Mock
+    private AccountHandlerApi testAccountHandlerApi = new AccountHandlerApi();
 
     @Test
     public void correctAccountFetchedContainsProvidedBattleTag() {
 
         String battleTag = "Jokefish#2265";
+        String urlRequest = "https://eu.api.blizzard.com/d3/profile/Jokefish-2265/?locale=pl_PL&access_token=";
         String token = testObject.requestToken().getAccess_token();
 
+        Mockito.when(testObject.fetchAPIResourceRequest(
+                urlRequest + token)).thenReturn("Jokefish#2265");
+
         Assertions.assertTrue(testObject.fetchAPIResourceRequest(
-                "https://eu.api.blizzard.com/d3/profile/Jokefish-2265/?locale=pl_PL&access_token="
-                + token)
-                .contains(battleTag));
+                urlRequest + token).contains(battleTag));
     }
 
     @Test
     public void fetchAccountFailedMissedCredentialsNotContainDesiredChar() {
+
+        Mockito.when(testObject.fetchAPIResourceRequest(BaseUrlParts.getBaseProfileApi()
+                        + BaseUrlParts.getBaseLocaleAndToken()))
+                .thenReturn("");
 
         String fetchedAccount = testObject.fetchAPIResourceRequest(BaseUrlParts.getBaseProfileApi()
                  + BaseUrlParts.getBaseLocaleAndToken());
@@ -31,6 +47,13 @@ public class AccountHandlerApiTest {
 
     @Test
     public void fetchAccountFailedMissedCredentials() {
+
+        Mockito.when(testObject.fetchAPIResourceRequest(BaseUrlParts.getBaseProfileApi() + "Jokefish-2265"
+                        + BaseUrlParts.getBaseLocaleAndToken() + Token.getAccess_token()))
+                .thenReturn("Jokefish#2265");
+
+        Mockito.when(testObject.fetchAPIResourceRequest(BaseUrlParts.getBaseProfileApi() + BaseUrlParts.getBaseLocaleAndToken()))
+                .thenReturn("");
 
         String fetchedAccountOK = testObject.fetchAPIResourceRequest(BaseUrlParts.getBaseProfileApi() + "Jokefish-2265"
                 + BaseUrlParts.getBaseLocaleAndToken() + Token.getAccess_token());
@@ -43,7 +66,11 @@ public class AccountHandlerApiTest {
     @Test
     public void fetchAccountFailedWrongBattleTagProvided() {
 
-        AccountHandlerApi testAccountHandlerApi = new AccountHandlerApi();
+        Mockito.when(testAccountHandlerApi.generateRequest("Jokefish-2265", testObject))
+                .thenReturn("Jokefish#2265");
+
+        Mockito.when(testAccountHandlerApi.generateRequest(" ", testObject))
+                .thenReturn("");
 
         String fetchedAccountOK = testAccountHandlerApi.generateRequest("Jokefish-2265", testObject);
         String fetchedAccountNOK = testAccountHandlerApi.generateRequest(" ", testObject);
@@ -54,8 +81,13 @@ public class AccountHandlerApiTest {
     @Test
     public void fetchAccountFailedNullBattleTagProvided() {
 
-        AccountHandlerApi testAccountHandlerApi = new AccountHandlerApi();
+        Mockito.when(testAccountHandlerApi.generateRequest("Jokefish-2265", testObject))
+                .thenReturn("Jokefish#2265");
+
         String battleTag = null;
+        Mockito.when(testObject.fetchAPIResourceRequest(BaseUrlParts.getBaseProfileApi() + battleTag
+                + BaseUrlParts.getBaseLocaleAndToken() + Token.getAccess_token()))
+                .thenReturn("");
 
         String fetchedAccountOK = testAccountHandlerApi.generateRequest("Jokefish-2265", testObject);
         String fetchedAccountNOK = testObject.fetchAPIResourceRequest(BaseUrlParts.getBaseProfileApi() + battleTag
@@ -79,5 +111,4 @@ public class AccountHandlerApiTest {
 
         Assertions.assertTrue(actualMessage.contains(expectedMessage));
     }
-
 }
