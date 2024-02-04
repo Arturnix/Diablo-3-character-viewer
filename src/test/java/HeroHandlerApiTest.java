@@ -11,7 +11,7 @@ public class HeroHandlerApiTest {
     private FetchToken testObject = new FetchToken();
 
     @Test
-    public void correctAccountFetched() {
+    public void correctAccountFetchedContainsProvidedHeroId() {
 
         String heroId = "162864678";
         String token = testObject.requestToken().getAccess_token();
@@ -22,7 +22,7 @@ public class HeroHandlerApiTest {
     }
 
     @Test
-    public void fetchHeroFailed() {
+    public void fetchHeroFailedMissedCredentialsNotContainDesiredField() {
 
         String fetchedHero = testObject.fetchAPIResourceRequest(BaseUrlParts.getBaseProfileApi() + BaseUrlParts.getBaseHeroApi()
                 + BaseUrlParts.getBaseLocaleAndToken());
@@ -31,7 +31,7 @@ public class HeroHandlerApiTest {
     }
 
     @Test
-    public void fetchHeroFailed2() {
+    public void fetchHeroFailedMissedCredentials() {
 
         String fetchedHeroOK = testObject.fetchAPIResourceRequest(BaseUrlParts.getBaseProfileApi() + "Jokefish-2265"
                 + BaseUrlParts.getBaseHeroApi() + "162864678"
@@ -45,7 +45,7 @@ public class HeroHandlerApiTest {
     }
 
     @Test
-    public void fetchHeroFailed3() {
+    public void fetchHeroFailedWrongHeroIdProvided() {
 
         HeroHandlerApi testHeroHandlerApi = new HeroHandlerApi();
 
@@ -56,7 +56,7 @@ public class HeroHandlerApiTest {
     }
 
     @Test
-    public void fetchHeroFailed4() {
+    public void fetchHeroFailedWrongBattleTagProvided() {
 
         HeroHandlerApi testHeroHandlerApi = new HeroHandlerApi();
 
@@ -67,7 +67,7 @@ public class HeroHandlerApiTest {
     }
 
     @Test
-    public void fetchHeroFailed5() {
+    public void fetchHeroFailedNullHeroId() {
 
         HeroHandlerApi testHeroHandlerApi = new HeroHandlerApi();
 
@@ -78,7 +78,7 @@ public class HeroHandlerApiTest {
     }
 
     @Test
-    public void fetchHeroFailed6() {
+    public void fetchHeroFailedNullBattleTagThorwsException() {
 
         HeroHandlerApi testHeroHandlerApi = new HeroHandlerApi();
         String heroId = "162864678";

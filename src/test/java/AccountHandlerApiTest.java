@@ -30,7 +30,7 @@ public class AccountHandlerApiTest {
     }
 
     @Test
-    public void fetchAccountFailedMissedCredentialsObjectsEqualityCheck() {
+    public void fetchAccountFailedMissedCredentials() {
 
         String fetchedAccountOK = testObject.fetchAPIResourceRequest(BaseUrlParts.getBaseProfileApi() + "Jokefish-2265"
                 + BaseUrlParts.getBaseLocaleAndToken() + Token.getAccess_token());
@@ -41,7 +41,7 @@ public class AccountHandlerApiTest {
     }
 
     @Test
-    public void fetchAccountFailedMissedBattleTag() {
+    public void fetchAccountFailedWrongBattleTagProvided() {
 
         AccountHandlerApi testAccountHandlerApi = new AccountHandlerApi();
 
@@ -52,7 +52,7 @@ public class AccountHandlerApiTest {
     }
 
     @Test
-    public void fetchAccountFailedNullBattleTagProvidedObjectsEquality() {
+    public void fetchAccountFailedNullBattleTagProvided() {
 
         AccountHandlerApi testAccountHandlerApi = new AccountHandlerApi();
         String battleTag = null;

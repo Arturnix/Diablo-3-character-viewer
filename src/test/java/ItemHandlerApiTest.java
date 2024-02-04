@@ -10,7 +10,7 @@ public class ItemHandlerApiTest {
     private FetchToken testObject = new FetchToken();
 
     @Test
-    public void correctAccountFetched() {
+    public void correctAccountFetchedConatinsProvidedItemId() {
 
         String itemSlugAndId = "corrupted-ashbringer-Unique_Sword_2H_104_x1";
         String token = testObject.requestToken().getAccess_token();
@@ -21,7 +21,7 @@ public class ItemHandlerApiTest {
     }
 
     @Test
-    public void fetchItemFailed() {
+    public void fetchItemFailedMissedCredentialsNotContainDesiredField() {
 
         String fetchedItem = testObject.fetchAPIResourceRequest(BaseUrlParts.getBaseItemApi());
 
@@ -29,7 +29,7 @@ public class ItemHandlerApiTest {
     }
 
     @Test
-    public void fetchItemFailed2() {
+    public void fetchItemFailedMissedCredentials() {
 
         String fetchedItemOK = testObject.fetchAPIResourceRequest(BaseUrlParts.getBaseItemApi() + "corrupted-ashbringer-Unique_Sword_2H_104_x1"
                     + BaseUrlParts.getBaseLocaleAndToken() + Token.getAccess_token());
@@ -40,7 +40,7 @@ public class ItemHandlerApiTest {
     }
 
     @Test
-    public void fetchItemFailed3() {
+    public void fetchItemFailedWrongItemIdProvided() {
 
         ItemHandlerApi testItemHandlerApi = new ItemHandlerApi();
 
@@ -51,7 +51,7 @@ public class ItemHandlerApiTest {
     }
 
     @Test
-    public void fetchItemFailed4() {
+    public void fetchItemFailedNullItemId() {
 
         ItemHandlerApi testItemHandlerApi = new ItemHandlerApi();
 
