@@ -3,6 +3,7 @@ package com.diablo3CharViewer;
 import com.diablo3CharViewer.api_handlers.AccountHandlerApi;
 import com.diablo3CharViewer.api_handlers.HeroHandlerApi;
 import com.diablo3CharViewer.api_handlers.ItemHandlerApi;
+import com.diablo3CharViewer.data_models.AccountDataModel;
 import com.diablo3CharViewer.token.FetchToken;
 import com.diablo3CharViewer.token.Token;
 
@@ -12,7 +13,6 @@ public class Main {
     public static void main(String[] args) {
 
         FetchToken fetchToken = new FetchToken();
-        //fetchToken.requestToken();
         AccountHandlerApi accountHandlerApi = new AccountHandlerApi();
         HeroHandlerApi heroHandlerApi = new HeroHandlerApi();
         ItemHandlerApi itemHandlerApi = new ItemHandlerApi(); //dac tworzenie klas po podaniu battleTag lub item Id z podaną wartoscia dla tego pola

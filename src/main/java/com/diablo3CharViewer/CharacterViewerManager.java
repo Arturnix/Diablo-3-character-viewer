@@ -10,7 +10,7 @@ import java.util.Scanner;
 public class CharacterViewerManager {
 
     public void showProfile(Scanner scanner, AccountHandlerApi accountHandlerApi, FetchToken fetchToken) {
-        System.out.println("Zostan na chwile i poczytaj:\n" + accountHandlerApi.generateRequest(battleTagProvider(scanner), fetchToken) + '\n');
+        System.out.println("Zostan na chwile i poczytaj:\n" + accountHandlerApi.fetchAccountToDataModel(battleTagProvider(scanner), fetchToken) + '\n');
     }
 
     public void showHero(Scanner scanner, HeroHandlerApi heroHandlerApi, FetchToken fetchToken) {
