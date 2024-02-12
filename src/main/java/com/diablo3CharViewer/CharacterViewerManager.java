@@ -1,16 +1,16 @@
 package com.diablo3CharViewer;
 
-import com.diablo3CharViewer.api_handlers.AccountHandlerApi;
 import com.diablo3CharViewer.api_handlers.HeroHandlerApi;
 import com.diablo3CharViewer.api_handlers.ItemHandlerApi;
+import com.diablo3CharViewer.json_mappers.AccountMapper;
 import com.diablo3CharViewer.token.FetchToken;
 
 import java.util.Scanner;
 
 public class CharacterViewerManager {
 
-    public void showProfile(Scanner scanner, AccountHandlerApi accountHandlerApi, FetchToken fetchToken) {
-        System.out.println("Zostan na chwile i poczytaj:\n" + accountHandlerApi.generateRequest(battleTagProvider(scanner), fetchToken) + '\n');
+    public void showProfile(Scanner scanner, AccountMapper accountMapper, FetchToken fetchToken) {
+        System.out.println("Zostan na chwile i poczytaj:\n" + accountMapper.fetchAccountToDataModel(battleTagProvider(scanner), fetchToken) + '\n');
     }
 
     public void showHero(Scanner scanner, HeroHandlerApi heroHandlerApi, FetchToken fetchToken) {
