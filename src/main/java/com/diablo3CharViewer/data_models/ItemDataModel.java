@@ -2,7 +2,7 @@ package com.diablo3CharViewer.data_models;
 
 public class ItemDataModel {
 
-    private String bodyPart;
+    private String bodyPart; //zrobic tez enum?
     private String id;
     private String name;
     private int requiredLevel;
@@ -11,6 +11,12 @@ public class ItemDataModel {
     private String minDamage;
     private String maxDamage;
     //Map<String, List<String>> attributes (key is the primary/secondary attribute, value is list of attributes)
+
+
+    public ItemDataModel(String id, String name) {
+        this.id = id;
+        this.name = name;
+    }
 
     //osobny konstruktor dla armor osobny dla broni
     public ItemDataModel(String bodyPart, String id, String name, int requiredLevel, int itemLevel, int armor, String minDamage, String maxDamage) {
@@ -27,14 +33,14 @@ public class ItemDataModel {
     @Override
     public String toString() {
         return "ItemDataModel{" +
-                "bodyPart='" + bodyPart + '\'' +
+                //"bodyPart='" + bodyPart + '\'' +
                 ", id='" + id + '\'' +
                 ", name='" + name + '\'' +
-                ", requiredLevel=" + requiredLevel +
+               /* ", requiredLevel=" + requiredLevel +
                 ", itemLevel=" + itemLevel +
                 ", armor=" + armor +
                 ", minDamage=" + minDamage +
-                ", maxDamage=" + maxDamage +
+                ", maxDamage=" + maxDamage +*/
                 '}';
     }
 }

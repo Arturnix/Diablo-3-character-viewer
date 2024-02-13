@@ -24,7 +24,7 @@ public class HeroDataModel {
         this.classHero = classHero;
     }
 
-    public HeroDataModel(int id, String name, String classHero, int level, int paragonLevel, boolean hardcore, boolean seasonal, boolean dead, Map<String, Integer> kills, List<SkillDataModel> skills) {
+    public HeroDataModel(int id, String name, String classHero, int level, int paragonLevel, boolean hardcore, boolean seasonal, boolean dead, Map<String, Integer> kills, List<SkillDataModel> skills, List<ItemDataModel> items) {
         this.id = id;
         this.name = name;
         this.classHero = classHero;
@@ -35,9 +35,10 @@ public class HeroDataModel {
         this.dead = dead;
         this.kills = kills;
         this.skills = skills;
+        this.items = items;
     }
 
-    public HeroDataModel(int id, String name, String classHero, int level, int paragonLevel, boolean hardcore, boolean seasonal, Map<String, Integer> kills, List<SkillDataModel> skills) {
+    public HeroDataModel(int id, String name, String classHero, int level, int paragonLevel, boolean hardcore, boolean seasonal, Map<String, Integer> kills, List<SkillDataModel> skills, List<ItemDataModel> items) {
         this.id = id;
         this.name = name;
         this.classHero = classHero;
@@ -47,6 +48,7 @@ public class HeroDataModel {
         this.seasonal = seasonal;
         this.kills = kills;
         this.skills = skills;
+        this.items = items;
     }
 
     @Override
@@ -65,12 +67,14 @@ public class HeroDataModel {
             return basicStats +
                     ", kills=" + kills +
                     ", skills=" + skills +
+                    ", items=" + items +
                     '}';
         } else {
             return basicStats +
                     ", dead=" + dead +
                     ", kills=" + kills +
                     ", skills=" + skills +
+                    ", items=" + items +
                     '}';
         }
     }

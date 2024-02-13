@@ -2,6 +2,7 @@ package com.diablo3CharViewer.json_mappers;
 
 import com.diablo3CharViewer.api_handlers.HeroHandlerApi;
 import com.diablo3CharViewer.data_models.HeroDataModel;
+import com.diablo3CharViewer.data_models.ItemDataModel;
 import com.diablo3CharViewer.data_models.SkillDataModel;
 import com.diablo3CharViewer.token.FetchToken;
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -35,7 +36,8 @@ public class HeroMapper extends HeroHandlerApi {
                 node.get("seasonal").asBoolean(),
                 node.get("dead").asBoolean(),
                 fetchKills(node),
-                fetchSkills(node)
+                fetchSkills(node),
+                fetchItems(node)
         );
         return heroDataModelHardcore;
     }
@@ -51,7 +53,8 @@ public class HeroMapper extends HeroHandlerApi {
                 node.get("hardcore").asBoolean(),
                 node.get("seasonal").asBoolean(),
                 fetchKills(node),
-                fetchSkills(node)
+                fetchSkills(node),
+                fetchItems(node)
         );
         return heroDataModel;
     }
@@ -78,6 +81,20 @@ public class HeroMapper extends HeroHandlerApi {
         }
 
         return skills;
+    }
+
+    private List<ItemDataModel> fetchItems(JsonNode node) {
+
+        List<ItemDataModel> items = new ArrayList<>();
+        for(int i = 0; i < node.get("items").size(); i++) {
+            ItemDataModel itemDataModel = new ItemDataModel(
+                    node.get("items").get("head").get("id").asText(), //bodyPart pobierac z enum i iterowac, ktora czesc ekipunktu do tego pasuje.
+                    node.get("items").get("head").get("name").asText()
+            );
+            items.add(itemDataModel);
+        }
+
+        return items;
     }
 
     public HeroDataModel fetchHeroToDataModel(String battleTag, String heroId, FetchToken fetchToken) {
