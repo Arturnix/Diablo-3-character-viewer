@@ -5,6 +5,7 @@ import com.diablo3CharViewer.api_handlers.HeroHandlerApi;
 import com.diablo3CharViewer.api_handlers.ItemHandlerApi;
 import com.diablo3CharViewer.data_models.AccountDataModel;
 import com.diablo3CharViewer.json_mappers.AccountMapper;
+import com.diablo3CharViewer.json_mappers.HeroMapper;
 import com.diablo3CharViewer.token.FetchToken;
 import com.diablo3CharViewer.token.Token;
 
@@ -14,9 +15,8 @@ public class Main {
     public static void main(String[] args) {
 
         FetchToken fetchToken = new FetchToken();
-        //AccountHandlerApi accountHandlerApi = new AccountHandlerApi();
         AccountMapper accountMapper = new AccountMapper();
-        HeroHandlerApi heroHandlerApi = new HeroHandlerApi();
+        HeroMapper heroMapper = new HeroMapper();
         ItemHandlerApi itemHandlerApi = new ItemHandlerApi(); //dac tworzenie klas po podaniu battleTag lub item Id z podaną wartoscia dla tego pola
         CharacterViewerManager characterViewerManager = new CharacterViewerManager();
 
@@ -35,7 +35,7 @@ public class Main {
                     characterViewerManager.showProfile(scanner, accountMapper, fetchToken);
                     break;
                 case "2":
-                    characterViewerManager.showHero(scanner, heroHandlerApi, fetchToken);
+                    characterViewerManager.showHero(scanner, heroMapper, fetchToken);
                     break;
                 case "3":
                     characterViewerManager.showItem(scanner, itemHandlerApi, fetchToken);
