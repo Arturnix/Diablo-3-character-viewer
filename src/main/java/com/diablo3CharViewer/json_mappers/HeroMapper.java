@@ -102,15 +102,15 @@ public class HeroMapper extends HeroHandlerApi {
 
     private List<FollowerDataModel> fetchFollowers(JsonNode node) {
 
-        enum follower { //enum wewnatrz metody czy jako osobna klasa?
-            templar,
-            scoundrel,
-            enchantress
+        enum FollowerClass { //enum wewnatrz metody czy jako osobna klasa?
+            TEMPLAR,
+            SCOUNDREL,
+            ENCHANTRESS
         }
 
         List<FollowerDataModel> followers = new ArrayList<>();
-            for (follower followerClass : follower.values()) {
-                switch (node.get("followers").get(followerClass.toString()).get("slug").asText()) {
+            for (FollowerClass followerClass : FollowerClass.values()) {
+                switch (node.get("followers").get(followerClass.toString().toLowerCase()).get("slug").asText()) {
                     case "templar":
                         FollowerDataModel followerDataModelTemplar = new FollowerDataModel(
                                 node.get("followers").get("templar").get("slug").asText(),
