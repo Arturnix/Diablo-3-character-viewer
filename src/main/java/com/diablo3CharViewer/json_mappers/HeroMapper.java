@@ -1,6 +1,7 @@
 package com.diablo3CharViewer.json_mappers;
 
 import com.diablo3CharViewer.api_handlers.HeroHandlerApi;
+import com.diablo3CharViewer.data_models.FollowerDataModel;
 import com.diablo3CharViewer.data_models.HeroDataModel;
 import com.diablo3CharViewer.data_models.ItemDataModel;
 import com.diablo3CharViewer.data_models.SkillDataModel;
@@ -37,7 +38,8 @@ public class HeroMapper extends HeroHandlerApi {
                 node.get("dead").asBoolean(),
                 fetchKills(node),
                 fetchSkills(node),
-                fetchItems(node)
+                fetchItems(node),
+                fetchFollowers(node)
         );
         return heroDataModelHardcore;
     }
@@ -54,7 +56,8 @@ public class HeroMapper extends HeroHandlerApi {
                 node.get("seasonal").asBoolean(),
                 fetchKills(node),
                 fetchSkills(node),
-                fetchItems(node)
+                fetchItems(node),
+                fetchFollowers(node)
         );
         return heroDataModel;
     }
@@ -89,12 +92,50 @@ public class HeroMapper extends HeroHandlerApi {
         for(int i = 0; i < node.get("items").size(); i++) {
             ItemDataModel itemDataModel = new ItemDataModel(
                     node.get("items").get("head").get("id").asText(), //bodyPart pobierac z enum i iterowac, ktora czesc ekipunktu do tego pasuje.
-                    node.get("items").get("head").get("name").asText()
+                    node.get("items").get("head").get("name").asText() //zrobic to na switch niech pobiera konkretne body parts w iteracjach
             );
             items.add(itemDataModel);
         }
 
         return items;
+    }
+
+    private List<FollowerDataModel> fetchFollowers(JsonNode node) {
+
+        enum follower { //enum wewnatrz metody czy jako osobna klasa?
+            templar,
+            scoundrel,
+            enchantress
+        }
+
+        List<FollowerDataModel> followers = new ArrayList<>();
+            for (follower followerClass : follower.values()) {
+                switch (node.get("followers").get(followerClass.toString()).get("slug").asText()) {
+                    case "templar":
+                        FollowerDataModel followerDataModelTemplar = new FollowerDataModel(
+                                node.get("followers").get("templar").get("slug").asText(),
+                                node.get("followers").get("templar").get("level").asInt()
+                        );
+                        followers.add(followerDataModelTemplar);
+                        break;
+                    case "scoundrel":
+                        FollowerDataModel followerDataModelScoundrel = new FollowerDataModel(
+                                node.get("followers").get("scoundrel").get("slug").asText(),
+                                node.get("followers").get("scoundrel").get("level").asInt()
+                        );
+                        followers.add(followerDataModelScoundrel);
+                        break;
+                    case "enchantress":
+                        FollowerDataModel followerDataModelEnchantress = new FollowerDataModel(
+                                node.get("followers").get("enchantress").get("slug").asText(),
+                                node.get("followers").get("enchantress").get("level").asInt()
+                        );
+                        followers.add(followerDataModelEnchantress);
+                        break;
+                }
+            }
+
+        return followers;
     }
 
     public HeroDataModel fetchHeroToDataModel(String battleTag, String heroId, FetchToken fetchToken) {

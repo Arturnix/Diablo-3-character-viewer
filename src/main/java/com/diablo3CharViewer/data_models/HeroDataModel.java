@@ -24,7 +24,7 @@ public class HeroDataModel {
         this.classHero = classHero;
     }
 
-    public HeroDataModel(int id, String name, String classHero, int level, int paragonLevel, boolean hardcore, boolean seasonal, boolean dead, Map<String, Integer> kills, List<SkillDataModel> skills, List<ItemDataModel> items) {
+    public HeroDataModel(int id, String name, String classHero, int level, int paragonLevel, boolean hardcore, boolean seasonal, boolean dead, Map<String, Integer> kills, List<SkillDataModel> skills, List<ItemDataModel> items, List<FollowerDataModel> followers) {
         this.id = id;
         this.name = name;
         this.classHero = classHero;
@@ -36,9 +36,10 @@ public class HeroDataModel {
         this.kills = kills;
         this.skills = skills;
         this.items = items;
+        this.followers = followers;
     }
 
-    public HeroDataModel(int id, String name, String classHero, int level, int paragonLevel, boolean hardcore, boolean seasonal, Map<String, Integer> kills, List<SkillDataModel> skills, List<ItemDataModel> items) {
+    public HeroDataModel(int id, String name, String classHero, int level, int paragonLevel, boolean hardcore, boolean seasonal, Map<String, Integer> kills, List<SkillDataModel> skills, List<ItemDataModel> items, List<FollowerDataModel> followers) {
         this.id = id;
         this.name = name;
         this.classHero = classHero;
@@ -49,6 +50,7 @@ public class HeroDataModel {
         this.kills = kills;
         this.skills = skills;
         this.items = items;
+        this.followers = followers;
     }
 
     @Override
@@ -68,6 +70,7 @@ public class HeroDataModel {
                     ", kills=" + kills +
                     ", skills=" + skills +
                     ", items=" + items +
+                    ", followers=" + followers +
                     '}';
         } else {
             return basicStats +
@@ -75,6 +78,7 @@ public class HeroDataModel {
                     ", kills=" + kills +
                     ", skills=" + skills +
                     ", items=" + items +
+                    ", followers=" + followers +
                     '}';
         }
     }
