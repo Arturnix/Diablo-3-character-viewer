@@ -39,7 +39,8 @@ public class HeroMapper extends HeroHandlerApi {
                 fetchKills(node),
                 fetchSkills(node),
                 fetchItems(node),
-                fetchFollowers(node)
+                fetchFollowers(node),
+                fetchHeroStats(node)
         );
         return heroDataModelHardcore;
     }
@@ -57,7 +58,8 @@ public class HeroMapper extends HeroHandlerApi {
                 fetchKills(node),
                 fetchSkills(node),
                 fetchItems(node),
-                fetchFollowers(node)
+                fetchFollowers(node),
+                fetchHeroStats(node)
         );
         return heroDataModel;
     }
@@ -65,7 +67,7 @@ public class HeroMapper extends HeroHandlerApi {
     private Map<String, Integer> fetchKills(JsonNode node) {
 
         ObjectMapper objectMapper = new ObjectMapper();
-        Map<String, Integer> mapKills = objectMapper.convertValue(node.get("kills"), Map.class);;
+        Map<String, Integer> mapKills = objectMapper.convertValue(node.get("kills"), Map.class);
 
         return mapKills;
     }
@@ -136,6 +138,14 @@ public class HeroMapper extends HeroHandlerApi {
             }
 
         return followers;
+    }
+
+    private Map<String, Integer> fetchHeroStats(JsonNode node) {
+
+        ObjectMapper objectMapper = new ObjectMapper();
+        Map<String, Integer> mapHeroStats = objectMapper.convertValue(node.get("stats"), Map.class);
+
+        return mapHeroStats;
     }
 
     public HeroDataModel fetchHeroToDataModel(String battleTag, String heroId, FetchToken fetchToken) {
