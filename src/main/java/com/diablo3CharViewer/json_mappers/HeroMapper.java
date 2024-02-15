@@ -109,38 +109,18 @@ public class HeroMapper extends HeroHandlerApi {
 
     private List<FollowerDataModel> fetchFollowers(JsonNode node) {
 
-        enum FollowerClass { //enum wewnatrz metody czy jako osobna klasa?
-            TEMPLAR,
-            SCOUNDREL,
-            ENCHANTRESS
-        }
-
         List<FollowerDataModel> followers = new ArrayList<>();
-            for (FollowerClass followerClass : FollowerClass.values()) {
-                switch (node.get("followers").get(followerClass.toString().toLowerCase()).get("slug").asText()) {
-                    case "templar":
-                        FollowerDataModel followerDataModelTemplar = new FollowerDataModel(
-                                node.get("followers").get("templar").get("slug").asText(),
-                                node.get("followers").get("templar").get("level").asInt()
-                        );
-                        followers.add(followerDataModelTemplar);
-                        break;
-                    case "scoundrel":
-                        FollowerDataModel followerDataModelScoundrel = new FollowerDataModel(
-                                node.get("followers").get("scoundrel").get("slug").asText(),
-                                node.get("followers").get("scoundrel").get("level").asInt()
-                        );
-                        followers.add(followerDataModelScoundrel);
-                        break;
-                    case "enchantress":
-                        FollowerDataModel followerDataModelEnchantress = new FollowerDataModel(
-                                node.get("followers").get("enchantress").get("slug").asText(),
-                                node.get("followers").get("enchantress").get("level").asInt()
-                        );
-                        followers.add(followerDataModelEnchantress);
-                        break;
-                }
-            }
+        List<String> followersKeys = new ArrayList<>();
+        Iterator<String> iterator = node.get("followers").fieldNames();
+        iterator.forEachRemaining(e -> followersKeys.add(e));
+
+        for(int i = 0; i < followersKeys.size(); i++) {
+            FollowerDataModel followerDataModel = new FollowerDataModel(
+                    node.get("followers").get(followersKeys.get(i)).get("slug").asText(),
+                    node.get("followers").get(followersKeys.get(i)).get("level").asInt()
+            );
+            followers.add(followerDataModel);
+        }
 
         return followers;
     }
