@@ -94,14 +94,14 @@ public class HeroMapper extends HeroHandlerApi {
         List<ItemDataModel> items = new ArrayList<>();
         List<String> itemsKeys = new ArrayList<>();
         Iterator<String> iterator = node.get("items").fieldNames();
-        iterator.forEachRemaining(e -> itemsKeys.add(e));
+        iterator.forEachRemaining(itemsKeys::add);
 
-        for(int i = 0; i < itemsKeys.size(); i++) {
+        for (String itemsKey : itemsKeys) {
             ItemDataModel itemDataModel = new ItemDataModel(
-                    node.get("items").get(itemsKeys.get(i)).get("id").asText(),
-                    node.get("items").get(itemsKeys.get(i)).get("name").asText()
+                    node.get("items").get(itemsKey).get("id").asText(),
+                    node.get("items").get(itemsKey).get("name").asText()
             );
-                    items.add(itemDataModel);
+            items.add(itemDataModel);
         }
 
         return items;
