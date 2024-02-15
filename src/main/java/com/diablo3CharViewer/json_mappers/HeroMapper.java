@@ -11,6 +11,7 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -46,7 +47,7 @@ public class HeroMapper extends HeroHandlerApi {
     }
 
     private HeroDataModel regularHeroCreator(JsonNode node) {
-
+        //System.out.println(node.get("items").elements().toString());
         HeroDataModel heroDataModel = new HeroDataModel(
                 node.get("id").asInt(),
                 node.get("name").asText(),
@@ -91,12 +92,16 @@ public class HeroMapper extends HeroHandlerApi {
     private List<ItemDataModel> fetchItems(JsonNode node) {
 
         List<ItemDataModel> items = new ArrayList<>();
-        for(int i = 0; i < node.get("items").size(); i++) {
+        List<String> itemsKeys = new ArrayList<>();
+        Iterator<String> iterator = node.get("items").fieldNames();
+        iterator.forEachRemaining(e -> itemsKeys.add(e));
+
+        for(int i = 0; i < itemsKeys.size(); i++) {
             ItemDataModel itemDataModel = new ItemDataModel(
-                    node.get("items").get("head").get("id").asText(), //bodyPart pobierac z enum i iterowac, ktora czesc ekipunktu do tego pasuje.
-                    node.get("items").get("head").get("name").asText() //zrobic to na switch niech pobiera konkretne body parts w iteracjach
+                    node.get("items").get(itemsKeys.get(i)).get("id").asText(),
+                    node.get("items").get(itemsKeys.get(i)).get("name").asText()
             );
-            items.add(itemDataModel);
+                    items.add(itemDataModel);
         }
 
         return items;
