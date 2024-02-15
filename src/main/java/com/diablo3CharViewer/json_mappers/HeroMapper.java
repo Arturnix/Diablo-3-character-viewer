@@ -47,7 +47,7 @@ public class HeroMapper extends HeroHandlerApi {
     }
 
     private HeroDataModel regularHeroCreator(JsonNode node) {
-        //System.out.println(node.get("items").elements().toString());
+
         HeroDataModel heroDataModel = new HeroDataModel(
                 node.get("id").asInt(),
                 node.get("name").asText(),
@@ -76,14 +76,21 @@ public class HeroMapper extends HeroHandlerApi {
     private List<SkillDataModel> fetchSkills(JsonNode node) {
 
         List<SkillDataModel> skills = new ArrayList<>();
-        for(int i = 0; i < node.get("skills").size(); i++) {
-            SkillDataModel skillDataModel = new SkillDataModel(
-                    node.get("skills").get("active").get(i).get("skill").get("slug").asText(),
-                    node.get("skills").get("active").get(i).get("skill").get("name").asText(),
-                    node.get("skills").get("active").get(i).get("skill").get("level").asInt(),
-                    node.get("skills").get("active").get(i).get("skill").get("description").asText()
-            );
-            skills.add(skillDataModel);
+        List<String> skillType = new ArrayList<>();
+        Iterator<String> iterator = node.get("skills").fieldNames();
+        iterator.forEachRemaining(skillType::add);
+
+        for (String singleSkillType : skillType) {
+            for(int i = 0; i < node.get("skills").get(singleSkillType).size(); i++) {
+                SkillDataModel skillDataModel = new SkillDataModel(
+                        singleSkillType,
+                        node.get("skills").get(singleSkillType).get(i).get("skill").get("slug").asText(),
+                        node.get("skills").get(singleSkillType).get(i).get("skill").get("name").asText(),
+                        node.get("skills").get(singleSkillType).get(i).get("skill").get("level").asInt(),
+                        node.get("skills").get(singleSkillType).get(i).get("skill").get("description").asText()
+                );
+                skills.add(skillDataModel);
+            }
         }
 
         return skills;
