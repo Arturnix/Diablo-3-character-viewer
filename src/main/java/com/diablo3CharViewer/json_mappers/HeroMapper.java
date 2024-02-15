@@ -112,12 +112,12 @@ public class HeroMapper extends HeroHandlerApi {
         List<FollowerDataModel> followers = new ArrayList<>();
         List<String> followersKeys = new ArrayList<>();
         Iterator<String> iterator = node.get("followers").fieldNames();
-        iterator.forEachRemaining(e -> followersKeys.add(e));
+        iterator.forEachRemaining(followersKeys::add);
 
-        for(int i = 0; i < followersKeys.size(); i++) {
+        for (String followersKey : followersKeys) {
             FollowerDataModel followerDataModel = new FollowerDataModel(
-                    node.get("followers").get(followersKeys.get(i)).get("slug").asText(),
-                    node.get("followers").get(followersKeys.get(i)).get("level").asInt()
+                    node.get("followers").get(followersKey).get("slug").asText(),
+                    node.get("followers").get(followersKey).get("level").asInt()
             );
             followers.add(followerDataModel);
         }
