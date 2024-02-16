@@ -10,10 +10,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class HeroMapper extends HeroHandlerApi {
 
@@ -99,14 +96,15 @@ public class HeroMapper extends HeroHandlerApi {
     private List<ItemDataModel> fetchItems(JsonNode node) {
 
         List<ItemDataModel> items = new ArrayList<>();
-        List<String> itemsKeys = new ArrayList<>();
+        List<String> itemsBodyPart = new ArrayList<>();
         Iterator<String> iterator = node.get("items").fieldNames();
-        iterator.forEachRemaining(itemsKeys::add);
+        iterator.forEachRemaining(itemsBodyPart::add);
 
-        for (String itemsKey : itemsKeys) {
+        for (String itemBodyPart : itemsBodyPart) {
             ItemDataModel itemDataModel = new ItemDataModel(
-                    node.get("items").get(itemsKey).get("id").asText(),
-                    node.get("items").get(itemsKey).get("name").asText()
+                    itemBodyPart,
+                    node.get("items").get(itemBodyPart).get("id").asText(),
+                    node.get("items").get(itemBodyPart).get("name").asText()
             );
             items.add(itemDataModel);
         }
@@ -118,13 +116,17 @@ public class HeroMapper extends HeroHandlerApi {
 
         List<FollowerDataModel> followers = new ArrayList<>();
         List<String> followersKeys = new ArrayList<>();
+        List<ItemDataModel> items = new ArrayList<>();
+        Map<String, Integer> followerStats = new HashMap<String, Integer>();
         Iterator<String> iterator = node.get("followers").fieldNames();
         iterator.forEachRemaining(followersKeys::add);
 
         for (String followersKey : followersKeys) {
             FollowerDataModel followerDataModel = new FollowerDataModel(
                     node.get("followers").get(followersKey).get("slug").asText(),
-                    node.get("followers").get(followersKey).get("level").asInt()
+                    node.get("followers").get(followersKey).get("level").asInt(),
+                    items = fetchItems(node.get("followers").get(followersKey)),
+                    followerStats = fetchHeroStats(node.get("followers").get(followersKey))
             );
             followers.add(followerDataModel);
         }

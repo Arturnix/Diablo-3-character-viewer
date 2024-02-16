@@ -24,6 +24,7 @@ public class HeroDataModel {
         this.classHero = classHero;
     }
 
+    //hardcore character constructor
     public HeroDataModel(int id, String name, String classHero, int level, int paragonLevel,
                          boolean hardcore, boolean seasonal, boolean dead,
                          Map<String, Integer> kills, List<SkillDataModel> skills,
@@ -64,7 +65,7 @@ public class HeroDataModel {
     @Override
     public String toString() {
 
-        String basicStats = "HeroDataModel{" +
+        String singleStats = "HeroDataModel{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", classHero='" + classHero + '\'' +
@@ -73,23 +74,17 @@ public class HeroDataModel {
                 ", hardcore=" + hardcore +
                 ", seasonal=" + seasonal;
 
+        String complexStats = ", kills=" + kills +
+                ", skills=" + skills +
+                ", items=" + items +
+                ", followers=" + followers +
+                ", stats=" + stats +
+                '}';
+
         if (!hardcore) {
-            return basicStats +
-                    ", kills=" + kills +
-                    ", skills=" + skills +
-                    ", items=" + items +
-                    ", followers=" + followers +
-                    ", stats=" + stats +
-                    '}';
+            return singleStats + complexStats;
         } else {
-            return basicStats +
-                    ", dead=" + dead +
-                    ", kills=" + kills +
-                    ", skills=" + skills +
-                    ", items=" + items +
-                    ", followers=" + followers +
-                    ", stats=" + stats +
-                    '}';
+            return singleStats + ", dead=" + dead + complexStats;
         }
     }
 }

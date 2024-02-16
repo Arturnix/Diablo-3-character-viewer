@@ -10,11 +10,6 @@ public class FollowerDataModel {
     private List<ItemDataModel> items;
     private Map<String, Integer> stats;
 
-    public FollowerDataModel(String name, int level) {
-        this.name = name;
-        this.level = level;
-    }
-
     public FollowerDataModel(String name, int level, List<ItemDataModel> items, Map<String, Integer> stats) {
         this.name = name;
         this.level = level;
