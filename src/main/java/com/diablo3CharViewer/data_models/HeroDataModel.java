@@ -24,7 +24,6 @@ public class HeroDataModel {
         this.classHero = classHero;
     }
 
-    //hardcore character constructor
     public HeroDataModel(int id, String name, String classHero, int level, int paragonLevel,
                          boolean hardcore, boolean seasonal, boolean dead,
                          Map<String, Integer> kills, List<SkillDataModel> skills,
@@ -44,47 +43,22 @@ public class HeroDataModel {
         this.stats = stats;
     }
 
-    public HeroDataModel(int id, String name, String classHero, int level, int paragonLevel,
-                         boolean hardcore, boolean seasonal,
-                         Map<String, Integer> kills, List<SkillDataModel> skills,
-                         List<ItemDataModel> items, List<FollowerDataModel> followers, Map<String, Integer> stats) {
-        this.id = id;
-        this.name = name;
-        this.classHero = classHero;
-        this.level = level;
-        this.paragonLevel = paragonLevel;
-        this.hardcore = hardcore;
-        this.seasonal = seasonal;
-        this.kills = kills;
-        this.skills = skills;
-        this.items = items;
-        this.followers = followers;
-        this.stats = stats;
-    }
-
     @Override
     public String toString() {
-
-        String singleStats = "HeroDataModel{" +
+        return "HeroDataModel{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", classHero='" + classHero + '\'' +
                 ", level=" + level +
                 ", paragonLevel=" + paragonLevel +
                 ", hardcore=" + hardcore +
-                ", seasonal=" + seasonal;
-
-        String complexStats = ", kills=" + kills +
+                ", seasonal=" + seasonal +
+                ", dead=" + dead +
+                ", kills=" + kills +
                 ", skills=" + skills +
                 ", items=" + items +
                 ", followers=" + followers +
                 ", stats=" + stats +
                 '}';
-
-        if (!hardcore) {
-            return singleStats + complexStats;
-        } else {
-            return singleStats + ", dead=" + dead + complexStats;
-        }
     }
 }

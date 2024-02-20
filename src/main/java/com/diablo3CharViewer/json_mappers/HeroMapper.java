@@ -16,34 +16,17 @@ public class HeroMapper extends HeroHandlerApi {
 
     private HeroDataModel heroTypeCreator(JsonNode node) {
 
-        if(!node.get("hardcore").asBoolean()) {
-            return regularHeroCreator(node);
+        boolean isHardcoreCharacter = node.get("hardcore").asBoolean();
+
+        if(!isHardcoreCharacter) {
+            return heroCreator(node, isHardcoreCharacter,false);
         } else {
-            return hardcoreHeroCreator(node);
+            boolean isDeadCharacter = node.get("dead").asBoolean();
+            return heroCreator(node, isHardcoreCharacter, isDeadCharacter);
         }
     }
 
-    private HeroDataModel hardcoreHeroCreator(JsonNode node) {
-
-        HeroDataModel heroDataModelHardcore = new HeroDataModel(
-                node.get("id").asInt(),
-                node.get("name").asText(),
-                node.get("class").asText(),
-                node.get("level").asInt(),
-                node.get("paragonLevel").asInt(),
-                node.get("hardcore").asBoolean(),
-                node.get("seasonal").asBoolean(),
-                node.get("dead").asBoolean(),
-                fetchKills(node),
-                fetchSkills(node),
-                fetchItems(node),
-                fetchFollowers(node),
-                fetchHeroStats(node)
-        );
-        return heroDataModelHardcore;
-    }
-
-    private HeroDataModel regularHeroCreator(JsonNode node) {
+    private HeroDataModel heroCreator(JsonNode node, boolean isHardcoreCharacter, boolean isDeadCharacter) {
 
         HeroDataModel heroDataModel = new HeroDataModel(
                 node.get("id").asInt(),
@@ -51,8 +34,9 @@ public class HeroMapper extends HeroHandlerApi {
                 node.get("class").asText(),
                 node.get("level").asInt(),
                 node.get("paragonLevel").asInt(),
-                node.get("hardcore").asBoolean(),
+                isHardcoreCharacter,
                 node.get("seasonal").asBoolean(),
+                isDeadCharacter,
                 fetchKills(node),
                 fetchSkills(node),
                 fetchItems(node),

@@ -20,15 +20,23 @@ public class ItemDataModel {
     }
 
     //osobny konstruktor dla armor osobny dla broni
-    public ItemDataModel(String bodyPart, String id, String name, int requiredLevel, int itemLevel/*, int armor, String minDamage, String maxDamage*/) {
+    public ItemDataModel(String bodyPart, String id, String name, int requiredLevel, int itemLevel, int armor) {
         this.bodyPart = bodyPart;
         this.id = id;
         this.name = name;
         this.requiredLevel = requiredLevel;
         this.itemLevel = itemLevel;
-        /*this.armor = armor;
+        this.armor = armor;
+    }
+
+    public ItemDataModel(String bodyPart, String id, String name, int requiredLevel, int itemLevel, String minDamage, String maxDamage) {
+        this.bodyPart = bodyPart;
+        this.id = id;
+        this.name = name;
+        this.requiredLevel = requiredLevel;
+        this.itemLevel = itemLevel;
         this.minDamage = minDamage;
-        this.maxDamage = maxDamage;*/
+        this.maxDamage = maxDamage;
     }
 
     @Override
