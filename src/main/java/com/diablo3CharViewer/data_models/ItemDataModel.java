@@ -1,5 +1,8 @@
 package com.diablo3CharViewer.data_models;
 
+import java.util.List;
+import java.util.Map;
+
 public class ItemDataModel {
 
     protected String bodyPart;
@@ -8,7 +11,7 @@ public class ItemDataModel {
     protected int requiredLevel;
     protected int itemLevel;
 
-    //Map<String, List<String>> attributes (key is the primary/secondary attribute, value is list of attributes)
+    //protected Map<String, List<String>> attributes; //(key is the primary/secondary attribute, value is list of attributes)
 
 
     public ItemDataModel(String bodyPart, String id, String name) {
@@ -31,11 +34,6 @@ public class ItemDataModel {
                 "bodyPart='" + bodyPart + '\'' +
                 ", id='" + id + '\'' +
                 ", name='" + name + '\'' +
-               /* ", requiredLevel=" + requiredLevel +
-                ", itemLevel=" + itemLevel +
-                ", armor=" + armor +
-                ", minDamage=" + minDamage +
-                ", maxDamage=" + maxDamage +*/
                 '}';
     }
 }

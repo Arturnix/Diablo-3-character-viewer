@@ -10,22 +10,38 @@ import java.util.Scanner;
 
 public class CharacterViewerManager {
 
-    public void showProfile(Scanner scanner, AccountMapper accountMapper, FetchToken fetchToken) {
-        System.out.println("Zostan na chwile i poczytaj:\n" + accountMapper.fetchAccountToDataModel(battleTagProvider(scanner), fetchToken) + '\n');
+    private void showProfile(Scanner scanner, AccountMapper accountMapper, FetchToken fetchToken) {
+        String battleTag = battleTagProvider(scanner);
+        if(battleTagVerifier(battleTag)) {
+            System.out.println("Zostan na chwile i poczytaj:\n" + accountMapper.fetchAccountToDataModel(battleTag, fetchToken) + '\n');
+        }
     }
 
-    public void showHero(Scanner scanner, HeroMapper heroMapper, FetchToken fetchToken) {
-        System.out.println("Zostan na chwile i poczytaj:\n" + heroMapper.fetchHeroToDataModel(battleTagProvider(scanner), heroIdProvider(scanner), fetchToken) + '\n');
+    private void showHero(Scanner scanner, HeroMapper heroMapper, FetchToken fetchToken) {
+        String battleTag = battleTagProvider(scanner);
+        if (battleTagVerifier(battleTag)) {
+            System.out.println("Zostan na chwile i poczytaj:\n" + heroMapper.fetchHeroToDataModel(battleTag, heroIdProvider(scanner), fetchToken) + '\n');
+        }
     }
 
-    public void showItem(Scanner scanner, ItemHandlerApi itemHandlerApi, FetchToken fetchToken) {
+    private void showItem(Scanner scanner, ItemHandlerApi itemHandlerApi, FetchToken fetchToken) {
         System.out.println("Zostan na chwile i poczytaj:\n" + itemHandlerApi.generateRequest(itemSlugAndIdProvider(scanner), fetchToken) + '\n');
     }
 
-    private String battleTagProvider(Scanner scanner) { //zrobic funkcje anonimowe z tego?
-        System.out.println("Podaj battleTag aby wyszukac profil bohatera: ");
+    private String battleTagProvider(Scanner scanner) {
+            System.out.println("Podaj battleTag aby wyszukac profil bohatera: ");
 
         return dataProvider(scanner);
+    }
+
+    private boolean battleTagVerifier(String battleTagToCheck) {
+
+            if (!battleTagToCheck.matches("\\w+#+\\d+") && !battleTagToCheck.matches("\\w+-+\\d+")) {
+                System.out.println("Niepoprawny format battleTag! Spróbuj ponownie.");
+            } else {
+                return true;
+            }
+        return false;
     }
 
     private String heroIdProvider(Scanner scanner) {
@@ -44,11 +60,38 @@ public class CharacterViewerManager {
         return scanner.nextLine();
     }
 
-    public void showMenu() {
+    private void showMenu() {
         System.out.println("1. Przegladaj profil podajac batlleTag bohatera");
         System.out.println("2. Wyswietl postac dla wybranego profilu");
         System.out.println("3. Wyswietl informacje o przedmiocie");
         System.out.println("4. Opusc archiwum");
     }
 
+    public void operateMenu(Scanner scanner, AccountMapper accountMapper, HeroMapper heroMapper,
+                            ItemHandlerApi itemHandlerApi, FetchToken fetchToken) {
+        String wybor;
+
+        do {
+            showMenu();
+            wybor = scanner.nextLine();
+            //scanner.nextLine(); //nextInt() doesnt consume new line char when hitting enter to confirm typed data. So this command consume left end line char.
+
+            switch (wybor) {
+                case "1":
+                    showProfile(scanner, accountMapper, fetchToken);
+                    break;
+                case "2":
+                    showHero(scanner, heroMapper, fetchToken);
+                    break;
+                case "3":
+                    showItem(scanner, itemHandlerApi, fetchToken);
+                    break;
+                case "4":
+                    System.out.println("Zegnaj wedrowcze...");
+                    break;
+                default:
+                    System.out.println("Dokonaj poprawnego wyboru:");
+            }
+        } while(!wybor.equals("4"));
+    }
 }
