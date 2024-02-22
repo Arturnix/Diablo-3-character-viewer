@@ -11,6 +11,7 @@ import java.util.Scanner;
 public class CharacterViewerManager {
 
     private void showProfile(Scanner scanner, AccountMapper accountMapper, FetchToken fetchToken) {
+
         String battleTag = battleTagProvider(scanner);
         if(battleTagVerifier(battleTag)) {
             System.out.println("Zostan na chwile i poczytaj:\n" + accountMapper.fetchAccountToDataModel(battleTag, fetchToken) + '\n');
@@ -18,9 +19,13 @@ public class CharacterViewerManager {
     }
 
     private void showHero(Scanner scanner, HeroMapper heroMapper, FetchToken fetchToken) {
+
         String battleTag = battleTagProvider(scanner);
         if (battleTagVerifier(battleTag)) {
-            System.out.println("Zostan na chwile i poczytaj:\n" + heroMapper.fetchHeroToDataModel(battleTag, heroIdProvider(scanner), fetchToken) + '\n');
+            String heroId = heroIdProvider(scanner);
+            if (heroIdVerifier(heroId)) {
+                System.out.println("Zostan na chwile i poczytaj:\n" + heroMapper.fetchHeroToDataModel(battleTag, heroId, fetchToken) + '\n');
+            }
         }
     }
 
@@ -32,16 +37,6 @@ public class CharacterViewerManager {
             System.out.println("Podaj battleTag aby wyszukac profil bohatera: ");
 
         return dataProvider(scanner);
-    }
-
-    private boolean battleTagVerifier(String battleTagToCheck) {
-
-            if (!battleTagToCheck.matches("\\w+#+\\d+") && !battleTagToCheck.matches("\\w+-+\\d+")) {
-                System.out.println("Niepoprawny format battleTag! Spróbuj ponownie.");
-            } else {
-                return true;
-            }
-        return false;
     }
 
     private String heroIdProvider(Scanner scanner) {
@@ -58,6 +53,26 @@ public class CharacterViewerManager {
 
     private String dataProvider(Scanner scanner) {
         return scanner.nextLine();
+    }
+
+    private boolean battleTagVerifier(String battleTagToCheck) {
+
+        if (!battleTagToCheck.matches("\\w+#+\\d+") && !battleTagToCheck.matches("\\w+-+\\d+")) {
+            System.out.println("Niepoprawny format battleTag! Spróbuj ponownie.");
+            return false;
+        } else {
+            return true;
+        }
+    }
+
+    private boolean heroIdVerifier(String heroIdToCheck) {
+
+        if(!heroIdToCheck.matches("\\d+")) {
+            System.out.println("Niepoprawny format heroId - tylko cyfry! Spróbuj ponownie.");
+            return false;
+        } else {
+            return true;
+        }
     }
 
     private void showMenu() {
