@@ -1,9 +1,7 @@
-import com.diablo3CharViewer.api_handlers.AccountHandlerApi;
 import com.diablo3CharViewer.data_models.AccountDataModel;
 import com.diablo3CharViewer.data_models.HeroDataModel;
 import com.diablo3CharViewer.json_mappers.AccountMapper;
 import com.diablo3CharViewer.token.FetchToken;
-import com.fasterxml.jackson.databind.JsonNode;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -11,22 +9,33 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-//@ExtendWith(MockitoExtension.class)
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import static org.mockito.Mockito.lenient;
+
+@ExtendWith(MockitoExtension.class)
 public class AccountMapperTest {
 
-   // @Mock
+   @Mock
     private FetchToken testFetchToken = new FetchToken();
-   // @Mock
+   @Mock
     private AccountMapper testAccountMapper = new AccountMapper();
 
    @Test
-    public void correctFetchedAccountToDataModelTest() {
+    public void isCorrectAccountFetchedToDataModelTest() { // czy obsługiwac w testach zgodnosc danych pobranych jako pozostale pola w data modelu?
 
-        String battleTag = "Jokefish#2265";
+       String battleTag = "Jokefish#2265";
+       List<HeroDataModel> heroes = new ArrayList<>();
+       Map<String, Integer> mapKills = new HashMap<String, Integer>();
+       AccountDataModel accountDataModel = new AccountDataModel("Jokefish#2265", 1111, "Phantas Magoria",
+               heroes, 70, mapKills);
 
-        AccountDataModel accountDataModel = testAccountMapper.fetchAccountToDataModel(battleTag, testFetchToken);
+       lenient().when(testAccountMapper.fetchAccountToDataModel(battleTag, testFetchToken)).thenReturn(accountDataModel);
 
-       Assertions.assertTrue(accountDataModel.getBattleTag().equals("Jokefish#2265"));
+       Assertions.assertEquals("Jokefish#2265", accountDataModel.getBattleTag());
 
     }
 }
