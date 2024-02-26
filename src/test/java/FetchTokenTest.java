@@ -1,15 +1,10 @@
 import com.diablo3CharViewer.token.FetchToken;
-import com.diablo3CharViewer.token.Token;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-
-import java.net.HttpURLConnection;
-import java.net.http.HttpResponse;
 
 public class FetchTokenTest {
 
     private FetchToken testObject = new FetchToken();
-    private Token testToken = new Token();
 
     @Test
     public void correctTokenFetched() {
