@@ -43,3 +43,4 @@ bin/
 
 ### class ###
 com.diablo3CharViewer.ClientCredentials.java
+src/main/java/com/diablo3CharViewer/ClientCredentials.java
