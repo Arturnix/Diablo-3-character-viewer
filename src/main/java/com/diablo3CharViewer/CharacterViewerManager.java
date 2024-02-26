@@ -10,7 +10,7 @@ import java.util.Scanner;
 
 public class CharacterViewerManager {
 
-    private void showProfile(Scanner scanner, AccountMapper accountMapper, FetchToken fetchToken) {
+    public void showProfile(Scanner scanner, AccountMapper accountMapper, FetchToken fetchToken) {
 
         String battleTag = battleTagProvider(scanner);
         if(isBattleTagCorrect(battleTag)) {
@@ -18,7 +18,7 @@ public class CharacterViewerManager {
         }
     }
 
-    private void showHero(Scanner scanner, HeroMapper heroMapper, FetchToken fetchToken) {
+    public void showHero(Scanner scanner, HeroMapper heroMapper, FetchToken fetchToken) {
 
         String battleTag = battleTagProvider(scanner);
         if (isBattleTagCorrect(battleTag)) {
@@ -29,7 +29,7 @@ public class CharacterViewerManager {
         }
     }
 
-    private void showItem(Scanner scanner, ItemHandlerApi itemHandlerApi, FetchToken fetchToken) {
+    public void showItem(Scanner scanner, ItemHandlerApi itemHandlerApi, FetchToken fetchToken) {
         System.out.println("Zostan na chwile i poczytaj:\n" + itemHandlerApi.generateRequest(itemSlugAndIdProvider(scanner), fetchToken) + '\n');
     }
 
@@ -75,38 +75,10 @@ public class CharacterViewerManager {
         }
     }
 
-    private void showMenu() {
+    public void showMenu() {
         System.out.println("1. Przegladaj profil podajac batlleTag bohatera");
         System.out.println("2. Wyswietl postac dla wybranego profilu");
         System.out.println("3. Wyswietl informacje o przedmiocie");
         System.out.println("4. Opusc archiwum");
-    }
-
-    public void operateMenu(Scanner scanner, AccountMapper accountMapper, HeroMapper heroMapper,
-                            ItemHandlerApi itemHandlerApi, FetchToken fetchToken) {
-        String wybor;
-
-        do {
-            showMenu();
-            wybor = scanner.nextLine();
-            //scanner.nextLine(); //nextInt() doesnt consume new line char when hitting enter to confirm typed data. So this command consume left end line char.
-
-            switch (wybor) {
-                case "1":
-                    showProfile(scanner, accountMapper, fetchToken);
-                    break;
-                case "2":
-                    showHero(scanner, heroMapper, fetchToken);
-                    break;
-                case "3":
-                    showItem(scanner, itemHandlerApi, fetchToken);
-                    break;
-                case "4":
-                    System.out.println("Zegnaj wedrowcze...");
-                    break;
-                default:
-                    System.out.println("Dokonaj poprawnego wyboru:");
-            }
-        } while(!wybor.equals("4"));
     }
 }
