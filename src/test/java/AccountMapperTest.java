@@ -23,19 +23,64 @@ public class AccountMapperTest {
     private FetchToken testFetchToken = new FetchToken();
    @Mock
     private AccountMapper testAccountMapper = new AccountMapper();
+    String battleTag = "Jokefish#2265";
+    List<HeroDataModel> heroes = new ArrayList<>();
+    Map<String, Integer> mapKills = new HashMap<String, Integer>();
+    AccountDataModel accountDataModel = new AccountDataModel("Jokefish#2265", 1111, "Phantas Magoria",
+            heroes, 70, mapKills);
 
    @Test
-    public void isCorrectAccountFetchedToDataModelTest() { // czy obsługiwac w testach zgodnosc danych pobranych jako pozostale pola w data modelu?
+    public void correctAccountFetchedToDataModel() {
 
-       String battleTag = "Jokefish#2265";
-       List<HeroDataModel> heroes = new ArrayList<>();
-       Map<String, Integer> mapKills = new HashMap<String, Integer>();
-       AccountDataModel accountDataModel = new AccountDataModel("Jokefish#2265", 1111, "Phantas Magoria",
-               heroes, 70, mapKills);
+       String expectedBattleTag = "Jokefish#2265";
 
        lenient().when(testAccountMapper.fetchAccountToDataModel(battleTag, testFetchToken)).thenReturn(accountDataModel);
-
-       Assertions.assertEquals("Jokefish#2265", accountDataModel.getBattleTag());
-
+       Assertions.assertEquals(expectedBattleTag, testAccountMapper.fetchAccountToDataModel(battleTag, testFetchToken).getBattleTag());
     }
+
+    @Test
+    public void correctParagonLevelFetchedToDataModel() {
+
+        int expectedParagonLevel = 1111;
+
+        lenient().when(testAccountMapper.fetchAccountToDataModel(battleTag, testFetchToken)).thenReturn(accountDataModel);
+        Assertions.assertEquals(expectedParagonLevel, testAccountMapper.fetchAccountToDataModel(battleTag, testFetchToken).getParagonLevel());
+    }
+
+    @Test
+    public void correctGuildNameFetchedToDataModel() {
+
+        String expectedGuildName = "Phantas Magoria";
+
+        lenient().when(testAccountMapper.fetchAccountToDataModel(battleTag, testFetchToken)).thenReturn(accountDataModel);
+        Assertions.assertEquals(expectedGuildName, testAccountMapper.fetchAccountToDataModel(battleTag, testFetchToken).getGuildName());
+    }
+
+    @Test
+    public void correctHeroesListSizeFetchedToDataModel() {
+
+       heroes.add(new HeroDataModel(1, "A", "barbarian"));
+       heroes.add(new HeroDataModel(2, "B", "crusader"));
+
+       lenient().when(testAccountMapper.fetchAccountToDataModel(battleTag, testFetchToken)).thenReturn(accountDataModel);
+       Assertions.assertEquals(2, heroes.size());
+    }
+
+    @Test
+    public void correctHighestHardcoreLevelFetchedToDataModel() {
+
+        lenient().when(testAccountMapper.fetchAccountToDataModel(battleTag, testFetchToken)).thenReturn(accountDataModel);
+        Assertions.assertEquals(70, testAccountMapper.fetchAccountToDataModel(battleTag, testFetchToken).getHighestHardcoreLevel());
+    }
+
+    @Test
+    public void correctKillsFetchedToDataModel() {
+
+        mapKills.put("elites", 1974);
+
+        lenient().when(testAccountMapper.fetchAccountToDataModel(battleTag, testFetchToken)).thenReturn(accountDataModel);
+        Assertions.assertTrue(testAccountMapper.fetchAccountToDataModel(battleTag, testFetchToken).getKills().containsKey("elites"));
+        Assertions.assertTrue(testAccountMapper.fetchAccountToDataModel(battleTag, testFetchToken).getKills().containsValue(1974));
+    }
+
 }
