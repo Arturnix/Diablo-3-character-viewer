@@ -1,3 +1,4 @@
+import com.diablo3CharViewer.api_handlers.AccountHandlerApi;
 import com.diablo3CharViewer.data_models.AccountDataModel;
 import com.diablo3CharViewer.data_models.HeroDataModel;
 import com.diablo3CharViewer.json_mappers.AccountMapper;
@@ -108,6 +109,23 @@ public class AccountMapperTest {
         });
 
         String expectedMessage = "Bohater o podanym battleTagu nie istnieje w swiecie Sanktuarium!";
+        String actualMessage = exception.getMessage();
+
+        Assertions.assertTrue(actualMessage.contains(expectedMessage));
+    }
+
+    @Test
+    public void providedBattleTagIsNullThrowsException() {
+
+        AccountMapper testAccountMapper = new AccountMapper();
+        FetchToken testFetchToken = new FetchToken();
+        String battleTag = null;
+
+        Exception exception = Assertions.assertThrows(NullPointerException.class, ()-> {
+            testAccountMapper.fetchAccountToDataModel(battleTag, testFetchToken);
+        });
+
+        String expectedMessage = "Cannot invoke \"String.replace(char, char)\" because \"battleTag\" is null";
         String actualMessage = exception.getMessage();
 
         Assertions.assertTrue(actualMessage.contains(expectedMessage));
