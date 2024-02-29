@@ -83,4 +83,33 @@ public class AccountMapperTest {
         Assertions.assertTrue(testAccountMapper.fetchAccountToDataModel(battleTag, testFetchToken).getKills().containsValue(1974));
     }
 
+    @Test
+    public void wrongBattleTagFormatProvided() {
+
+       String providedBattleTag = "";
+       String wrongBattleTagFormatWarning = "Niepoprawny format battleTag! Spróbuj ponownie.";
+
+        Mockito.when(testAccountMapper.generateRequest(providedBattleTag, testFetchToken))
+                .thenReturn("Niepoprawny format battleTag! Spróbuj ponownie.");
+
+        Assertions.assertEquals(wrongBattleTagFormatWarning, testAccountMapper.generateRequest(providedBattleTag, testFetchToken));
+    }
+
+    @Test
+    public void providedBattleTagDoesntExistThrowsException() {
+
+        AccountMapper testAccountMapper = new AccountMapper();
+        FetchToken testFetchToken = new FetchToken();
+
+        String battleTag = "dsf#123";
+
+        Exception exception = Assertions.assertThrows(RuntimeException.class, ()-> {
+            testAccountMapper.fetchAccountToDataModel(battleTag, testFetchToken);
+        });
+
+        String expectedMessage = "Bohater o podanym battleTagu nie istnieje w swiecie Sanktuarium!";
+        String actualMessage = exception.getMessage();
+
+        Assertions.assertTrue(actualMessage.contains(expectedMessage));
+    }
 }
