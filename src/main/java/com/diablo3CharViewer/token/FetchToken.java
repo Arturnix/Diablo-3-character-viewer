@@ -92,7 +92,7 @@ public class FetchToken {
 
             if(response.statusCode() != HttpURLConnection.HTTP_OK) {
                //return "Bohater o podanym battleTagu nie istnieje w swiecie Sanktuarium"; //System.out.println("Bohater o podanym battleTagu nie istnieje w swiecie Sanktuarium!");
-                throw new RuntimeException("Bohater o podanym battleTagu nie istnieje w swiecie Sanktuarium!\n" + "HttpResponseCode: " + response.statusCode());
+                throw new RuntimeException("Gracz o podanym battleTagu nie istnieje w swiecie Sanktuarium!\n" + "HttpResponseCode: " + response.statusCode());
                 //throw new RuntimeException("Bohater o podanym battleTagu nie istnieje w swiecie Sanktuarium!");
             } else {
                 return response.body();
