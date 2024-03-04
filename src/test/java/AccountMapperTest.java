@@ -21,13 +21,19 @@ import static org.mockito.Mockito.lenient;
 public class AccountMapperTest {
 
    @Mock
-    private FetchToken testFetchToken = new FetchToken();
+    private FetchToken testFetchTokenMock = new FetchToken();
    @Mock
-    private AccountMapper testAccountMapper = new AccountMapper();
-    String battleTag = "Jokefish#2265";
-    List<HeroDataModel> heroes = new ArrayList<>();
-    Map<String, Integer> mapKills = new HashMap<String, Integer>();
-    AccountDataModel accountDataModel = new AccountDataModel("Jokefish#2265", 1111, "Phantas Magoria",
+    private AccountMapper testAccountMapperMock = new AccountMapper();
+    private final FetchToken testFetchToken = new FetchToken();
+    private final AccountMapper testAccountMapper = new AccountMapper();
+    private final String battleTag = "Jokefish#2265";
+    private final String battleTagAsWrongFormat = "abc123";
+    private final String battleTagAsNull = null;
+    private final String battleTagAsDosentExist = "dsf#123";
+    private final String wrongBattleTagFormatWarning = "Niepoprawny format battleTag! Spróbuj ponownie.";
+    private final List<HeroDataModel> heroes = new ArrayList<>();
+    private final Map<String, Integer> mapKills = new HashMap<String, Integer>();
+    private final AccountDataModel accountDataModel = new AccountDataModel("Jokefish#2265", 1111, "Phantas Magoria",
             heroes, 70, mapKills);
 
    @Test
@@ -35,8 +41,8 @@ public class AccountMapperTest {
 
        String expectedBattleTag = "Jokefish#2265";
 
-       lenient().when(testAccountMapper.fetchAccountToDataModel(battleTag, testFetchToken)).thenReturn(accountDataModel);
-       Assertions.assertEquals(expectedBattleTag, testAccountMapper.fetchAccountToDataModel(battleTag, testFetchToken).getBattleTag());
+       lenient().when(testAccountMapperMock.fetchAccountToDataModel(battleTag, testFetchTokenMock)).thenReturn(accountDataModel);
+       Assertions.assertEquals(expectedBattleTag, testAccountMapperMock.fetchAccountToDataModel(battleTag, testFetchTokenMock).getBattleTag());
     }
 
     @Test
@@ -44,8 +50,8 @@ public class AccountMapperTest {
 
         int expectedParagonLevel = 1111;
 
-        lenient().when(testAccountMapper.fetchAccountToDataModel(battleTag, testFetchToken)).thenReturn(accountDataModel);
-        Assertions.assertEquals(expectedParagonLevel, testAccountMapper.fetchAccountToDataModel(battleTag, testFetchToken).getParagonLevel());
+        lenient().when(testAccountMapperMock.fetchAccountToDataModel(battleTag, testFetchTokenMock)).thenReturn(accountDataModel);
+        Assertions.assertEquals(expectedParagonLevel, testAccountMapperMock.fetchAccountToDataModel(battleTag, testFetchTokenMock).getParagonLevel());
     }
 
     @Test
@@ -53,8 +59,8 @@ public class AccountMapperTest {
 
         String expectedGuildName = "Phantas Magoria";
 
-        lenient().when(testAccountMapper.fetchAccountToDataModel(battleTag, testFetchToken)).thenReturn(accountDataModel);
-        Assertions.assertEquals(expectedGuildName, testAccountMapper.fetchAccountToDataModel(battleTag, testFetchToken).getGuildName());
+        lenient().when(testAccountMapperMock.fetchAccountToDataModel(battleTag, testFetchTokenMock)).thenReturn(accountDataModel);
+        Assertions.assertEquals(expectedGuildName, testAccountMapperMock.fetchAccountToDataModel(battleTag, testFetchTokenMock).getGuildName());
     }
 
     @Test
@@ -63,15 +69,15 @@ public class AccountMapperTest {
        heroes.add(new HeroDataModel(1, "A", "barbarian"));
        heroes.add(new HeroDataModel(2, "B", "crusader"));
 
-       lenient().when(testAccountMapper.fetchAccountToDataModel(battleTag, testFetchToken)).thenReturn(accountDataModel);
+       lenient().when(testAccountMapperMock.fetchAccountToDataModel(battleTag, testFetchTokenMock)).thenReturn(accountDataModel);
        Assertions.assertEquals(2, heroes.size());
     }
 
     @Test
     public void correctHighestHardcoreLevelFetchedToDataModel() {
 
-        lenient().when(testAccountMapper.fetchAccountToDataModel(battleTag, testFetchToken)).thenReturn(accountDataModel);
-        Assertions.assertEquals(70, testAccountMapper.fetchAccountToDataModel(battleTag, testFetchToken).getHighestHardcoreLevel());
+        lenient().when(testAccountMapperMock.fetchAccountToDataModel(battleTag, testFetchTokenMock)).thenReturn(accountDataModel);
+        Assertions.assertEquals(70, testAccountMapperMock.fetchAccountToDataModel(battleTag, testFetchTokenMock).getHighestHardcoreLevel());
     }
 
     @Test
@@ -79,36 +85,28 @@ public class AccountMapperTest {
 
         mapKills.put("elites", 1974);
 
-        lenient().when(testAccountMapper.fetchAccountToDataModel(battleTag, testFetchToken)).thenReturn(accountDataModel);
-        Assertions.assertTrue(testAccountMapper.fetchAccountToDataModel(battleTag, testFetchToken).getKills().containsKey("elites"));
-        Assertions.assertTrue(testAccountMapper.fetchAccountToDataModel(battleTag, testFetchToken).getKills().containsValue(1974));
+        lenient().when(testAccountMapperMock.fetchAccountToDataModel(battleTag, testFetchTokenMock)).thenReturn(accountDataModel);
+        Assertions.assertTrue(testAccountMapperMock.fetchAccountToDataModel(battleTag, testFetchTokenMock).getKills().containsKey("elites"));
+        Assertions.assertTrue(testAccountMapperMock.fetchAccountToDataModel(battleTag, testFetchTokenMock).getKills().containsValue(1974));
     }
 
     @Test
     public void wrongBattleTagFormatProvided() {
 
-       String providedBattleTag = "";
-       String wrongBattleTagFormatWarning = "Niepoprawny format battleTag! Spróbuj ponownie.";
-
-        Mockito.when(testAccountMapper.generateRequest(providedBattleTag, testFetchToken))
+        Mockito.when(testAccountMapperMock.generateRequest(battleTagAsWrongFormat, testFetchTokenMock))
                 .thenReturn("Niepoprawny format battleTag! Spróbuj ponownie.");
 
-        Assertions.assertEquals(wrongBattleTagFormatWarning, testAccountMapper.generateRequest(providedBattleTag, testFetchToken));
+        Assertions.assertTrue(testAccountMapperMock.generateRequest(battleTagAsWrongFormat, testFetchTokenMock).contains(wrongBattleTagFormatWarning));
     }
 
     @Test
     public void providedBattleTagDoesntExistThrowsException() {
 
-        AccountMapper testAccountMapper = new AccountMapper();
-        FetchToken testFetchToken = new FetchToken();
-
-        String battleTag = "dsf#123";
-
         Exception exception = Assertions.assertThrows(RuntimeException.class, ()-> {
-            testAccountMapper.fetchAccountToDataModel(battleTag, testFetchToken);
+            testAccountMapper.fetchAccountToDataModel(battleTagAsDosentExist, testFetchToken);
         });
 
-        String expectedMessage = "Bohater o podanym battleTagu nie istnieje w swiecie Sanktuarium!";
+        String expectedMessage = "Gracz o podanym battleTagu nie istnieje w swiecie Sanktuarium!";
         String actualMessage = exception.getMessage();
 
         Assertions.assertTrue(actualMessage.contains(expectedMessage));
@@ -117,12 +115,8 @@ public class AccountMapperTest {
     @Test
     public void providedBattleTagIsNullThrowsException() {
 
-        AccountMapper testAccountMapper = new AccountMapper();
-        FetchToken testFetchToken = new FetchToken();
-        String battleTag = null;
-
         Exception exception = Assertions.assertThrows(NullPointerException.class, ()-> {
-            testAccountMapper.fetchAccountToDataModel(battleTag, testFetchToken);
+            testAccountMapper.fetchAccountToDataModel(battleTagAsNull, testFetchTokenMock);
         });
 
         String expectedMessage = "Cannot invoke \"String.replace(char, char)\" because \"battleTag\" is null";
