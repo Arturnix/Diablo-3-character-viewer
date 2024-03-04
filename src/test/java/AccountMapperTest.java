@@ -1,4 +1,3 @@
-import com.diablo3CharViewer.api_handlers.AccountHandlerApi;
 import com.diablo3CharViewer.data_models.AccountDataModel;
 import com.diablo3CharViewer.data_models.HeroDataModel;
 import com.diablo3CharViewer.json_mappers.AccountMapper;
@@ -15,23 +14,24 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import static org.mockito.Mockito.lenient;
-
 @ExtendWith(MockitoExtension.class)
 public class AccountMapperTest {
 
    @Mock
-    private FetchToken testFetchTokenMock = new FetchToken();
+    private FetchToken testFetchTokenMock;
    @Mock
-    private AccountMapper testAccountMapperMock = new AccountMapper();
+    private AccountMapper testAccountMapperMock;
     private final FetchToken testFetchToken = new FetchToken();
     private final AccountMapper testAccountMapper = new AccountMapper();
     private final String battleTag = "Jokefish#2265";
+    private final String expectedBattleTag = "Jokefish#2265";
+    private final int expectedParagonLevel = 1111;
+    private final String expectedGuildName = "Phantas Magoria";
     private final String battleTagAsWrongFormat = "abc123";
     private final String battleTagAsNull = null;
     private final String battleTagAsDosentExist = "dsf#123";
     private final String wrongBattleTagFormatWarning = "Niepoprawny format battleTag! Spróbuj ponownie.";
-    private final List<HeroDataModel> heroes = new ArrayList<>();
+    private final List<HeroDataModel> heroes = new ArrayList<HeroDataModel>();
     private final Map<String, Integer> mapKills = new HashMap<String, Integer>();
     private final AccountDataModel accountDataModel = new AccountDataModel("Jokefish#2265", 1111, "Phantas Magoria",
             heroes, 70, mapKills);
@@ -39,44 +39,38 @@ public class AccountMapperTest {
    @Test
     public void correctAccountFetchedToDataModel() {
 
-       String expectedBattleTag = "Jokefish#2265";
-
-       lenient().when(testAccountMapperMock.fetchAccountToDataModel(battleTag, testFetchTokenMock)).thenReturn(accountDataModel);
+       Mockito.when(testAccountMapperMock.fetchAccountToDataModel(battleTag, testFetchTokenMock)).thenReturn(accountDataModel);
        Assertions.assertEquals(expectedBattleTag, testAccountMapperMock.fetchAccountToDataModel(battleTag, testFetchTokenMock).getBattleTag());
     }
 
     @Test
     public void correctParagonLevelFetchedToDataModel() {
 
-        int expectedParagonLevel = 1111;
-
-        lenient().when(testAccountMapperMock.fetchAccountToDataModel(battleTag, testFetchTokenMock)).thenReturn(accountDataModel);
+        Mockito.when(testAccountMapperMock.fetchAccountToDataModel(battleTag, testFetchTokenMock)).thenReturn(accountDataModel);
         Assertions.assertEquals(expectedParagonLevel, testAccountMapperMock.fetchAccountToDataModel(battleTag, testFetchTokenMock).getParagonLevel());
     }
 
     @Test
     public void correctGuildNameFetchedToDataModel() {
 
-        String expectedGuildName = "Phantas Magoria";
-
-        lenient().when(testAccountMapperMock.fetchAccountToDataModel(battleTag, testFetchTokenMock)).thenReturn(accountDataModel);
+        Mockito.when(testAccountMapperMock.fetchAccountToDataModel(battleTag, testFetchTokenMock)).thenReturn(accountDataModel);
         Assertions.assertEquals(expectedGuildName, testAccountMapperMock.fetchAccountToDataModel(battleTag, testFetchTokenMock).getGuildName());
     }
 
     @Test
     public void correctHeroesListSizeFetchedToDataModel() {
 
-       heroes.add(new HeroDataModel(1, "A", "barbarian"));
-       heroes.add(new HeroDataModel(2, "B", "crusader"));
+        heroes.add(new HeroDataModel(1, "A", "barbarian"));
+        heroes.add(new HeroDataModel(2, "B", "crusader"));
 
-       lenient().when(testAccountMapperMock.fetchAccountToDataModel(battleTag, testFetchTokenMock)).thenReturn(accountDataModel);
-       Assertions.assertEquals(2, heroes.size());
+        Mockito.when(testAccountMapperMock.fetchAccountToDataModel(battleTag, testFetchTokenMock)).thenReturn(accountDataModel);
+        Assertions.assertEquals(2, heroes.size());
     }
 
     @Test
     public void correctHighestHardcoreLevelFetchedToDataModel() {
 
-        lenient().when(testAccountMapperMock.fetchAccountToDataModel(battleTag, testFetchTokenMock)).thenReturn(accountDataModel);
+        Mockito.when(testAccountMapperMock.fetchAccountToDataModel(battleTag, testFetchTokenMock)).thenReturn(accountDataModel);
         Assertions.assertEquals(70, testAccountMapperMock.fetchAccountToDataModel(battleTag, testFetchTokenMock).getHighestHardcoreLevel());
     }
 
@@ -85,7 +79,7 @@ public class AccountMapperTest {
 
         mapKills.put("elites", 1974);
 
-        lenient().when(testAccountMapperMock.fetchAccountToDataModel(battleTag, testFetchTokenMock)).thenReturn(accountDataModel);
+        Mockito.when(testAccountMapperMock.fetchAccountToDataModel(battleTag, testFetchTokenMock)).thenReturn(accountDataModel);
         Assertions.assertTrue(testAccountMapperMock.fetchAccountToDataModel(battleTag, testFetchTokenMock).getKills().containsKey("elites"));
         Assertions.assertTrue(testAccountMapperMock.fetchAccountToDataModel(battleTag, testFetchTokenMock).getKills().containsValue(1974));
     }
