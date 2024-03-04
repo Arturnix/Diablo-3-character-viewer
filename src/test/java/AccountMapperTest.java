@@ -9,17 +9,16 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
+
+import static org.mockito.Mockito.lenient;
 
 @ExtendWith(MockitoExtension.class)
 public class AccountMapperTest {
 
-   @Mock
+    @Mock
     private FetchToken testFetchTokenMock;
-   @Mock
+    @Mock
     private AccountMapper testAccountMapperMock;
     private final FetchToken testFetchToken = new FetchToken();
     private final AccountMapper testAccountMapper = new AccountMapper();
@@ -31,8 +30,14 @@ public class AccountMapperTest {
     private final String battleTagAsNull = null;
     private final String battleTagAsDosentExist = "dsf#123";
     private final String wrongBattleTagFormatWarning = "Niepoprawny format battleTag! Spróbuj ponownie.";
-    private final List<HeroDataModel> heroes = new ArrayList<HeroDataModel>();
-    private final Map<String, Integer> mapKills = new HashMap<String, Integer>();
+    private final ArrayList<HeroDataModel> heroes = new ArrayList<>(Arrays.asList(
+            new HeroDataModel(1, "A", "barbarian"),
+            new HeroDataModel(2, "B", "crusader")
+    ));
+    private final Map<String, Integer> mapKills = new HashMap<String, Integer>()
+    {{
+            put("elites",1974);
+    }};
     private final AccountDataModel accountDataModel = new AccountDataModel("Jokefish#2265", 1111, "Phantas Magoria",
             heroes, 70, mapKills);
 
@@ -60,10 +65,7 @@ public class AccountMapperTest {
     @Test
     public void correctHeroesListSizeFetchedToDataModel() {
 
-        heroes.add(new HeroDataModel(1, "A", "barbarian"));
-        heroes.add(new HeroDataModel(2, "B", "crusader"));
-
-        Mockito.when(testAccountMapperMock.fetchAccountToDataModel(battleTag, testFetchTokenMock)).thenReturn(accountDataModel);
+        lenient().when(testAccountMapperMock.fetchAccountToDataModel(battleTag, testFetchTokenMock)).thenReturn(accountDataModel);
         Assertions.assertEquals(2, heroes.size());
     }
 
@@ -76,8 +78,6 @@ public class AccountMapperTest {
 
     @Test
     public void correctKillsFetchedToDataModel() {
-
-        mapKills.put("elites", 1974);
 
         Mockito.when(testAccountMapperMock.fetchAccountToDataModel(battleTag, testFetchTokenMock)).thenReturn(accountDataModel);
         Assertions.assertTrue(testAccountMapperMock.fetchAccountToDataModel(battleTag, testFetchTokenMock).getKills().containsKey("elites"));
