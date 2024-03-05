@@ -34,8 +34,7 @@ public class AccountMapperTest {
             new HeroDataModel(1, "A", "barbarian"),
             new HeroDataModel(2, "B", "crusader")
     ));
-    private final Map<String, Integer> mapKills = new HashMap<String, Integer>()
-    {{
+    private final Map<String, Integer> mapKills = new HashMap<String, Integer>() {{
             put("elites",1974);
     }};
     private final AccountDataModel accountDataModel = new AccountDataModel("Jokefish#2265", 1111, "Phantas Magoria",
@@ -43,42 +42,36 @@ public class AccountMapperTest {
 
    @Test
     public void correctAccountFetchedToDataModel() {
-
        Mockito.when(testAccountMapperMock.fetchAccountToDataModel(battleTag, testFetchTokenMock)).thenReturn(accountDataModel);
        Assertions.assertEquals(expectedBattleTag, testAccountMapperMock.fetchAccountToDataModel(battleTag, testFetchTokenMock).getBattleTag());
     }
 
     @Test
     public void correctParagonLevelFetchedToDataModel() {
-
         Mockito.when(testAccountMapperMock.fetchAccountToDataModel(battleTag, testFetchTokenMock)).thenReturn(accountDataModel);
         Assertions.assertEquals(expectedParagonLevel, testAccountMapperMock.fetchAccountToDataModel(battleTag, testFetchTokenMock).getParagonLevel());
     }
 
     @Test
     public void correctGuildNameFetchedToDataModel() {
-
         Mockito.when(testAccountMapperMock.fetchAccountToDataModel(battleTag, testFetchTokenMock)).thenReturn(accountDataModel);
         Assertions.assertEquals(expectedGuildName, testAccountMapperMock.fetchAccountToDataModel(battleTag, testFetchTokenMock).getGuildName());
     }
 
     @Test
     public void correctHeroesListSizeFetchedToDataModel() {
-
         lenient().when(testAccountMapperMock.fetchAccountToDataModel(battleTag, testFetchTokenMock)).thenReturn(accountDataModel);
         Assertions.assertEquals(2, heroes.size());
     }
 
     @Test
     public void correctHighestHardcoreLevelFetchedToDataModel() {
-
         Mockito.when(testAccountMapperMock.fetchAccountToDataModel(battleTag, testFetchTokenMock)).thenReturn(accountDataModel);
         Assertions.assertEquals(70, testAccountMapperMock.fetchAccountToDataModel(battleTag, testFetchTokenMock).getHighestHardcoreLevel());
     }
 
     @Test
     public void correctKillsFetchedToDataModel() {
-
         Mockito.when(testAccountMapperMock.fetchAccountToDataModel(battleTag, testFetchTokenMock)).thenReturn(accountDataModel);
         Assertions.assertTrue(testAccountMapperMock.fetchAccountToDataModel(battleTag, testFetchTokenMock).getKills().containsKey("elites"));
         Assertions.assertTrue(testAccountMapperMock.fetchAccountToDataModel(battleTag, testFetchTokenMock).getKills().containsValue(1974));
@@ -86,7 +79,6 @@ public class AccountMapperTest {
 
     @Test
     public void wrongBattleTagFormatProvided() {
-
         Mockito.when(testAccountMapperMock.generateRequest(battleTagAsWrongFormat, testFetchTokenMock))
                 .thenReturn("Niepoprawny format battleTag! Spróbuj ponownie.");
 
@@ -95,7 +87,6 @@ public class AccountMapperTest {
 
     @Test
     public void providedBattleTagDoesntExistThrowsException() {
-
         Exception exception = Assertions.assertThrows(RuntimeException.class, ()-> {
             testAccountMapper.fetchAccountToDataModel(battleTagAsDosentExist, testFetchToken);
         });
@@ -108,7 +99,6 @@ public class AccountMapperTest {
 
     @Test
     public void providedBattleTagIsNullThrowsException() {
-
         Exception exception = Assertions.assertThrows(NullPointerException.class, ()-> {
             testAccountMapper.fetchAccountToDataModel(battleTagAsNull, testFetchTokenMock);
         });
