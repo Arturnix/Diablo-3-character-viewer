@@ -43,6 +43,38 @@ public class HeroDataModel {
         this.stats = stats;
     }
 
+    public int getId() {
+        return id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getClassHero() {
+        return classHero;
+    }
+
+    public Map<String, Integer> getKills() {
+        return kills;
+    }
+
+    public List<SkillDataModel> getSkills() {
+        return skills;
+    }
+
+    public List<ItemDataModel> getItems() {
+        return items;
+    }
+
+    public List<FollowerDataModel> getFollowers() {
+        return followers;
+    }
+
+    public Map<String, Integer> getStats() {
+        return stats;
+    }
+
     @Override
     public String toString() {
 
