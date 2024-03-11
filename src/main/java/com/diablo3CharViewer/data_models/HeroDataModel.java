@@ -4,9 +4,9 @@ import java.util.List;
 import java.util.Map;
 
 public class HeroDataModel {
-    private int id;
-    private String name;
-    private String classHero;
+    private final int id;
+    private final String name;
+    private final String classHero;
     private int level;
     private int paragonLevel;
     private boolean hardcore;
