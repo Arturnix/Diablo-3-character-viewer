@@ -7,7 +7,7 @@ import java.util.Map;
 
 public class AccountDataModel {
 
-    private String  battleTag;
+    private String battleTag;
     private int paragonLevel;
     private String guildName;
     private List<HeroDataModel> heroes;

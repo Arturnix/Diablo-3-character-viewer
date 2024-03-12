@@ -14,7 +14,7 @@ import java.util.*;
 
 
 @ExtendWith(MockitoExtension.class)
-public class HeroMapperTest extends ShareableDataForTests {
+public class HeroMapperTest {
 
     @Mock
     private HeroMapper testHeroMapperMock;
@@ -54,89 +54,89 @@ public class HeroMapperTest extends ShareableDataForTests {
 
     @Test
     public void correctHeroFetchedToDataModel() {
-        Mockito.when(testHeroMapperMock.fetchHeroToDataModel(battleTag, heroId, testFetchTokenMock)).thenReturn(heroDataModel);
-        Assertions.assertEquals(expectedHeroId, testHeroMapperMock.fetchHeroToDataModel(battleTag,heroId,testFetchTokenMock).getId());
-        Assertions.assertEquals(expectedHeroName, testHeroMapperMock.fetchHeroToDataModel(battleTag,heroId,testFetchTokenMock).getName());
-        Assertions.assertEquals(expectedHeroClass, testHeroMapperMock.fetchHeroToDataModel(battleTag,heroId,testFetchTokenMock).getClassHero());
+        Mockito.when(testHeroMapperMock.fetchHeroToDataModel(ShareableDataForTests.battleTag, heroId, ShareableDataForTests.testFetchTokenMock)).thenReturn(heroDataModel);
+        Assertions.assertEquals(expectedHeroId, testHeroMapperMock.fetchHeroToDataModel(ShareableDataForTests.battleTag, heroId, ShareableDataForTests.testFetchTokenMock).getId());
+        Assertions.assertEquals(expectedHeroName, testHeroMapperMock.fetchHeroToDataModel(ShareableDataForTests.battleTag, heroId, ShareableDataForTests.testFetchTokenMock).getName());
+        Assertions.assertEquals(expectedHeroClass, testHeroMapperMock.fetchHeroToDataModel(ShareableDataForTests.battleTag, heroId, ShareableDataForTests.testFetchTokenMock).getClassHero());
     }
 
     @Test
     public void correctHeroKillsFetchedToDataModel() {
-        Mockito.when(testHeroMapperMock.fetchHeroToDataModel(battleTag, heroId, testFetchTokenMock)).thenReturn(heroDataModel);
-        Assertions.assertTrue(testHeroMapperMock.fetchHeroToDataModel(battleTag, heroId, testFetchTokenMock).getKills().containsKey("elites"));
-        Assertions.assertTrue(testHeroMapperMock.fetchHeroToDataModel(battleTag, heroId, testFetchTokenMock).getKills().containsValue(403));
+        Mockito.when(testHeroMapperMock.fetchHeroToDataModel(ShareableDataForTests.battleTag, heroId, ShareableDataForTests.testFetchTokenMock)).thenReturn(heroDataModel);
+        Assertions.assertTrue(testHeroMapperMock.fetchHeroToDataModel(ShareableDataForTests.battleTag, heroId, ShareableDataForTests.testFetchTokenMock).getKills().containsKey("elites"));
+        Assertions.assertTrue(testHeroMapperMock.fetchHeroToDataModel(ShareableDataForTests.battleTag, heroId, ShareableDataForTests.testFetchTokenMock).getKills().containsValue(403));
     }
 
     @Test
     public void correctHeroStatsFetchedToDataModel() {
-        Mockito.when(testHeroMapperMock.fetchHeroToDataModel(battleTag, heroId, testFetchTokenMock)).thenReturn(heroDataModel);
-        Assertions.assertTrue(testHeroMapperMock.fetchHeroToDataModel(battleTag, heroId, testFetchTokenMock).getStats().containsKey("life"));
-        Assertions.assertTrue(testHeroMapperMock.fetchHeroToDataModel(battleTag, heroId, testFetchTokenMock).getStats().containsValue(437161));
-        Assertions.assertTrue(testHeroMapperMock.fetchHeroToDataModel(battleTag, heroId, testFetchTokenMock).getStats().containsKey("damage"));
-        Assertions.assertTrue(testHeroMapperMock.fetchHeroToDataModel(battleTag, heroId, testFetchTokenMock).getStats().containsValue(276225));
+        Mockito.when(testHeroMapperMock.fetchHeroToDataModel(ShareableDataForTests.battleTag, heroId, ShareableDataForTests.testFetchTokenMock)).thenReturn(heroDataModel);
+        Assertions.assertTrue(testHeroMapperMock.fetchHeroToDataModel(ShareableDataForTests.battleTag, heroId, ShareableDataForTests.testFetchTokenMock).getStats().containsKey("life"));
+        Assertions.assertTrue(testHeroMapperMock.fetchHeroToDataModel(ShareableDataForTests.battleTag, heroId, ShareableDataForTests.testFetchTokenMock).getStats().containsValue(437161));
+        Assertions.assertTrue(testHeroMapperMock.fetchHeroToDataModel(ShareableDataForTests.battleTag, heroId, ShareableDataForTests.testFetchTokenMock).getStats().containsKey("damage"));
+        Assertions.assertTrue(testHeroMapperMock.fetchHeroToDataModel(ShareableDataForTests.battleTag, heroId, ShareableDataForTests.testFetchTokenMock).getStats().containsValue(276225));
     }
 
     @Test
     public void correctHeroSkillsListSizeFetchedToDataModel() {
-        Mockito.when(testHeroMapperMock.fetchHeroToDataModel(battleTag, heroId, testFetchTokenMock)).thenReturn(heroDataModel);
-        Assertions.assertEquals(2, testHeroMapperMock.fetchHeroToDataModel(battleTag, heroId, testFetchTokenMock).getSkills().size());
+        Mockito.when(testHeroMapperMock.fetchHeroToDataModel(ShareableDataForTests.battleTag, heroId, ShareableDataForTests.testFetchTokenMock)).thenReturn(heroDataModel);
+        Assertions.assertEquals(2, testHeroMapperMock.fetchHeroToDataModel(ShareableDataForTests.battleTag, heroId, ShareableDataForTests.testFetchTokenMock).getSkills().size());
     }
 
     @Test
     public void correctHeroItemsListSizeFetchedToDataModel() {
-        Mockito.when(testHeroMapperMock.fetchHeroToDataModel(battleTag, heroId, testFetchTokenMock)).thenReturn(heroDataModel);
-        Assertions.assertEquals(2, testHeroMapperMock.fetchHeroToDataModel(battleTag, heroId, testFetchTokenMock).getItems().size());
+        Mockito.when(testHeroMapperMock.fetchHeroToDataModel(ShareableDataForTests.battleTag, heroId, ShareableDataForTests.testFetchTokenMock)).thenReturn(heroDataModel);
+        Assertions.assertEquals(2, testHeroMapperMock.fetchHeroToDataModel(ShareableDataForTests.battleTag, heroId, ShareableDataForTests.testFetchTokenMock).getItems().size());
     }
 
     @Test
     public void correctHeroFollowersListSizeFetchedToDataModel() {
-        Mockito.when(testHeroMapperMock.fetchHeroToDataModel(battleTag, heroId, testFetchTokenMock)).thenReturn(heroDataModel);
-        Assertions.assertEquals(1, testHeroMapperMock.fetchHeroToDataModel(battleTag, heroId, testFetchTokenMock).getFollowers().size());
+        Mockito.when(testHeroMapperMock.fetchHeroToDataModel(ShareableDataForTests.battleTag, heroId, ShareableDataForTests.testFetchTokenMock)).thenReturn(heroDataModel);
+        Assertions.assertEquals(1, testHeroMapperMock.fetchHeroToDataModel(ShareableDataForTests.battleTag, heroId, ShareableDataForTests.testFetchTokenMock).getFollowers().size());
     }
 
     @Test
     public void wrongBattleTagFormatProvided() {
-        Mockito.when(testHeroMapperMock.generateRequest(battleTagAsWrongFormat, heroId, testFetchTokenMock))
+        Mockito.when(testHeroMapperMock.generateRequest(ShareableDataForTests.battleTagAsWrongFormat, heroId, ShareableDataForTests.testFetchTokenMock))
                 .thenReturn("Niepoprawny format battleTag! Spróbuj ponownie.");
 
-        Assertions.assertTrue(testHeroMapperMock.generateRequest(battleTagAsWrongFormat, heroId, testFetchTokenMock)
-                .contains(wrongBattleTagFormatWarning));
+        Assertions.assertTrue(testHeroMapperMock.generateRequest(ShareableDataForTests.battleTagAsWrongFormat, heroId, ShareableDataForTests.testFetchTokenMock)
+                .contains(ShareableDataForTests.wrongBattleTagFormatWarning));
     }
 
     @Test
     public void wrongHeroIdFormatProvided() {
-        Mockito.when(testHeroMapperMock.generateRequest(battleTag, heroIdAsWrongFormat, testFetchTokenMock))
+        Mockito.when(testHeroMapperMock.generateRequest(ShareableDataForTests.battleTag, heroIdAsWrongFormat, ShareableDataForTests.testFetchTokenMock))
                 .thenReturn("Niepoprawny format heroId - tylko cyfry! Spróbuj ponownie.");
 
-        Assertions.assertTrue(testHeroMapperMock.generateRequest(battleTag, heroIdAsWrongFormat, testFetchTokenMock)
+        Assertions.assertTrue(testHeroMapperMock.generateRequest(ShareableDataForTests.battleTag, heroIdAsWrongFormat, ShareableDataForTests.testFetchTokenMock)
                 .contains(wrongHeroIdFormatWarning));
     }
 
     @Test
     public void providedBattleTagDoesntExistThrowsException() {
         Assertions.assertThrows(RuntimeException.class, ()-> {
-            testHeroMapper.fetchHeroToDataModel(battleTagAsDosentExist, heroId, testFetchToken);
+            testHeroMapper.fetchHeroToDataModel(ShareableDataForTests.battleTagAsDosentExist, heroId, ShareableDataForTests.testFetchToken);
         });
     }
 
     @Test
     public void providedBattleTagIsNullThrowsException() {
         Assertions.assertThrows(NullPointerException.class, ()-> {
-            testHeroMapper.fetchHeroToDataModel(null, heroId, testFetchTokenMock);
+            testHeroMapper.fetchHeroToDataModel(null, heroId, ShareableDataForTests.testFetchTokenMock);
         });
     }
 
     @Test
     public void providedHeroIdIsNullThrowsException() {
         Assertions.assertThrows(IllegalArgumentException.class, ()-> {
-            testHeroMapper.fetchHeroToDataModel(battleTag, null, testFetchTokenMock);
+            testHeroMapper.fetchHeroToDataModel(ShareableDataForTests.battleTag, null, ShareableDataForTests.testFetchTokenMock);
         });
     }
 
     @Test
     public void providedTokenNullThrowsException() {
         Assertions.assertThrows(NullPointerException.class, ()-> {
-            testHeroMapper.fetchHeroToDataModel(battleTag, heroId, null);
+            testHeroMapper.fetchHeroToDataModel(ShareableDataForTests.battleTag, heroId, null);
         });
     }
 }
