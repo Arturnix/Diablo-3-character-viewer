@@ -4,9 +4,9 @@ import java.util.List;
 import java.util.Map;
 
 public class HeroDataModel {
-    private int id;
-    private String name;
-    private String classHero;
+    private final int id;
+    private final String name;
+    private final String classHero;
     private int level;
     private int paragonLevel;
     private boolean hardcore;
@@ -41,6 +41,38 @@ public class HeroDataModel {
         this.items = items;
         this.followers = followers;
         this.stats = stats;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getClassHero() {
+        return classHero;
+    }
+
+    public Map<String, Integer> getKills() {
+        return kills;
+    }
+
+    public List<SkillDataModel> getSkills() {
+        return skills;
+    }
+
+    public List<ItemDataModel> getItems() {
+        return items;
+    }
+
+    public List<FollowerDataModel> getFollowers() {
+        return followers;
+    }
+
+    public Map<String, Integer> getStats() {
+        return stats;
     }
 
     @Override
