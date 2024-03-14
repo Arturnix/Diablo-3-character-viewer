@@ -5,6 +5,7 @@ import com.diablo3CharViewer.token.Token;
 
 public class ItemHandlerApi {
     //corrupted-ashbringer-Unique_Sword_2H_104_x1
+    //veil-of-steel-p43_RetroHelm_003
     public String generateRequest(String itemSlugAndId, FetchToken fetchToken) { //token przypisywać ze zmiennej. Pobieram token kiedy program startuje i wrzucam go do stałej.
 
         String apiEndpoint = BaseUrlParts.getBaseItemApi() + itemSlugAndId;

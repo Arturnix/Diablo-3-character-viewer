@@ -4,6 +4,7 @@ import com.diablo3CharViewer.api_handlers.HeroHandlerApi;
 import com.diablo3CharViewer.api_handlers.ItemHandlerApi;
 import com.diablo3CharViewer.json_mappers.AccountMapper;
 import com.diablo3CharViewer.json_mappers.HeroMapper;
+import com.diablo3CharViewer.json_mappers.ItemMapper;
 import com.diablo3CharViewer.token.FetchToken;
 
 import java.util.Scanner;
@@ -29,8 +30,8 @@ public class CharacterViewerManager {
         }
     }
 
-    public void showItem(Scanner scanner, ItemHandlerApi itemHandlerApi, FetchToken fetchToken) {
-        System.out.println("Zostan na chwile i poczytaj:\n" + itemHandlerApi.generateRequest(itemSlugAndIdProvider(scanner), fetchToken) + '\n');
+    public void showItem(Scanner scanner, ItemMapper itemMapper, FetchToken fetchToken) {
+        System.out.println("Zostan na chwile i poczytaj:\n" + itemMapper.fetchItemToDataModel(itemSlugAndIdProvider(scanner), fetchToken) + '\n');
     }
 
     private String battleTagProvider(Scanner scanner) {

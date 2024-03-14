@@ -2,6 +2,7 @@ import com.diablo3CharViewer.token.FetchToken;
 import org.mockito.Mock;
 
 public class ShareableDataForTests {
+    //public static final jest od okreslania wartosci stalych. Nie trzeba getterow i robic jako private.
     @Mock
     public static FetchToken testFetchTokenMock;
     public static final FetchToken testFetchToken = new FetchToken();

@@ -6,6 +6,7 @@ import com.diablo3CharViewer.api_handlers.ItemHandlerApi;
 import com.diablo3CharViewer.data_models.AccountDataModel;
 import com.diablo3CharViewer.json_mappers.AccountMapper;
 import com.diablo3CharViewer.json_mappers.HeroMapper;
+import com.diablo3CharViewer.json_mappers.ItemMapper;
 import com.diablo3CharViewer.token.FetchToken;
 import com.diablo3CharViewer.token.Token;
 
@@ -17,7 +18,8 @@ public class Main {
         FetchToken fetchToken = new FetchToken();
         AccountMapper accountMapper = new AccountMapper();
         HeroMapper heroMapper = new HeroMapper();
-        ItemHandlerApi itemHandlerApi = new ItemHandlerApi(); //dac tworzenie klas po podaniu battleTag lub item Id z podaną wartoscia dla tego pola
+        ItemMapper itemMapper = new ItemMapper();
+        //ItemHandlerApi itemHandlerApi = new ItemHandlerApi(); //dac tworzenie klas po podaniu battleTag lub item Id z podaną wartoscia dla tego pola
         CharacterViewerManager characterViewerManager = new CharacterViewerManager();
         Scanner scanner = new Scanner(System.in);
         String wybor;
@@ -37,7 +39,7 @@ public class Main {
                     characterViewerManager.showHero(scanner, heroMapper, fetchToken);
                     break;
                 case "3":
-                    characterViewerManager.showItem(scanner, itemHandlerApi, fetchToken);
+                    characterViewerManager.showItem(scanner, itemMapper, fetchToken);
                     break;
                 case "4":
                     System.out.println("Zegnaj wedrowcze...");
