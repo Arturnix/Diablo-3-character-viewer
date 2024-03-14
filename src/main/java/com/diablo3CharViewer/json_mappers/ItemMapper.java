@@ -53,7 +53,7 @@ public class ItemMapper extends ItemHandlerApi {
 
     private ItemDataModel createArmorDataModel(JsonNode node) {
 
-        ItemDataModel itemDataModel = new ItemArmorDataModel(
+        return new ItemArmorDataModel(
                 fetchItemBodyPartSlots(node),
                 node.get("id").asText(),
                 node.get("name").asText(),
@@ -61,13 +61,11 @@ public class ItemMapper extends ItemHandlerApi {
                 fetchItemAttrtibutes(node),
                 node.get("armor").asText()
         );
-
-        return itemDataModel;
     }
 
     private ItemDataModel createWeaponDataModel(JsonNode node) {
 
-        ItemDataModel itemDataModel = new ItemWeaponDataModel(
+        return new ItemWeaponDataModel(
                 fetchItemBodyPartSlots(node),
                 node.get("id").asText(),
                 node.get("name").asText(),
@@ -76,8 +74,6 @@ public class ItemMapper extends ItemHandlerApi {
                 getMinDamage(node),
                 getMaxDamage(node)
         );
-
-        return itemDataModel;
     }
 
     public ItemDataModel fetchItemToDataModel(String itemSlugAndId, FetchToken fetchToken) {
