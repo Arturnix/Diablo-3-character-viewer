@@ -13,7 +13,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class AccountMapper extends AccountHandlerApi {
+public class AccountMapper {
 
     private Map<String, Integer> sumEliteKills(JsonNode node) {
 
@@ -44,7 +44,7 @@ public class AccountMapper extends AccountHandlerApi {
 
     public AccountDataModel fetchAccountToDataModel(String battleTag, FetchToken fetchToken) {
 
-        String accountData = generateRequest(battleTag, fetchToken);
+        String accountData = AccountHandlerApi.generateRequest(battleTag, fetchToken);
         ObjectMapper objectMapper = new ObjectMapper();
         JsonNode node = null;
 

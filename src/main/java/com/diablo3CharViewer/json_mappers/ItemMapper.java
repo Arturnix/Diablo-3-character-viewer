@@ -13,7 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-public class ItemMapper extends ItemHandlerApi {
+public class ItemMapper {
 
     private List<String> fetchItemBodyPartSlots(JsonNode node) {
 
@@ -78,7 +78,7 @@ public class ItemMapper extends ItemHandlerApi {
 
     public ItemDataModel fetchItemToDataModel(String itemSlugAndId, FetchToken fetchToken) {
 
-        String accountData = generateRequest(itemSlugAndId, fetchToken);
+        String accountData = ItemHandlerApi.generateRequest(itemSlugAndId, fetchToken);
         ObjectMapper objectMapper = new ObjectMapper();
         JsonNode node = null;
 
