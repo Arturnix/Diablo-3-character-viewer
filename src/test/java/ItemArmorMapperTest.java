@@ -15,40 +15,26 @@ public class ItemArmorMapperTest {
     @Mock
     private ItemMapper testItemArmorMapperMock;
     private ItemMapper itemArmorMapper = new ItemMapper();
-    private final List<String> itemBodyPartSlots = new ArrayList<>(
-            Arrays.asList("head")
-    );
     private final String expectedItemId = "p43_RetroHelm_003";
     private final String expectedItemName = "Stalowy Calun";
-    private final Map<String, List<String>> attributes = new HashMap<>() {{
-    }};
-    private final ItemDataModel itemDataModel = new ItemArmorDataModel(
-            itemBodyPartSlots,
-            "p43_RetroHelm_003",
-            "Stalowy Calun",
-            0,
-            attributes,
-            "21 - 24"
-    );
-    private final String itemSlugAndId = "veil-of-steel-p43_RetroHelm_003";
 
     @Test
     public void correctItemFetchedToDataModel() {
-        Mockito.when(testItemArmorMapperMock.fetchItemToDataModel(itemSlugAndId, ShareableDataForTests.testFetchTokenMock)).thenReturn(itemDataModel);
-        Assertions.assertEquals(expectedItemId,testItemArmorMapperMock.fetchItemToDataModel(itemSlugAndId, ShareableDataForTests.testFetchTokenMock).getId());
-        Assertions.assertEquals(expectedItemName,testItemArmorMapperMock.fetchItemToDataModel(itemSlugAndId, ShareableDataForTests.testFetchTokenMock).getName());
+        Mockito.when(testItemArmorMapperMock.fetchItemToDataModel(ShareableDataForTests.itemSlugAndIdArmor, ShareableDataForTests.testFetchTokenMock)).thenReturn(ShareableDataForTests.itemArmorDataModel);
+        Assertions.assertEquals(expectedItemId,testItemArmorMapperMock.fetchItemToDataModel(ShareableDataForTests.itemSlugAndIdArmor, ShareableDataForTests.testFetchTokenMock).getId());
+        Assertions.assertEquals(expectedItemName,testItemArmorMapperMock.fetchItemToDataModel(ShareableDataForTests.itemSlugAndIdArmor, ShareableDataForTests.testFetchTokenMock).getName());
     }
 
     @Test
     public void correctItemBodyPartSlotsListFetchedToDataModel() {
-        Mockito.when(testItemArmorMapperMock.fetchItemToDataModel(itemSlugAndId, ShareableDataForTests.testFetchTokenMock)).thenReturn(itemDataModel);
-        Assertions.assertTrue(testItemArmorMapperMock.fetchItemToDataModel(itemSlugAndId, ShareableDataForTests.testFetchTokenMock).getItemBodyPartSlots().contains("head"));
+        Mockito.when(testItemArmorMapperMock.fetchItemToDataModel(ShareableDataForTests.itemSlugAndIdArmor, ShareableDataForTests.testFetchTokenMock)).thenReturn(ShareableDataForTests.itemArmorDataModel);
+        Assertions.assertTrue(testItemArmorMapperMock.fetchItemToDataModel(ShareableDataForTests.itemSlugAndIdArmor, ShareableDataForTests.testFetchTokenMock).getItemBodyPartSlots().contains("head"));
     }
 
     @Test
     public void correctItemTypeFetchedToDataModel() {
-        Mockito.when(testItemArmorMapperMock.fetchItemToDataModel(itemSlugAndId, ShareableDataForTests.testFetchTokenMock)).thenReturn(itemDataModel);
-        Assertions.assertTrue(testItemArmorMapperMock.fetchItemToDataModel(itemSlugAndId, ShareableDataForTests.testFetchTokenMock).getClass().getName().contains("ItemArmorDataModel"));
+        Mockito.when(testItemArmorMapperMock.fetchItemToDataModel(ShareableDataForTests.itemSlugAndIdArmor, ShareableDataForTests.testFetchTokenMock)).thenReturn(ShareableDataForTests.itemArmorDataModel);
+        Assertions.assertTrue(testItemArmorMapperMock.fetchItemToDataModel(ShareableDataForTests.itemSlugAndIdArmor, ShareableDataForTests.testFetchTokenMock).getClass().getName().contains("ItemArmorDataModel"));
     }
 
     @Test
@@ -68,7 +54,7 @@ public class ItemArmorMapperTest {
     @Test
     public void providedTokenNullThrowsException() {
         Assertions.assertThrows(NullPointerException.class, ()-> {
-            itemArmorMapper.fetchItemToDataModel(itemSlugAndId, null);
+            itemArmorMapper.fetchItemToDataModel(ShareableDataForTests.itemSlugAndIdArmor, null);
         });
     }
 }
