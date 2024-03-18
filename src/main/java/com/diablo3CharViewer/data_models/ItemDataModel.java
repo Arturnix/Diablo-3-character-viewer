@@ -38,6 +38,7 @@ public class ItemDataModel {
         return itemBodyPartSlots;
     }
 
+
     @Override
     public String toString() {
         return "ItemDataModel{" +
