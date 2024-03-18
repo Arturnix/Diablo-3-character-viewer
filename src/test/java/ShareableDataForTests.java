@@ -9,5 +9,6 @@ public class ShareableDataForTests {
     public static final String battleTag = "Jokefish#2265";
     public static final String battleTagAsWrongFormat = "abc123";
     public static final String battleTagAsDosentExist = "dsf#123";
+    public static final String itemSlugAndIdAsDoesntExist = "";
     public static final String wrongBattleTagFormatWarning = "Niepoprawny format battleTag! Spróbuj ponownie.";
 }

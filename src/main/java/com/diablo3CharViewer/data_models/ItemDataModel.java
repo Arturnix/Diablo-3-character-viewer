@@ -26,6 +26,18 @@ public class ItemDataModel {
         this.attributes = attributes;
     }
 
+    public String getId() {
+        return id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public List<String> getItemBodyPartSlots() {
+        return itemBodyPartSlots;
+    }
+
     @Override
     public String toString() {
         return "ItemDataModel{" +
