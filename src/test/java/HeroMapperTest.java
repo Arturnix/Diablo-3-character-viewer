@@ -19,10 +19,8 @@ public class HeroMapperTest {
     @Mock
     private HeroMapper testHeroMapperMock;
     private HeroMapper testHeroMapper = new HeroMapper();
-    private final String wrongHeroIdFormatWarning = "Niepoprawny format heroId - tylko cyfry! Spróbuj ponownie.";
     private final String heroId = "162864678";
     private final int expectedHeroId = 162864678;
-    private final String heroIdAsWrongFormat = "abc123";
     private final String expectedHeroName = "Barbera";
     private final String expectedHeroClass = "barbarian";
     private final Map<String, Integer> heroKills = new HashMap<String, Integer>() {{
@@ -93,24 +91,6 @@ public class HeroMapperTest {
         Mockito.when(testHeroMapperMock.fetchHeroToDataModel(ShareableDataForTests.battleTag, heroId, ShareableDataForTests.testFetchTokenMock)).thenReturn(heroDataModel);
         Assertions.assertEquals(1, testHeroMapperMock.fetchHeroToDataModel(ShareableDataForTests.battleTag, heroId, ShareableDataForTests.testFetchTokenMock).getFollowers().size());
     }
-
-    /*@Test przeniesc te 2 testy dla klasy CharacterViewerManager po zmianie na static w HeroHandlerApi
-    public void wrongBattleTagFormatProvided() {
-        Mockito.when(testHeroMapperMock.generateRequest(ShareableDataForTests.battleTagAsWrongFormat, heroId, ShareableDataForTests.testFetchTokenMock))
-                .thenReturn("Niepoprawny format battleTag! Spróbuj ponownie.");
-
-        Assertions.assertTrue(testHeroMapperMock.generateRequest(ShareableDataForTests.battleTagAsWrongFormat, heroId, ShareableDataForTests.testFetchTokenMock)
-                .contains(ShareableDataForTests.wrongBattleTagFormatWarning));
-    }*/
-
-    /*@Test
-    public void wrongHeroIdFormatProvided() {
-        Mockito.when(testHeroMapperMock.generateRequest(ShareableDataForTests.battleTag, heroIdAsWrongFormat, ShareableDataForTests.testFetchTokenMock))
-                .thenReturn("Niepoprawny format heroId - tylko cyfry! Spróbuj ponownie.");
-
-        Assertions.assertTrue(testHeroMapperMock.generateRequest(ShareableDataForTests.battleTag, heroIdAsWrongFormat, ShareableDataForTests.testFetchTokenMock)
-                .contains(wrongHeroIdFormatWarning));
-    }*/
 
     @Test
     public void providedBattleTagDoesntExistThrowsException() {

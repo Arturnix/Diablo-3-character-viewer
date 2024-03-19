@@ -1,5 +1,3 @@
-import com.diablo3CharViewer.data_models.ItemArmorDataModel;
-import com.diablo3CharViewer.data_models.ItemDataModel;
 import com.diablo3CharViewer.json_mappers.ItemMapper;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -7,8 +5,6 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
-
-import java.util.*;
 
 @ExtendWith(MockitoExtension.class)
 public class ItemArmorMapperTest {

@@ -11,27 +11,29 @@ import java.util.Scanner;
 
 public class CharacterViewerManager {
 
-    public void showProfile(Scanner scanner, AccountMapper accountMapper, FetchToken fetchToken) {
+    public String profileDataModelProvider(Scanner scanner, AccountMapper accountMapper, FetchToken fetchToken) {
 
         String battleTag = battleTagProvider(scanner);
-        if(isBattleTagCorrect(battleTag)) {
-            System.out.println("Zostan na chwile i poczytaj:\n" + accountMapper.fetchAccountToDataModel(battleTag, fetchToken) + '\n');
+        if (isBattleTagCorrect(battleTag)) {
+            return "Zostan na chwile i poczytaj:\n" + accountMapper.fetchAccountToDataModel(battleTag, fetchToken) + '\n';
         }
+        return "";
     }
 
-    public void showHero(Scanner scanner, HeroMapper heroMapper, FetchToken fetchToken) {
+    public String heroDataModelProvider(Scanner scanner, HeroMapper heroMapper, FetchToken fetchToken) {
 
         String battleTag = battleTagProvider(scanner);
         if (isBattleTagCorrect(battleTag)) {
             String heroId = heroIdProvider(scanner);
             if (isHeroIDCorrect(heroId)) {
-                System.out.println("Zostan na chwile i poczytaj:\n" + heroMapper.fetchHeroToDataModel(battleTag, heroId, fetchToken) + '\n');
+                return "Zostan na chwile i poczytaj:\n" + heroMapper.fetchHeroToDataModel(battleTag, heroId, fetchToken) + '\n';
             }
         }
+        return "";
     }
 
-    public void showItem(Scanner scanner, ItemMapper itemMapper, FetchToken fetchToken) {
-        System.out.println("Zostan na chwile i poczytaj:\n" + itemMapper.fetchItemToDataModel(itemSlugAndIdProvider(scanner), fetchToken) + '\n');
+    public String itemDataModelProvider(Scanner scanner, ItemMapper itemMapper, FetchToken fetchToken) {
+        return "Zostan na chwile i poczytaj:\n" + itemMapper.fetchItemToDataModel(itemSlugAndIdProvider(scanner), fetchToken) + '\n';
     }
 
     private String battleTagProvider(Scanner scanner) {

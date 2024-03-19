@@ -1,6 +1,3 @@
-import com.diablo3CharViewer.data_models.ItemArmorDataModel;
-import com.diablo3CharViewer.data_models.ItemDataModel;
-import com.diablo3CharViewer.data_models.ItemWeaponDataModel;
 import com.diablo3CharViewer.json_mappers.ItemMapper;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;

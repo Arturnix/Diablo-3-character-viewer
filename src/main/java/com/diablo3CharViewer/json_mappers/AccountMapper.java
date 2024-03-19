@@ -54,7 +54,7 @@ public class AccountMapper {
             throw new RuntimeException(e);
         }
 
-        AccountDataModel accountDataModel = new AccountDataModel(
+        return new AccountDataModel(
                 node.get("battleTag").asText(),
                 node.get("paragonLevel").asInt(),
                 node.get("guildName").asText(),
@@ -62,7 +62,5 @@ public class AccountMapper {
                 node.get("highestHardcoreLevel").asInt(),
                 sumEliteKills(node)
         );
-
-        return accountDataModel;
     }
 }
