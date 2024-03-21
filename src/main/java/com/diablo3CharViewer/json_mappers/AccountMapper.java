@@ -13,7 +13,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class AccountMapper extends AccountHandlerApi {
+public class AccountMapper {
 
     private Map<String, Integer> sumEliteKills(JsonNode node) {
 
@@ -44,7 +44,7 @@ public class AccountMapper extends AccountHandlerApi {
 
     public AccountDataModel fetchAccountToDataModel(String battleTag, FetchToken fetchToken) {
 
-        String accountData = generateRequest(battleTag, fetchToken);
+        String accountData = AccountHandlerApi.generateRequest(battleTag, fetchToken);
         ObjectMapper objectMapper = new ObjectMapper();
         JsonNode node = null;
 
@@ -54,7 +54,7 @@ public class AccountMapper extends AccountHandlerApi {
             throw new RuntimeException(e);
         }
 
-        AccountDataModel accountDataModel = new AccountDataModel(
+        return new AccountDataModel(
                 node.get("battleTag").asText(),
                 node.get("paragonLevel").asInt(),
                 node.get("guildName").asText(),
@@ -62,7 +62,5 @@ public class AccountMapper extends AccountHandlerApi {
                 node.get("highestHardcoreLevel").asInt(),
                 sumEliteKills(node)
         );
-
-        return accountDataModel;
     }
 }
