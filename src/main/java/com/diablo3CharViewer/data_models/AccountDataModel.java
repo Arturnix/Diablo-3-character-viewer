@@ -37,7 +37,7 @@ public class AccountDataModel {
     }
 
     public String getBattleTag() {
-        return battleTag;
+        return this.battleTag;
     }
 
     public void setBattleTag(String battleTag) {
@@ -45,34 +45,18 @@ public class AccountDataModel {
     }
 
     public int getParagonLevel() {
-        return paragonLevel;
-    }
-
-    public void setParagonLevel(int paragonLevel) {
-        this.paragonLevel = paragonLevel;
+        return this.paragonLevel;
     }
 
     public String getGuildName() {
-        return guildName;
-    }
-
-    public void setGuildName(String guildName) {
-        this.guildName = guildName;
+        return this.guildName;
     }
 
     public int getHighestHardcoreLevel() {
-        return highestHardcoreLevel;
-    }
-
-    public void setHighestHardcoreLevel(int highestHardcoreLevel) {
-        this.highestHardcoreLevel = highestHardcoreLevel;
+        return this.highestHardcoreLevel;
     }
 
     public Map<String, Integer> getKills() {
-        return kills;
-    }
-
-    public void setKills(Map<String, Integer> kills) {
-        this.kills = kills;
+        return this.kills;
     }
 }

@@ -33,13 +33,13 @@ public class Main {
 
             switch (wybor) {
                 case "1":
-                    System.out.println(characterViewerManager.profileDataModelProvider(scanner, accountMapper, fetchToken));
+                    System.out.println(characterViewerManager.profileDataInfoProvider(scanner, accountMapper, fetchToken));
                     break;
                 case "2":
-                    System.out.println(characterViewerManager.heroDataModelProvider(scanner, heroMapper, fetchToken));
+                    System.out.println(characterViewerManager.heroDataInfoProvider(scanner, heroMapper, fetchToken));
                     break;
                 case "3":
-                    System.out.println(characterViewerManager.itemDataModelProvider(scanner, itemMapper, fetchToken));
+                    System.out.println(characterViewerManager.itemDataInfoProvider(scanner, itemMapper, fetchToken));
                     break;
                 case "4":
                     System.out.println("Zegnaj wedrowcze...");

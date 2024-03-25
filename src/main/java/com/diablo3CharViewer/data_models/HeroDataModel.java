@@ -48,31 +48,31 @@ public class HeroDataModel {
     }
 
     public String getName() {
-        return name;
+        return this.name;
     }
 
     public String getClassHero() {
-        return classHero;
+        return this.classHero;
     }
 
     public Map<String, Integer> getKills() {
-        return kills;
+        return this.kills;
     }
 
     public List<SkillDataModel> getSkills() {
-        return skills;
+        return this.skills;
     }
 
     public List<ItemDataModel> getItems() {
-        return items;
+        return this.items;
     }
 
     public List<FollowerDataModel> getFollowers() {
-        return followers;
+        return this.followers;
     }
 
     public Map<String, Integer> getStats() {
-        return stats;
+        return this.stats;
     }
 
     @Override

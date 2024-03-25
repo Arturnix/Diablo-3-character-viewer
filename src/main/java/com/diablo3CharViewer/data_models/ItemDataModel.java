@@ -27,15 +27,15 @@ public class ItemDataModel {
     }
 
     public String getId() {
-        return id;
+        return this.id;
     }
 
     public String getName() {
-        return name;
+        return this.name;
     }
 
     public List<String> getItemBodyPartSlots() {
-        return itemBodyPartSlots;
+        return this.itemBodyPartSlots;
     }
 
 

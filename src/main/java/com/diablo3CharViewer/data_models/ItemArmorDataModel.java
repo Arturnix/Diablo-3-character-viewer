@@ -13,7 +13,7 @@ public class ItemArmorDataModel extends ItemDataModel {
     }
 
     public String getArmor() {
-        return armor;
+        return this.armor;
     }
 
     @Override

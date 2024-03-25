@@ -5,8 +5,8 @@ import java.util.Map;
 
 public class ItemWeaponDataModel extends ItemDataModel {
 
-    private String minDamage;
-    private String maxDamage;
+    private final String minDamage;
+    private final String maxDamage;
 
     public ItemWeaponDataModel(List<String> itemBodyPartSlots, String id, String name, int requiredLevel, Map<String, List<String>> attributes, String minDamage, String maxDamage) {
         super(itemBodyPartSlots, id, name, requiredLevel, attributes);
