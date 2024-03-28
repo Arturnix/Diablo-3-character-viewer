@@ -69,15 +69,6 @@ public class AccountMapperTest {
     }
 
     @Test
-    public void wrongBattleTagFormatProvided() {
-        Mockito.when(testAccountMapperMock.generateRequest(ShareableDataForTests.battleTagAsWrongFormat, ShareableDataForTests.testFetchTokenMock))
-                .thenReturn("Niepoprawny format battleTag! Spróbuj ponownie.");
-
-        Assertions.assertTrue(testAccountMapperMock.generateRequest(ShareableDataForTests.battleTagAsWrongFormat, ShareableDataForTests.testFetchTokenMock)
-                .contains(ShareableDataForTests.wrongBattleTagFormatWarning));
-    }
-
-    @Test
     public void providedBattleTagDoesntExistThrowsException() {
         Assertions.assertThrows(RuntimeException.class, ()-> {
             testAccountMapper.fetchAccountToDataModel(ShareableDataForTests.battleTagAsDosentExist, ShareableDataForTests.testFetchToken);

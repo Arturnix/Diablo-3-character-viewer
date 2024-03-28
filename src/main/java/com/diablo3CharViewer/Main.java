@@ -6,6 +6,7 @@ import com.diablo3CharViewer.api_handlers.ItemHandlerApi;
 import com.diablo3CharViewer.data_models.AccountDataModel;
 import com.diablo3CharViewer.json_mappers.AccountMapper;
 import com.diablo3CharViewer.json_mappers.HeroMapper;
+import com.diablo3CharViewer.json_mappers.ItemMapper;
 import com.diablo3CharViewer.token.FetchToken;
 import com.diablo3CharViewer.token.Token;
 
@@ -17,7 +18,8 @@ public class Main {
         FetchToken fetchToken = new FetchToken();
         AccountMapper accountMapper = new AccountMapper();
         HeroMapper heroMapper = new HeroMapper();
-        ItemHandlerApi itemHandlerApi = new ItemHandlerApi(); //dac tworzenie klas po podaniu battleTag lub item Id z podaną wartoscia dla tego pola
+        ItemMapper itemMapper = new ItemMapper();
+        //ItemHandlerApi itemHandlerApi = new ItemHandlerApi(); //dac tworzenie klas po podaniu battleTag lub item Id z podaną wartoscia dla tego pola
         CharacterViewerManager characterViewerManager = new CharacterViewerManager();
         Scanner scanner = new Scanner(System.in);
         String wybor;
@@ -31,13 +33,13 @@ public class Main {
 
             switch (wybor) {
                 case "1":
-                    characterViewerManager.showProfile(scanner, accountMapper, fetchToken);
+                    System.out.println(characterViewerManager.profileDataInfoProvider(scanner, accountMapper, fetchToken));
                     break;
                 case "2":
-                    characterViewerManager.showHero(scanner, heroMapper, fetchToken);
+                    System.out.println(characterViewerManager.heroDataInfoProvider(scanner, heroMapper, fetchToken));
                     break;
                 case "3":
-                    characterViewerManager.showItem(scanner, itemHandlerApi, fetchToken);
+                    System.out.println(characterViewerManager.itemDataInfoProvider(scanner, itemMapper, fetchToken));
                     break;
                 case "4":
                     System.out.println("Zegnaj wedrowcze...");

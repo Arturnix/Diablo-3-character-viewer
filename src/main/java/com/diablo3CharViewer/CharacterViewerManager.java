@@ -4,33 +4,40 @@ import com.diablo3CharViewer.api_handlers.HeroHandlerApi;
 import com.diablo3CharViewer.api_handlers.ItemHandlerApi;
 import com.diablo3CharViewer.json_mappers.AccountMapper;
 import com.diablo3CharViewer.json_mappers.HeroMapper;
+import com.diablo3CharViewer.json_mappers.ItemMapper;
 import com.diablo3CharViewer.token.FetchToken;
 
 import java.util.Scanner;
 
 public class CharacterViewerManager {
 
-    public void showProfile(Scanner scanner, AccountMapper accountMapper, FetchToken fetchToken) {
+    public String profileDataInfoProvider(Scanner scanner, AccountMapper accountMapper, FetchToken fetchToken) {
 
         String battleTag = battleTagProvider(scanner);
-        if(isBattleTagCorrect(battleTag)) {
-            System.out.println("Zostan na chwile i poczytaj:\n" + accountMapper.fetchAccountToDataModel(battleTag, fetchToken) + '\n');
+        if (isBattleTagCorrect(battleTag)) {
+            return "Zostan na chwile i poczytaj:\n" + accountMapper.fetchAccountToDataModel(battleTag, fetchToken) + '\n';
+        } else {
+            return "Niepoprawny format battleTag! Spróbuj ponownie.";
         }
     }
 
-    public void showHero(Scanner scanner, HeroMapper heroMapper, FetchToken fetchToken) {
+    public String heroDataInfoProvider(Scanner scanner, HeroMapper heroMapper, FetchToken fetchToken) {
 
         String battleTag = battleTagProvider(scanner);
         if (isBattleTagCorrect(battleTag)) {
             String heroId = heroIdProvider(scanner);
             if (isHeroIDCorrect(heroId)) {
-                System.out.println("Zostan na chwile i poczytaj:\n" + heroMapper.fetchHeroToDataModel(battleTag, heroId, fetchToken) + '\n');
+                return "Zostan na chwile i poczytaj:\n" + heroMapper.fetchHeroToDataModel(battleTag, heroId, fetchToken) + '\n';
+            } else {
+                return "Niepoprawny format heroId - tylko cyfry! Spróbuj ponownie.";
             }
+        } else {
+            return "Niepoprawny format battleTag! Spróbuj ponownie.";
         }
     }
 
-    public void showItem(Scanner scanner, ItemHandlerApi itemHandlerApi, FetchToken fetchToken) {
-        System.out.println("Zostan na chwile i poczytaj:\n" + itemHandlerApi.generateRequest(itemSlugAndIdProvider(scanner), fetchToken) + '\n');
+    public String itemDataInfoProvider(Scanner scanner, ItemMapper itemMapper, FetchToken fetchToken) {
+        return "Zostan na chwile i poczytaj:\n" + itemMapper.fetchItemToDataModel(itemSlugAndIdProvider(scanner), fetchToken) + '\n';
     }
 
     private String battleTagProvider(Scanner scanner) {
@@ -58,7 +65,6 @@ public class CharacterViewerManager {
     private boolean isBattleTagCorrect(String battleTagToCheck) {
 
         if (!battleTagToCheck.matches("\\w+#+\\d+") && !battleTagToCheck.matches("\\w+-+\\d+")) {
-            System.out.println("Niepoprawny format battleTag! Spróbuj ponownie.");
             return false;
         } else {
             return true;
@@ -68,7 +74,6 @@ public class CharacterViewerManager {
     private boolean isHeroIDCorrect(String heroIdToCheck) {
 
         if(!heroIdToCheck.matches("\\d+")) {
-            System.out.println("Niepoprawny format heroId - tylko cyfry! Spróbuj ponownie.");
             return false;
         } else {
             return true;

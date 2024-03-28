@@ -1,22 +1,29 @@
 package com.diablo3CharViewer.data_models;
 
+import java.util.List;
+import java.util.Map;
+
 public class ItemArmorDataModel extends ItemDataModel {
 
-    private int armor;
+    private final String armor;
 
-    public ItemArmorDataModel(String bodyPart, String id, String name, int requiredLevel, int itemLevel, int armor) {
-        super(bodyPart, id, name, requiredLevel, itemLevel);
+    public ItemArmorDataModel(List<String> itemBodyPartSlots, String id, String name, int requiredLevel, Map<String, List<String>> attributes, String armor) {
+        super(itemBodyPartSlots, id, name, requiredLevel, attributes);
         this.armor = armor;
+    }
+
+    public String getArmor() {
+        return this.armor;
     }
 
     @Override
     public String toString() {
         return "ItemArmorDataModel{" +
-                "bodyPart='" + bodyPart + '\'' +
+                "itemBodyPartSlots='" + itemBodyPartSlots + '\'' +
                 ", id='" + id + '\'' +
                 ", name='" + name + '\'' +
                 ", requiredLevel=" + requiredLevel +
-                ", itemLevel=" + itemLevel +
+                ", attributes='" + attributes + '\'' +
                 ", armor=" + armor +
                 '}';
     }

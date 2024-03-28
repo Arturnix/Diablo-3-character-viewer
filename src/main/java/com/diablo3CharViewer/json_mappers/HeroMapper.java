@@ -12,7 +12,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 import java.util.*;
 
-public class HeroMapper extends HeroHandlerApi {
+public class HeroMapper {
 
     private HeroDataModel heroTypeCreator(JsonNode node) {
 
@@ -128,7 +128,7 @@ public class HeroMapper extends HeroHandlerApi {
 
     public HeroDataModel fetchHeroToDataModel(String battleTag, String heroId, FetchToken fetchToken) {
 
-        String accountData = generateRequest(battleTag, heroId, fetchToken);
+        String accountData = HeroHandlerApi.generateRequest(battleTag, heroId, fetchToken);
         ObjectMapper objectMapper = new ObjectMapper();
         JsonNode node = null;
 

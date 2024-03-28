@@ -1,12 +1,15 @@
 package com.diablo3CharViewer.data_models;
 
+import java.util.List;
+import java.util.Map;
+
 public class ItemWeaponDataModel extends ItemDataModel {
 
-    private String minDamage;
-    private String maxDamage;
+    private final String minDamage;
+    private final String maxDamage;
 
-    public ItemWeaponDataModel(String bodyPart, String id, String name, int requiredLevel, int itemLevel, String minDamage, String maxDamage) {
-        super(bodyPart, id, name, requiredLevel, itemLevel);
+    public ItemWeaponDataModel(List<String> itemBodyPartSlots, String id, String name, int requiredLevel, Map<String, List<String>> attributes, String minDamage, String maxDamage) {
+        super(itemBodyPartSlots, id, name, requiredLevel, attributes);
         this.minDamage = minDamage;
         this.maxDamage = maxDamage;
     }
@@ -14,11 +17,11 @@ public class ItemWeaponDataModel extends ItemDataModel {
     @Override
     public String toString() {
         return "ItemWeaponDataModel{" +
-                "bodyPart='" + bodyPart + '\'' +
+                "itemBodyPartSlots='" + itemBodyPartSlots + '\'' +
                 ", id='" + id + '\'' +
                 ", name='" + name + '\'' +
                 ", requiredLevel=" + requiredLevel +
-                ", itemLevel=" + itemLevel +
+                ", attributes='" + attributes + '\'' +
                 ", minDamage='" + minDamage + '\'' +
                 ", maxDamage='" + maxDamage + '\'' +
                 '}';
