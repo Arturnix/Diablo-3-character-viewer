@@ -90,12 +90,12 @@ public class CharacterViewerManager {
 
     private void showHeroesListForSpecificAccount(List<HeroDataModel> heroesOnProvidedAccount) {
 
-        for (int i = 0; i < heroesOnProvidedAccount.size(); i++) {
+        for (HeroDataModel heroDataModel : heroesOnProvidedAccount) {
             StringBuilder str = new StringBuilder();
-            str.append("Hero id: ").append(heroesOnProvidedAccount.get(i).getId());
-            str.append(", name: ").append(heroesOnProvidedAccount.get(i).getName());
-            str.append(", class: ").append(heroesOnProvidedAccount.get(i).getClassHero());
-            str.append(", level: ").append(heroesOnProvidedAccount.get(i).getLevel());
+            str.append("Hero id: ").append(heroDataModel.getId());
+            str.append(", name: ").append(heroDataModel.getName());
+            str.append(", class: ").append(heroDataModel.getClassHero());
+            str.append(", level: ").append(heroDataModel.getLevel());
             System.out.println(str.toString() + '\n');
         }
     }
