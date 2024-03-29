@@ -2,11 +2,13 @@ package com.diablo3CharViewer;
 
 import com.diablo3CharViewer.api_handlers.HeroHandlerApi;
 import com.diablo3CharViewer.api_handlers.ItemHandlerApi;
+import com.diablo3CharViewer.data_models.HeroDataModel;
 import com.diablo3CharViewer.json_mappers.AccountMapper;
 import com.diablo3CharViewer.json_mappers.HeroMapper;
 import com.diablo3CharViewer.json_mappers.ItemMapper;
 import com.diablo3CharViewer.token.FetchToken;
 
+import java.util.List;
 import java.util.Scanner;
 
 public class CharacterViewerManager {
@@ -21,10 +23,18 @@ public class CharacterViewerManager {
         }
     }
 
-    public String heroDataInfoProvider(Scanner scanner, HeroMapper heroMapper, FetchToken fetchToken) {
+    public String heroDataInfoProvider(Scanner scanner, AccountMapper accountMapper, HeroMapper heroMapper, FetchToken fetchToken) {
 
         String battleTag = battleTagProvider(scanner);
         if (isBattleTagCorrect(battleTag)) {
+            List<HeroDataModel> heroesOnProvidedAccount = accountMapper.fetchHeroesList(battleTag, fetchToken);
+            for(int i = 0; i < heroesOnProvidedAccount.size(); i++) {
+                //zrobic metode do wyswietlania tych danych
+                System.out.println(heroesOnProvidedAccount.get(i).getId() + " " +
+                        heroesOnProvidedAccount.get(i).getName() + " " +
+                        heroesOnProvidedAccount.get(i).getClassHero() + " " +
+                        heroesOnProvidedAccount.get(i).getLevel() + "\n");
+            }
             String heroId = heroIdProvider(scanner);
             if (isHeroIDCorrect(heroId)) {
                 return "Zostan na chwile i poczytaj:\n" + heroMapper.fetchHeroToDataModel(battleTag, heroId, fetchToken) + '\n';

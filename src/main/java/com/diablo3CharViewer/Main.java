@@ -36,7 +36,7 @@ public class Main {
                     System.out.println(characterViewerManager.profileDataInfoProvider(scanner, accountMapper, fetchToken));
                     break;
                 case "2":
-                    System.out.println(characterViewerManager.heroDataInfoProvider(scanner, heroMapper, fetchToken));
+                    System.out.println(characterViewerManager.heroDataInfoProvider(scanner, accountMapper, heroMapper, fetchToken));
                     break;
                 case "3":
                     System.out.println(characterViewerManager.itemDataInfoProvider(scanner, itemMapper, fetchToken));

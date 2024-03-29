@@ -22,8 +22,8 @@ public class AccountMapperTest {
     private final int expectedParagonLevel = 1111;
     private final String expectedGuildName = "Phantas Magoria";
     private final ArrayList<HeroDataModel> heroes = new ArrayList<>(Arrays.asList(
-            new HeroDataModel(1, "A", "barbarian"),
-            new HeroDataModel(2, "B", "crusader")
+            new HeroDataModel(1, "A", "barbarian", 15),
+            new HeroDataModel(2, "B", "crusader", 9)
     ));
     private final Map<String, Integer> mapKills = new HashMap<String, Integer>() {{
             put("elites",1974);
