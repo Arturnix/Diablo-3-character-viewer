@@ -28,12 +28,17 @@ public class CharacterViewerManager {
         String battleTag = battleTagProvider(scanner);
         if (isBattleTagCorrect(battleTag)) {
             List<HeroDataModel> heroesOnProvidedAccount = accountMapper.fetchHeroesList(battleTag, fetchToken);
-            for(int i = 0; i < heroesOnProvidedAccount.size(); i++) {
-                //zrobic metode do wyswietlania tych danych
-                System.out.println(heroesOnProvidedAccount.get(i).getId() + " " +
-                        heroesOnProvidedAccount.get(i).getName() + " " +
-                        heroesOnProvidedAccount.get(i).getClassHero() + " " +
-                        heroesOnProvidedAccount.get(i).getLevel() + "\n");
+            if(heroesOnProvidedAccount.isEmpty()) {
+                System.out.println("Brak bohaterow dla podanego konta");
+            } else {
+
+                for (int i = 0; i < heroesOnProvidedAccount.size(); i++) {
+                    //zrobic metode do wyswietlania tych danych
+                    System.out.println(heroesOnProvidedAccount.get(i).getId() + " " +
+                            heroesOnProvidedAccount.get(i).getName() + " " +
+                            heroesOnProvidedAccount.get(i).getClassHero() + " " +
+                            heroesOnProvidedAccount.get(i).getLevel() + "\n");
+                }
             }
             String heroId = heroIdProvider(scanner);
             if (isHeroIDCorrect(heroId)) {
