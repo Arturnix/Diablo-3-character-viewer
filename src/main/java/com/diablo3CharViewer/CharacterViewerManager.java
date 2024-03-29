@@ -31,14 +31,7 @@ public class CharacterViewerManager {
             if(heroesOnProvidedAccount.isEmpty()) {
                 System.out.println("Brak bohaterow dla podanego konta");
             } else {
-
-                for (int i = 0; i < heroesOnProvidedAccount.size(); i++) {
-                    //zrobic metode do wyswietlania tych danych
-                    System.out.println(heroesOnProvidedAccount.get(i).getId() + " " +
-                            heroesOnProvidedAccount.get(i).getName() + " " +
-                            heroesOnProvidedAccount.get(i).getClassHero() + " " +
-                            heroesOnProvidedAccount.get(i).getLevel() + "\n");
-                }
+                showHeroesListForSpecificAccount(heroesOnProvidedAccount);
             }
             String heroId = heroIdProvider(scanner);
             if (isHeroIDCorrect(heroId)) {
@@ -92,6 +85,18 @@ public class CharacterViewerManager {
             return false;
         } else {
             return true;
+        }
+    }
+
+    private void showHeroesListForSpecificAccount(List<HeroDataModel> heroesOnProvidedAccount) {
+
+        for (int i = 0; i < heroesOnProvidedAccount.size(); i++) {
+            StringBuilder str = new StringBuilder();
+            str.append("Hero id: ").append(heroesOnProvidedAccount.get(i).getId());
+            str.append(", name: ").append(heroesOnProvidedAccount.get(i).getName());
+            str.append(", class: ").append(heroesOnProvidedAccount.get(i).getClassHero());
+            str.append(", level: ").append(heroesOnProvidedAccount.get(i).getLevel());
+            System.out.println(str.toString() + '\n');
         }
     }
 
