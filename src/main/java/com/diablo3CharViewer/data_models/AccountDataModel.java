@@ -24,18 +24,6 @@ public class AccountDataModel {
         this.kills = kills;
     }
 
-    @Override
-    public String toString() {
-        return "AccountDataModel{" +
-                "battleTag='" + battleTag + '\'' +
-                ", paragonLevel=" + paragonLevel +
-                ", guildName='" + guildName + '\'' +
-                ", heroes=" + heroes +
-                ", highestHardcoreLevel=" + highestHardcoreLevel +
-                ", kills=" + kills +
-                '}';
-    }
-
     public String getBattleTag() {
         return this.battleTag;
     }
@@ -52,11 +40,27 @@ public class AccountDataModel {
         return this.guildName;
     }
 
+    public List<HeroDataModel> getHeroes() {
+        return this.heroes;
+    }
+
     public int getHighestHardcoreLevel() {
         return this.highestHardcoreLevel;
     }
 
     public Map<String, Integer> getKills() {
         return this.kills;
+    }
+
+    @Override
+    public String toString() {
+        return "AccountDataModel{" +
+                "battleTag='" + battleTag + '\'' +
+                ", paragonLevel=" + paragonLevel +
+                ", guildName='" + guildName + '\'' +
+                ", heroes=" + heroes +
+                ", highestHardcoreLevel=" + highestHardcoreLevel +
+                ", kills=" + kills +
+                '}';
     }
 }

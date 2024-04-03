@@ -2,11 +2,13 @@ package com.diablo3CharViewer;
 
 import com.diablo3CharViewer.api_handlers.HeroHandlerApi;
 import com.diablo3CharViewer.api_handlers.ItemHandlerApi;
+import com.diablo3CharViewer.data_models.HeroDataModel;
 import com.diablo3CharViewer.json_mappers.AccountMapper;
 import com.diablo3CharViewer.json_mappers.HeroMapper;
 import com.diablo3CharViewer.json_mappers.ItemMapper;
 import com.diablo3CharViewer.token.FetchToken;
 
+import java.util.List;
 import java.util.Scanner;
 
 public class CharacterViewerManager {
@@ -21,10 +23,16 @@ public class CharacterViewerManager {
         }
     }
 
-    public String heroDataInfoProvider(Scanner scanner, HeroMapper heroMapper, FetchToken fetchToken) {
+    public String heroDataInfoProvider(Scanner scanner, AccountMapper accountMapper, HeroMapper heroMapper, FetchToken fetchToken) {
 
         String battleTag = battleTagProvider(scanner);
         if (isBattleTagCorrect(battleTag)) {
+            List<HeroDataModel> heroesOnProvidedAccount = accountMapper.fetchHeroesList(battleTag, fetchToken);
+            if(heroesOnProvidedAccount.isEmpty()) {
+                System.out.println("Brak bohaterow dla podanego konta");
+            } else {
+                HeroDataModel.showHeroesListForSpecificAccount(heroesOnProvidedAccount);
+            }
             String heroId = heroIdProvider(scanner);
             if (isHeroIDCorrect(heroId)) {
                 return "Zostan na chwile i poczytaj:\n" + heroMapper.fetchHeroToDataModel(battleTag, heroId, fetchToken) + '\n';
@@ -64,20 +72,12 @@ public class CharacterViewerManager {
 
     private boolean isBattleTagCorrect(String battleTagToCheck) {
 
-        if (!battleTagToCheck.matches("\\w+#+\\d+") && !battleTagToCheck.matches("\\w+-+\\d+")) {
-            return false;
-        } else {
-            return true;
-        }
+        return battleTagToCheck.matches("\\w+#+\\d+") || battleTagToCheck.matches("\\w+-+\\d+");
     }
 
     private boolean isHeroIDCorrect(String heroIdToCheck) {
 
-        if(!heroIdToCheck.matches("\\d+")) {
-            return false;
-        } else {
-            return true;
-        }
+        return heroIdToCheck.matches("\\d+");
     }
 
     public void showMenu() {

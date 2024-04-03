@@ -32,19 +32,19 @@ public class CharacterViewerManagerTest {
 
     @Test
     public void wrongBattleTagFormatProvidedShowHero() {
-        Mockito.when(testCharacterViewerManagerMock.heroDataInfoProvider(showRequestedData, heroMapper, ShareableDataForTests.testFetchTokenMock))
+        Mockito.when(testCharacterViewerManagerMock.heroDataInfoProvider(showRequestedData, accountMapper, heroMapper, ShareableDataForTests.testFetchTokenMock))
                 .thenReturn("Niepoprawny format battleTag! Spróbuj ponownie.");
 
-        Assertions.assertTrue(testCharacterViewerManagerMock.heroDataInfoProvider(showRequestedData, heroMapper, ShareableDataForTests.testFetchTokenMock)
+        Assertions.assertTrue(testCharacterViewerManagerMock.heroDataInfoProvider(showRequestedData, accountMapper, heroMapper, ShareableDataForTests.testFetchTokenMock)
                 .contains(ShareableDataForTests.wrongBattleTagFormatWarning));
     }
 
    @Test
     public void wrongHeroIdFormatProvidedShowHero() {
-        Mockito.when(testCharacterViewerManagerMock.heroDataInfoProvider(showRequestedData, heroMapper, ShareableDataForTests.testFetchTokenMock))
+        Mockito.when(testCharacterViewerManagerMock.heroDataInfoProvider(showRequestedData, accountMapper, heroMapper, ShareableDataForTests.testFetchTokenMock))
                 .thenReturn("Niepoprawny format heroId - tylko cyfry! Spróbuj ponownie.");
 
-        Assertions.assertTrue(testCharacterViewerManagerMock.heroDataInfoProvider(showRequestedData, heroMapper, ShareableDataForTests.testFetchTokenMock)
+        Assertions.assertTrue(testCharacterViewerManagerMock.heroDataInfoProvider(showRequestedData, accountMapper, heroMapper, ShareableDataForTests.testFetchTokenMock)
                 .contains(ShareableDataForTests.wrongHeroIdFormatWarning));
     }
 }

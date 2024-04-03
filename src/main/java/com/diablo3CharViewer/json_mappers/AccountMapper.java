@@ -34,7 +34,8 @@ public class AccountMapper {
             HeroDataModel heroDataModel = new HeroDataModel(
                     node.get("heroes").get(i).get("id").asInt(),
                     node.get("heroes").get(i).get("name").asText(),
-                    node.get("heroes").get(i).get("class").asText()
+                    node.get("heroes").get(i).get("class").asText(),
+                    node.get("heroes").get(i).get("level").asInt()
             );
             heroes.add(heroDataModel);
         }
@@ -62,5 +63,20 @@ public class AccountMapper {
                 node.get("highestHardcoreLevel").asInt(),
                 sumEliteKills(node)
         );
+    }
+
+    public List<HeroDataModel> fetchHeroesList(String battleTag, FetchToken fetchToken) {
+
+        String accountData = AccountHandlerApi.generateRequest(battleTag, fetchToken);
+        ObjectMapper objectMapper = new ObjectMapper();
+        JsonNode node = null;
+
+        try {
+            node = objectMapper.readTree(accountData);
+        } catch (JsonProcessingException e) {
+            throw new RuntimeException(e);
+        }
+
+        return fetchHeroesList(node);
     }
 }

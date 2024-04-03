@@ -18,10 +18,11 @@ public class HeroDataModel {
     private List<FollowerDataModel> followers;
     private Map<String, Integer> stats;
 
-    public HeroDataModel(int id, String name, String classHero) {
+    public HeroDataModel(int id, String name, String classHero, int level) {
         this.id = id;
         this.name = name;
         this.classHero = classHero;
+        this.level = level;
     }
 
     public HeroDataModel(int id, String name, String classHero, int level, int paragonLevel,
@@ -55,6 +56,10 @@ public class HeroDataModel {
         return this.classHero;
     }
 
+    public int getLevel() {
+        return this.level;
+    }
+
     public Map<String, Integer> getKills() {
         return this.kills;
     }
@@ -75,23 +80,44 @@ public class HeroDataModel {
         return this.stats;
     }
 
+    public static void showHeroesListForSpecificAccount(List<HeroDataModel> heroesOnProvidedAccount) {
+
+        for (HeroDataModel heroDataModel : heroesOnProvidedAccount) {
+            StringBuilder str = new StringBuilder();
+            str.append("Hero id: ").append(heroDataModel.getId());
+            str.append(", name: ").append(heroDataModel.getName());
+            str.append(", class: ").append(heroDataModel.getClassHero());
+            str.append(", level: ").append(heroDataModel.getLevel());
+            System.out.println(str.toString() + '\n');
+        }
+    }
+
     @Override
     public String toString() {
 
-        return "HeroDataModel{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", classHero='" + classHero + '\'' +
-                ", level=" + level +
-                ", paragonLevel=" + paragonLevel +
-                ", hardcore=" + hardcore +
-                ", seasonal=" + seasonal +
-                ", dead=" + dead +
-                ", kills=" + kills +
-                ", skills=" + skills +
-                ", items=" + items +
-                ", followers=" + followers +
-                ", stats=" + stats +
-                '}';
+        if(getStats() == null) {
+            return "HeroDataModel{" +
+                    "id=" + id +
+                    ", name='" + name + '\'' +
+                    ", classHero='" + classHero + '\'' +
+                    ", level=" + level +
+                    '}';
+        } else {
+            return "HeroDataModel{" +
+                    "id=" + id +
+                    ", name='" + name + '\'' +
+                    ", classHero='" + classHero + '\'' +
+                    ", level=" + level +
+                    ", paragonLevel=" + paragonLevel +
+                    ", hardcore=" + hardcore +
+                    ", seasonal=" + seasonal +
+                    ", dead=" + dead +
+                    ", kills=" + kills +
+                    ", skills=" + skills +
+                    ", items=" + items +
+                    ", followers=" + followers +
+                    ", stats=" + stats +
+                    '}';
+        }
     }
 }
