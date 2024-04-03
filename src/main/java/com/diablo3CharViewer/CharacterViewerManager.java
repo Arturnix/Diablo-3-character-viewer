@@ -31,7 +31,7 @@ public class CharacterViewerManager {
             if(heroesOnProvidedAccount.isEmpty()) {
                 System.out.println("Brak bohaterow dla podanego konta");
             } else {
-                showHeroesListForSpecificAccount(heroesOnProvidedAccount);
+                HeroDataModel.showHeroesListForSpecificAccount(heroesOnProvidedAccount);
             }
             String heroId = heroIdProvider(scanner);
             if (isHeroIDCorrect(heroId)) {
@@ -72,32 +72,12 @@ public class CharacterViewerManager {
 
     private boolean isBattleTagCorrect(String battleTagToCheck) {
 
-        if (!battleTagToCheck.matches("\\w+#+\\d+") && !battleTagToCheck.matches("\\w+-+\\d+")) {
-            return false;
-        } else {
-            return true;
-        }
+        return battleTagToCheck.matches("\\w+#+\\d+") || battleTagToCheck.matches("\\w+-+\\d+");
     }
 
     private boolean isHeroIDCorrect(String heroIdToCheck) {
 
-        if(!heroIdToCheck.matches("\\d+")) {
-            return false;
-        } else {
-            return true;
-        }
-    }
-
-    private void showHeroesListForSpecificAccount(List<HeroDataModel> heroesOnProvidedAccount) {
-
-        for (HeroDataModel heroDataModel : heroesOnProvidedAccount) {
-            StringBuilder str = new StringBuilder();
-            str.append("Hero id: ").append(heroDataModel.getId());
-            str.append(", name: ").append(heroDataModel.getName());
-            str.append(", class: ").append(heroDataModel.getClassHero());
-            str.append(", level: ").append(heroDataModel.getLevel());
-            System.out.println(str.toString() + '\n');
-        }
+        return heroIdToCheck.matches("\\d+");
     }
 
     public void showMenu() {

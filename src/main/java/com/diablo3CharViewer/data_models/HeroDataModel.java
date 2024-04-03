@@ -80,6 +80,18 @@ public class HeroDataModel {
         return this.stats;
     }
 
+    public static void showHeroesListForSpecificAccount(List<HeroDataModel> heroesOnProvidedAccount) {
+
+        for (HeroDataModel heroDataModel : heroesOnProvidedAccount) {
+            StringBuilder str = new StringBuilder();
+            str.append("Hero id: ").append(heroDataModel.getId());
+            str.append(", name: ").append(heroDataModel.getName());
+            str.append(", class: ").append(heroDataModel.getClassHero());
+            str.append(", level: ").append(heroDataModel.getLevel());
+            System.out.println(str.toString() + '\n');
+        }
+    }
+
     @Override
     public String toString() {
 
