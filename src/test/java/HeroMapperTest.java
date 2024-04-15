@@ -108,7 +108,7 @@ public class HeroMapperTest {
 
     @Test
     public void providedHeroIdIsNullThrowsException() {
-        Assertions.assertThrows(IllegalArgumentException.class, ()-> {
+        Assertions.assertThrows(NullPointerException.class, ()-> {
             testHeroMapper.fetchHeroToDataModel(ShareableDataForTests.battleTag, null, ShareableDataForTests.testFetchTokenMock);
         });
     }

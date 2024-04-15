@@ -13,9 +13,9 @@ import org.mockito.junit.jupiter.MockitoExtension;
 public class HeroHandlerApiTest {
 
     @Mock
-    private FetchToken testObject = new FetchToken();
+    private FetchToken testObject;
     @Mock
-    private HeroHandlerApi testHeroHandlerApi = new HeroHandlerApi();
+    private HeroHandlerApi testHeroHandlerApi;
 
     @Test
     public void correctAccountFetchedContainsProvidedHeroId() {

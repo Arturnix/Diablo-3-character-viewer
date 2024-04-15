@@ -14,9 +14,9 @@ import org.mockito.junit.jupiter.MockitoExtension;
 public class AccountHandlerApiTest {
 
     @Mock //wskazac dokladnie, niezaleznie od stanu obiektu. Nie jest rzeczywsitym obiektem, nie ma żadnego stanu. Z punktu widzenia programu to jest null
-    private FetchToken testObject = new FetchToken();
+    private FetchToken testObject;
     @Mock
-    private AccountHandlerApi testAccountHandlerApi = new AccountHandlerApi();
+    private AccountHandlerApi testAccountHandlerApi;
 
     @Test
     public void correctAccountFetchedContainsProvidedBattleTag() {
@@ -84,8 +84,10 @@ public class AccountHandlerApiTest {
         Mockito.when(testAccountHandlerApi.generateRequest("Jokefish-2265", testObject))
                 .thenReturn("Jokefish#2265");
 
+        /*Mockito.when(testAccountHandlerApi.generateRequest(null, testObject))
+                .thenReturn("");*/
         String battleTag = null;
-        Mockito.when(testObject.fetchAPIResourceRequest(BaseUrlParts.getBaseProfileApi() + battleTag
+       Mockito.when(testObject.fetchAPIResourceRequest(BaseUrlParts.getBaseProfileApi() + battleTag
                 + BaseUrlParts.getBaseLocaleAndToken() + Token.getAccess_token()))
                 .thenReturn("");
 

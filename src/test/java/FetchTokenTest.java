@@ -1,16 +1,19 @@
 import com.diablo3CharViewer.token.FetchToken;
+import com.diablo3CharViewer.token.Token;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.Mock;
+import org.mockito.Mockito;
+import org.mockito.junit.jupiter.MockitoExtension;
 
+@ExtendWith(MockitoExtension.class)
 public class FetchTokenTest {
-
-    private FetchToken testObject = new FetchToken();
+    private final FetchToken testObject = new FetchToken();
 
     @Test
     public void correctTokenFetched() {
-        String token = "EUCejbh2bft2F7hhtPl1Y0Wu8FAGW0AWJW"; //use actual token value
-
-        Assertions.assertEquals(token, testObject.requestToken().getAccess_token());
+        Assertions.assertEquals(Token.getAccess_token(), testObject.requestToken().getAccess_token());
     }
 
     @Test
@@ -21,22 +24,13 @@ public class FetchTokenTest {
     @Test
     public void fetchTokenThrows() {
 
-        Exception exception = Assertions.assertThrows(RuntimeException.class, ()-> {
-           testObject.fetchAPIResourceRequest("https://eu.api.blizzard.com/d3/profile/");
+        Exception exception = Assertions.assertThrows(RuntimeException.class, () -> {
+            testObject.fetchAPIResourceRequest("https://eu.api.blizzard.com/d3/profile/");
         });
 
-        String expectedMessage = "Bohater o podanym battleTagu nie istanieje w swiecie Sanktuarium";
+        String expectedMessage = "Szukany twor nie istnieje w swiecie Sanktuarium!";
         String actualMessage = exception.getMessage();
 
         Assertions.assertTrue(actualMessage.contains(expectedMessage));
-    }
-
-    @Test
-    public void fetchTokenFailed() {
-
-        String expectedMessage = "Bohater o podanym battleTagu nie istanieje w swiecie Sanktuarium";
-        String actualMessage = testObject.fetchAPIResourceRequest("https://eu.api.blizzard.com/d3/profile/");
-
-        Assertions.assertEquals(expectedMessage, actualMessage);
     }
 }

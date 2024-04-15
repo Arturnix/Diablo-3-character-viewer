@@ -45,7 +45,8 @@ public class AccountMapper {
 
     public AccountDataModel fetchAccountToDataModel(String battleTag, FetchToken fetchToken) {
 
-        String accountData = AccountHandlerApi.generateRequest(battleTag, fetchToken);
+        AccountHandlerApi accountHandlerApi = new AccountHandlerApi();
+        String accountData = accountHandlerApi.generateRequest(battleTag, fetchToken);
         ObjectMapper objectMapper = new ObjectMapper();
         JsonNode node = null;
 
@@ -67,7 +68,8 @@ public class AccountMapper {
 
     public List<HeroDataModel> fetchHeroesList(String battleTag, FetchToken fetchToken) {
 
-        String accountData = AccountHandlerApi.generateRequest(battleTag, fetchToken);
+        AccountHandlerApi accountHandlerApi = new AccountHandlerApi();
+        String accountData = accountHandlerApi.generateRequest(battleTag, fetchToken);
         ObjectMapper objectMapper = new ObjectMapper();
         JsonNode node = null;
 
