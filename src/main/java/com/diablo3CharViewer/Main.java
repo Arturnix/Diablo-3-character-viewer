@@ -17,6 +17,7 @@ public class Main {
 
         FetchToken fetchToken = new FetchToken();
         AccountMapper accountMapper = new AccountMapper();
+        AccountHandlerApi accountHandlerApi = new AccountHandlerApi();
         HeroMapper heroMapper = new HeroMapper();
         ItemMapper itemMapper = new ItemMapper();
         //ItemHandlerApi itemHandlerApi = new ItemHandlerApi(); //dac tworzenie klas po podaniu battleTag lub item Id z podaną wartoscia dla tego pola
@@ -33,10 +34,10 @@ public class Main {
 
             switch (wybor) {
                 case "1":
-                    System.out.println(characterViewerManager.profileDataInfoProvider(scanner, accountMapper, fetchToken));
+                    System.out.println(characterViewerManager.profileDataInfoProvider(scanner, accountHandlerApi, accountMapper, fetchToken));
                     break;
                 case "2":
-                    System.out.println(characterViewerManager.heroDataInfoProvider(scanner, accountMapper, heroMapper, fetchToken));
+                    System.out.println(characterViewerManager.heroDataInfoProvider(scanner, accountHandlerApi, accountMapper, heroMapper, fetchToken));
                     break;
                 case "3":
                     System.out.println(characterViewerManager.itemDataInfoProvider(scanner, itemMapper, fetchToken));

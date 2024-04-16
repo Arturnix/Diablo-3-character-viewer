@@ -16,41 +16,41 @@ public class ItemArmorMapperTest {
 
     @Test
     public void correctItemFetchedToDataModel() {
-        Mockito.when(testItemArmorMapperMock.fetchItemToDataModel(ShareableDataForTests.itemSlugAndIdArmor, ShareableDataForTests.testFetchTokenMock)).thenReturn(ShareableDataForTests.itemArmorDataModel);
-        Assertions.assertEquals(expectedItemId,testItemArmorMapperMock.fetchItemToDataModel(ShareableDataForTests.itemSlugAndIdArmor, ShareableDataForTests.testFetchTokenMock).getId());
-        Assertions.assertEquals(expectedItemName,testItemArmorMapperMock.fetchItemToDataModel(ShareableDataForTests.itemSlugAndIdArmor, ShareableDataForTests.testFetchTokenMock).getName());
+        Mockito.when(testItemArmorMapperMock.mapItemToDataModel(ShareableDataForTests.itemSlugAndIdArmor)).thenReturn(ShareableDataForTests.itemArmorDataModel);
+        Assertions.assertEquals(expectedItemId,testItemArmorMapperMock.mapItemToDataModel(ShareableDataForTests.itemSlugAndIdArmor).getId());
+        Assertions.assertEquals(expectedItemName,testItemArmorMapperMock.mapItemToDataModel(ShareableDataForTests.itemSlugAndIdArmor).getName());
     }
 
     @Test
     public void correctItemBodyPartSlotsListFetchedToDataModel() {
-        Mockito.when(testItemArmorMapperMock.fetchItemToDataModel(ShareableDataForTests.itemSlugAndIdArmor, ShareableDataForTests.testFetchTokenMock)).thenReturn(ShareableDataForTests.itemArmorDataModel);
-        Assertions.assertTrue(testItemArmorMapperMock.fetchItemToDataModel(ShareableDataForTests.itemSlugAndIdArmor, ShareableDataForTests.testFetchTokenMock).getItemBodyPartSlots().contains("head"));
+        Mockito.when(testItemArmorMapperMock.mapItemToDataModel(ShareableDataForTests.itemSlugAndIdArmor)).thenReturn(ShareableDataForTests.itemArmorDataModel);
+        Assertions.assertTrue(testItemArmorMapperMock.mapItemToDataModel(ShareableDataForTests.itemSlugAndIdArmor).getItemBodyPartSlots().contains("head"));
     }
 
     @Test
     public void correctItemTypeFetchedToDataModel() {
-        Mockito.when(testItemArmorMapperMock.fetchItemToDataModel(ShareableDataForTests.itemSlugAndIdArmor, ShareableDataForTests.testFetchTokenMock)).thenReturn(ShareableDataForTests.itemArmorDataModel);
-        Assertions.assertTrue(testItemArmorMapperMock.fetchItemToDataModel(ShareableDataForTests.itemSlugAndIdArmor, ShareableDataForTests.testFetchTokenMock).getClass().getName().contains("ItemArmorDataModel"));
+        Mockito.when(testItemArmorMapperMock.mapItemToDataModel(ShareableDataForTests.itemSlugAndIdArmor)).thenReturn(ShareableDataForTests.itemArmorDataModel);
+        Assertions.assertTrue(testItemArmorMapperMock.mapItemToDataModel(ShareableDataForTests.itemSlugAndIdArmor).getClass().getName().contains("ItemArmorDataModel"));
     }
 
     @Test
     public void providedItemSlugAndIdDoesntExistThrowsException() {
         Assertions.assertThrows(RuntimeException.class, ()-> {
-            itemArmorMapper.fetchItemToDataModel(ShareableDataForTests.itemSlugAndIdAsDoesntExist, ShareableDataForTests.testFetchTokenMock);
+            itemArmorMapper.mapItemToDataModel(ShareableDataForTests.itemSlugAndIdAsDoesntExist);
         });
     }
 
     @Test
-    public void providedItemSlugAndIdNullThrowsException() {
-        Assertions.assertThrows(NullPointerException.class, ()-> {
-            itemArmorMapper.fetchItemToDataModel(null, ShareableDataForTests.testFetchTokenMock);
+    public void providedItemDataNullThrowsException() {
+        Assertions.assertThrows(IllegalArgumentException.class, ()-> {
+            itemArmorMapper.mapItemToDataModel(null);
         });
     }
 
-    @Test
+    /*@Test //test dla item api handler
     public void providedTokenNullThrowsException() {
         Assertions.assertThrows(NullPointerException.class, ()-> {
-            itemArmorMapper.fetchItemToDataModel(ShareableDataForTests.itemSlugAndIdArmor, null);
+            itemArmorMapper.mapItemToDataModel(ShareableDataForTests.itemSlugAndIdArmor, null);
         });
-    }
+    }*/
 }

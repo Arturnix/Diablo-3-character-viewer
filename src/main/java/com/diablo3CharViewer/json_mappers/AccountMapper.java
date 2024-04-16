@@ -43,10 +43,8 @@ public class AccountMapper {
         return heroes;
     }
 
-    public AccountDataModel fetchAccountToDataModel(String battleTag, FetchToken fetchToken) {
+    public AccountDataModel mapAccountToDataModel(String accountData) { //zmienic nazwe na mapAccToDM
 
-        AccountHandlerApi accountHandlerApi = new AccountHandlerApi();
-        String accountData = accountHandlerApi.generateRequest(battleTag, fetchToken);
         ObjectMapper objectMapper = new ObjectMapper();
         JsonNode node = null;
 
@@ -60,16 +58,14 @@ public class AccountMapper {
                 node.get("battleTag").asText(),
                 node.get("paragonLevel").asInt(),
                 node.get("guildName").asText(),
-                fetchHeroesList(node),
+                fetchHeroesList(node), //przerzucic taki mechanizm do osbnej klasy? Aby zwiekszyc test coverage to mialbym ten kod private jako public innej klasie i bym testowal
                 node.get("highestHardcoreLevel").asInt(),
-                sumEliteKills(node)
+                sumEliteKills(node) //przerzucic taki mechanizm do osbnej klasy?
         );
     }
 
-    public List<HeroDataModel> fetchHeroesList(String battleTag, FetchToken fetchToken) {
+    public List<HeroDataModel> fetchHeroesList(String accountData) {
 
-        AccountHandlerApi accountHandlerApi = new AccountHandlerApi();
-        String accountData = accountHandlerApi.generateRequest(battleTag, fetchToken);
         ObjectMapper objectMapper = new ObjectMapper();
         JsonNode node = null;
 

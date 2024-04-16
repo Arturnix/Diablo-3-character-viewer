@@ -1,4 +1,5 @@
 import com.diablo3CharViewer.CharacterViewerManager;
+import com.diablo3CharViewer.api_handlers.AccountHandlerApi;
 import com.diablo3CharViewer.json_mappers.AccountMapper;
 import com.diablo3CharViewer.json_mappers.HeroMapper;
 import org.junit.jupiter.api.Assertions;
@@ -20,31 +21,33 @@ public class CharacterViewerManagerTest {
     private AccountMapper accountMapper;
     @Mock
     private HeroMapper heroMapper;
+    @Mock
+    private AccountHandlerApi accountHandlerApi; //= new AccountHandlerApi();
 
     @Test
     public void wrongBattleTagFormatProvidedShowProfile() {
-        Mockito.when(testCharacterViewerManagerMock.profileDataInfoProvider(showRequestedData, accountMapper, ShareableDataForTests.testFetchTokenMock))
+        Mockito.when(testCharacterViewerManagerMock.profileDataInfoProvider(showRequestedData, accountHandlerApi, accountMapper, ShareableDataForTests.testFetchTokenMock))
                 .thenReturn("Niepoprawny format battleTag! Spróbuj ponownie.");
 
-        Assertions.assertTrue(testCharacterViewerManagerMock.profileDataInfoProvider(showRequestedData, accountMapper, ShareableDataForTests.testFetchTokenMock)
+        Assertions.assertTrue(testCharacterViewerManagerMock.profileDataInfoProvider(showRequestedData, accountHandlerApi, accountMapper, ShareableDataForTests.testFetchTokenMock)
                 .contains(ShareableDataForTests.wrongBattleTagFormatWarning));
     }
 
     @Test
     public void wrongBattleTagFormatProvidedShowHero() {
-        Mockito.when(testCharacterViewerManagerMock.heroDataInfoProvider(showRequestedData, accountMapper, heroMapper, ShareableDataForTests.testFetchTokenMock))
+        Mockito.when(testCharacterViewerManagerMock.heroDataInfoProvider(showRequestedData, accountHandlerApi, accountMapper, heroMapper, ShareableDataForTests.testFetchTokenMock))
                 .thenReturn("Niepoprawny format battleTag! Spróbuj ponownie.");
 
-        Assertions.assertTrue(testCharacterViewerManagerMock.heroDataInfoProvider(showRequestedData, accountMapper, heroMapper, ShareableDataForTests.testFetchTokenMock)
+        Assertions.assertTrue(testCharacterViewerManagerMock.heroDataInfoProvider(showRequestedData, accountHandlerApi, accountMapper, heroMapper, ShareableDataForTests.testFetchTokenMock)
                 .contains(ShareableDataForTests.wrongBattleTagFormatWarning));
     }
 
    @Test
     public void wrongHeroIdFormatProvidedShowHero() {
-        Mockito.when(testCharacterViewerManagerMock.heroDataInfoProvider(showRequestedData, accountMapper, heroMapper, ShareableDataForTests.testFetchTokenMock))
+        Mockito.when(testCharacterViewerManagerMock.heroDataInfoProvider(showRequestedData, accountHandlerApi, accountMapper, heroMapper, ShareableDataForTests.testFetchTokenMock))
                 .thenReturn("Niepoprawny format heroId - tylko cyfry! Spróbuj ponownie.");
 
-        Assertions.assertTrue(testCharacterViewerManagerMock.heroDataInfoProvider(showRequestedData, accountMapper, heroMapper, ShareableDataForTests.testFetchTokenMock)
+        Assertions.assertTrue(testCharacterViewerManagerMock.heroDataInfoProvider(showRequestedData, accountHandlerApi, accountMapper, heroMapper, ShareableDataForTests.testFetchTokenMock)
                 .contains(ShareableDataForTests.wrongHeroIdFormatWarning));
     }
 }

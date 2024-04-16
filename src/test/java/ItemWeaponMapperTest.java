@@ -14,45 +14,45 @@ public class ItemWeaponMapperTest {
     private final String expectedItemId = "Unique_Sword_2H_104_x1";
     private final String expectedItemName = "Spaczony Spopielacz";
 
-    @Test
+   @Test
     public void correctItemFetchedToDataModel() {
-        Mockito.when(testItemWeaponMapperMock.fetchItemToDataModel(ShareableDataForTests.itemSlugAndIdWeapon, ShareableDataForTests.testFetchTokenMock)).thenReturn(ShareableDataForTests.itemWeaponDataModel);
-        Assertions.assertEquals(expectedItemId,testItemWeaponMapperMock.fetchItemToDataModel(ShareableDataForTests.itemSlugAndIdWeapon, ShareableDataForTests.testFetchTokenMock).getId());
-        Assertions.assertEquals(expectedItemName,testItemWeaponMapperMock.fetchItemToDataModel(ShareableDataForTests.itemSlugAndIdWeapon, ShareableDataForTests.testFetchTokenMock).getName());
+        Mockito.when(testItemWeaponMapperMock.mapItemToDataModel(ShareableDataForTests.itemSlugAndIdWeapon)).thenReturn(ShareableDataForTests.itemWeaponDataModel);
+        Assertions.assertEquals(expectedItemId,testItemWeaponMapperMock.mapItemToDataModel(ShareableDataForTests.itemSlugAndIdWeapon).getId());
+        Assertions.assertEquals(expectedItemName,testItemWeaponMapperMock.mapItemToDataModel(ShareableDataForTests.itemSlugAndIdWeapon).getName());
     }
 
     @Test
     public void correctItemBodyPartSlotsListFetchedToDataModel() {
-        Mockito.when(testItemWeaponMapperMock.fetchItemToDataModel(ShareableDataForTests.itemSlugAndIdWeapon, ShareableDataForTests.testFetchTokenMock)).thenReturn(ShareableDataForTests.itemWeaponDataModel);
-        Assertions.assertTrue(testItemWeaponMapperMock.fetchItemToDataModel(ShareableDataForTests.itemSlugAndIdWeapon, ShareableDataForTests.testFetchTokenMock).getItemBodyPartSlots().contains("right-hand"));
-        Assertions.assertTrue(testItemWeaponMapperMock.fetchItemToDataModel(ShareableDataForTests.itemSlugAndIdWeapon, ShareableDataForTests.testFetchTokenMock).getItemBodyPartSlots().contains("left-hand"));
-        Assertions.assertTrue(testItemWeaponMapperMock.fetchItemToDataModel(ShareableDataForTests.itemSlugAndIdWeapon, ShareableDataForTests.testFetchTokenMock).getItemBodyPartSlots().contains("follower-left-hand"));
+        Mockito.when(testItemWeaponMapperMock.mapItemToDataModel(ShareableDataForTests.itemSlugAndIdWeapon)).thenReturn(ShareableDataForTests.itemWeaponDataModel);
+        Assertions.assertTrue(testItemWeaponMapperMock.mapItemToDataModel(ShareableDataForTests.itemSlugAndIdWeapon).getItemBodyPartSlots().contains("right-hand"));
+        Assertions.assertTrue(testItemWeaponMapperMock.mapItemToDataModel(ShareableDataForTests.itemSlugAndIdWeapon).getItemBodyPartSlots().contains("left-hand"));
+        Assertions.assertTrue(testItemWeaponMapperMock.mapItemToDataModel(ShareableDataForTests.itemSlugAndIdWeapon).getItemBodyPartSlots().contains("follower-left-hand"));
     }
 
     @Test
     public void correctItemTypeFetchedToDataModel() {
-        Mockito.when(testItemWeaponMapperMock.fetchItemToDataModel(ShareableDataForTests.itemSlugAndIdWeapon, ShareableDataForTests.testFetchTokenMock)).thenReturn(ShareableDataForTests.itemWeaponDataModel);
-        Assertions.assertTrue(testItemWeaponMapperMock.fetchItemToDataModel(ShareableDataForTests.itemSlugAndIdWeapon, ShareableDataForTests.testFetchTokenMock).getClass().getName().contains("ItemWeaponDataModel"));
+        Mockito.when(testItemWeaponMapperMock.mapItemToDataModel(ShareableDataForTests.itemSlugAndIdWeapon)).thenReturn(ShareableDataForTests.itemWeaponDataModel);
+        Assertions.assertTrue(testItemWeaponMapperMock.mapItemToDataModel(ShareableDataForTests.itemSlugAndIdWeapon).getClass().getName().contains("ItemWeaponDataModel"));
     }
 
     @Test
     public void providedItemSlugAndIdDoesntExistThrowsException() {
         Assertions.assertThrows(RuntimeException.class, ()-> {
-            itemWeaponMapper.fetchItemToDataModel(ShareableDataForTests.itemSlugAndIdAsDoesntExist, ShareableDataForTests.testFetchTokenMock);
+            itemWeaponMapper.mapItemToDataModel(ShareableDataForTests.itemSlugAndIdAsDoesntExist);
         });
     }
 
     @Test
-    public void providedItemSlugAndIdNullThrowsException() {
-        Assertions.assertThrows(NullPointerException.class, ()-> {
-            itemWeaponMapper.fetchItemToDataModel(null, ShareableDataForTests.testFetchTokenMock);
+    public void providedItemDataNullThrowsException() {
+        Assertions.assertThrows(IllegalArgumentException.class, ()-> {
+            itemWeaponMapper.mapItemToDataModel(null);
         });
     }
 
-    @Test
+    /*@Test //test do item api handler
     public void providedTokenNullThrowsException() {
         Assertions.assertThrows(NullPointerException.class, ()-> {
-            itemWeaponMapper.fetchItemToDataModel(ShareableDataForTests.itemSlugAndIdWeapon, null);
+            itemWeaponMapper.mapItemToDataModel(ShareableDataForTests.itemSlugAndIdWeapon, null);
         });
-    }
+    }*/
 }

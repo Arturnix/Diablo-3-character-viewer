@@ -76,14 +76,13 @@ public class ItemMapper {
         );
     }
 
-    public ItemDataModel fetchItemToDataModel(String itemSlugAndId, FetchToken fetchToken) {
+    public ItemDataModel mapItemToDataModel(String itemData) {
 
-        String accountData = ItemHandlerApi.generateRequest(itemSlugAndId, fetchToken);
         ObjectMapper objectMapper = new ObjectMapper();
         JsonNode node = null;
 
         try {
-            node = objectMapper.readTree(accountData);
+            node = objectMapper.readTree(itemData);
         } catch (JsonProcessingException e) {
             throw new RuntimeException(e);
         }

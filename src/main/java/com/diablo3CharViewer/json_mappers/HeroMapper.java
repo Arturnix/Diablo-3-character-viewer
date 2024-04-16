@@ -19,16 +19,16 @@ public class HeroMapper {
         boolean isHardcoreCharacter = node.get("hardcore").asBoolean();
 
         if(!isHardcoreCharacter) {
-            return heroCreator(node, isHardcoreCharacter,false);
+            return heroCreator(node, false,false);
         } else {
             boolean isDeadCharacter = node.get("dead").asBoolean();
-            return heroCreator(node, isHardcoreCharacter, isDeadCharacter);
+            return heroCreator(node, true, isDeadCharacter);
         }
     }
 
     private HeroDataModel heroCreator(JsonNode node, boolean isHardcoreCharacter, boolean isDeadCharacter) {
 
-        HeroDataModel heroDataModel = new HeroDataModel(
+        return new HeroDataModel(
                 node.get("id").asInt(),
                 node.get("name").asText(),
                 node.get("class").asText(),
@@ -43,15 +43,13 @@ public class HeroMapper {
                 fetchFollowers(node),
                 fetchHeroStats(node)
         );
-        return heroDataModel;
     }
 
     private Map<String, Integer> fetchKills(JsonNode node) {
 
         ObjectMapper objectMapper = new ObjectMapper();
-        Map<String, Integer> mapKills = objectMapper.convertValue(node.get("kills"), Map.class);
 
-        return mapKills;
+        return objectMapper.convertValue(node.get("kills"), Map.class);
     }
 
     private List<SkillDataModel> fetchSkills(JsonNode node) {
@@ -121,14 +119,12 @@ public class HeroMapper {
     private Map<String, Integer> fetchHeroStats(JsonNode node) {
 
         ObjectMapper objectMapper = new ObjectMapper();
-        Map<String, Integer> mapHeroStats = objectMapper.convertValue(node.get("stats"), Map.class);
 
-        return mapHeroStats;
+        return objectMapper.convertValue(node.get("stats"), Map.class);
     }
 
-    public HeroDataModel fetchHeroToDataModel(String battleTag, String heroId, FetchToken fetchToken) {
+    public HeroDataModel mapHeroToDataModel(String accountData) {
 
-        String accountData = HeroHandlerApi.generateRequest(battleTag, heroId, fetchToken);
         ObjectMapper objectMapper = new ObjectMapper();
         JsonNode node = null;
 

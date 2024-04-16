@@ -17,6 +17,7 @@ public class AccountMapperTest {
 
     @Mock
     private AccountMapper testAccountMapperMock;
+    private String accountData;
     private final AccountMapper testAccountMapper = new AccountMapper();
     private final String expectedBattleTag = "Jokefish#2265";
     private final int expectedParagonLevel = 1111;
@@ -33,52 +34,52 @@ public class AccountMapperTest {
 
    @Test
     public void correctAccountFetchedToDataModel() {
-       Mockito.when(testAccountMapperMock.fetchAccountToDataModel(ShareableDataForTests.battleTag, ShareableDataForTests.testFetchTokenMock)).thenReturn(accountDataModel);
-       Assertions.assertEquals(expectedBattleTag, testAccountMapperMock.fetchAccountToDataModel(ShareableDataForTests.battleTag, ShareableDataForTests.testFetchTokenMock).getBattleTag());
+       Mockito.when(testAccountMapperMock.mapAccountToDataModel(accountData)).thenReturn(accountDataModel);
+       Assertions.assertEquals(expectedBattleTag, testAccountMapperMock.mapAccountToDataModel(accountData).getBattleTag());
     }
 
     @Test
     public void correctParagonLevelFetchedToDataModel() {
-        Mockito.when(testAccountMapperMock.fetchAccountToDataModel(ShareableDataForTests.battleTag, ShareableDataForTests.testFetchTokenMock)).thenReturn(accountDataModel);
-        Assertions.assertEquals(expectedParagonLevel, testAccountMapperMock.fetchAccountToDataModel(ShareableDataForTests.battleTag, ShareableDataForTests.testFetchTokenMock).getParagonLevel());
+        Mockito.when(testAccountMapperMock.mapAccountToDataModel(accountData)).thenReturn(accountDataModel);
+        Assertions.assertEquals(expectedParagonLevel, testAccountMapperMock.mapAccountToDataModel(accountData).getParagonLevel());
     }
 
     @Test
     public void correctGuildNameFetchedToDataModel() {
-        Mockito.when(testAccountMapperMock.fetchAccountToDataModel(ShareableDataForTests.battleTag, ShareableDataForTests.testFetchTokenMock)).thenReturn(accountDataModel);
-        Assertions.assertEquals(expectedGuildName, testAccountMapperMock.fetchAccountToDataModel(ShareableDataForTests.battleTag, ShareableDataForTests.testFetchTokenMock).getGuildName());
+        Mockito.when(testAccountMapperMock.mapAccountToDataModel(accountData)).thenReturn(accountDataModel);
+        Assertions.assertEquals(expectedGuildName, testAccountMapperMock.mapAccountToDataModel(accountData).getGuildName());
     }
 
     @Test
     public void correctHeroesListSizeFetchedToDataModel() {
-        lenient().when(testAccountMapperMock.fetchAccountToDataModel(ShareableDataForTests.battleTag, ShareableDataForTests.testFetchTokenMock)).thenReturn(accountDataModel);
+        lenient().when(testAccountMapperMock.mapAccountToDataModel(accountData)).thenReturn(accountDataModel);
         Assertions.assertEquals(2, heroes.size());
     }
 
     @Test
     public void correctHighestHardcoreLevelFetchedToDataModel() {
-        Mockito.when(testAccountMapperMock.fetchAccountToDataModel(ShareableDataForTests.battleTag, ShareableDataForTests.testFetchTokenMock)).thenReturn(accountDataModel);
-        Assertions.assertEquals(70, testAccountMapperMock.fetchAccountToDataModel(ShareableDataForTests.battleTag, ShareableDataForTests.testFetchTokenMock).getHighestHardcoreLevel());
+        Mockito.when(testAccountMapperMock.mapAccountToDataModel(accountData)).thenReturn(accountDataModel);
+        Assertions.assertEquals(70, testAccountMapperMock.mapAccountToDataModel(accountData).getHighestHardcoreLevel());
     }
 
     @Test
     public void correctKillsFetchedToDataModel() {
-        Mockito.when(testAccountMapperMock.fetchAccountToDataModel(ShareableDataForTests.battleTag, ShareableDataForTests.testFetchTokenMock)).thenReturn(accountDataModel);
-        Assertions.assertTrue(testAccountMapperMock.fetchAccountToDataModel(ShareableDataForTests.battleTag, ShareableDataForTests.testFetchTokenMock).getKills().containsKey("elites"));
-        Assertions.assertTrue(testAccountMapperMock.fetchAccountToDataModel(ShareableDataForTests.battleTag, ShareableDataForTests.testFetchTokenMock).getKills().containsValue(1974));
+        Mockito.when(testAccountMapperMock.mapAccountToDataModel(accountData)).thenReturn(accountDataModel);
+        Assertions.assertTrue(testAccountMapperMock.mapAccountToDataModel(accountData).getKills().containsKey("elites"));
+        Assertions.assertTrue(testAccountMapperMock.mapAccountToDataModel(accountData).getKills().containsValue(1974));
     }
 
     @Test
     public void providedBattleTagDoesntExistThrowsException() {
         Assertions.assertThrows(RuntimeException.class, ()-> {
-            testAccountMapper.fetchAccountToDataModel(ShareableDataForTests.battleTagAsDosentExist, ShareableDataForTests.testFetchToken);
+            testAccountMapper.mapAccountToDataModel(ShareableDataForTests.battleTagAsDosentExist);
         });
     }
 
     @Test
-    public void providedBattleTagIsNullThrowsException() {
-        Assertions.assertThrows(NullPointerException.class, ()-> {
-            testAccountMapper.fetchAccountToDataModel(null, ShareableDataForTests.testFetchTokenMock);
+    public void providedAccountDataIsNullThrowsException() {
+        Assertions.assertThrows(IllegalArgumentException.class, ()-> {
+            testAccountMapper.mapAccountToDataModel(null);
         });
     }
 }

@@ -1,5 +1,6 @@
 package com.diablo3CharViewer;
 
+import com.diablo3CharViewer.api_handlers.AccountHandlerApi;
 import com.diablo3CharViewer.api_handlers.HeroHandlerApi;
 import com.diablo3CharViewer.api_handlers.ItemHandlerApi;
 import com.diablo3CharViewer.data_models.HeroDataModel;
@@ -13,21 +14,21 @@ import java.util.Scanner;
 
 public class CharacterViewerManager {
 
-    public String profileDataInfoProvider(Scanner scanner, AccountMapper accountMapper, FetchToken fetchToken) {
+    public String profileDataInfoProvider(Scanner scanner, AccountHandlerApi accountHandlerApi, AccountMapper accountMapper, FetchToken fetchToken) {
 
         String battleTag = battleTagProvider(scanner);
         if (isBattleTagCorrect(battleTag)) {
-            return "Zostan na chwile i poczytaj:\n" + accountMapper.fetchAccountToDataModel(battleTag, fetchToken) + '\n';
+            return "Zostan na chwile i poczytaj:\n" + accountMapper.mapAccountToDataModel(accountHandlerApi.generateRequest(battleTag, fetchToken)) + '\n';
         } else {
             return "Niepoprawny format battleTag! Spróbuj ponownie.";
         }
     }
 
-    public String heroDataInfoProvider(Scanner scanner, AccountMapper accountMapper, HeroMapper heroMapper, FetchToken fetchToken) {
+    public String heroDataInfoProvider(Scanner scanner, AccountHandlerApi accountHandlerApi, AccountMapper accountMapper, HeroMapper heroMapper, FetchToken fetchToken) {
 
         String battleTag = battleTagProvider(scanner);
         if (isBattleTagCorrect(battleTag)) {
-            List<HeroDataModel> heroesOnProvidedAccount = accountMapper.fetchHeroesList(battleTag, fetchToken);
+            List<HeroDataModel> heroesOnProvidedAccount = accountMapper.fetchHeroesList(accountHandlerApi.generateRequest(battleTag, fetchToken));
             if(heroesOnProvidedAccount.isEmpty()) {
                 System.out.println("Brak bohaterow dla podanego konta");
             } else {
@@ -35,7 +36,7 @@ public class CharacterViewerManager {
             }
             String heroId = heroIdProvider(scanner);
             if (isHeroIDCorrect(heroId)) {
-                return "Zostan na chwile i poczytaj:\n" + heroMapper.fetchHeroToDataModel(battleTag, heroId, fetchToken) + '\n';
+                return "Zostan na chwile i poczytaj:\n" + heroMapper.mapHeroToDataModel(HeroHandlerApi.generateRequest(battleTag, heroId, fetchToken)) + '\n';
             } else {
                 return "Niepoprawny format heroId - tylko cyfry! Spróbuj ponownie.";
             }
@@ -45,7 +46,8 @@ public class CharacterViewerManager {
     }
 
     public String itemDataInfoProvider(Scanner scanner, ItemMapper itemMapper, FetchToken fetchToken) {
-        return "Zostan na chwile i poczytaj:\n" + itemMapper.fetchItemToDataModel(itemSlugAndIdProvider(scanner), fetchToken) + '\n';
+        String itemSlugAndId = itemSlugAndIdProvider(scanner);
+        return "Zostan na chwile i poczytaj:\n" + itemMapper.mapItemToDataModel(ItemHandlerApi.generateRequest(itemSlugAndId, fetchToken)) + '\n';
     }
 
     private String battleTagProvider(Scanner scanner) {
