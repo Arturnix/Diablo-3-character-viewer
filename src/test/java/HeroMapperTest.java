@@ -20,8 +20,8 @@ public class HeroMapperTest {
     private HeroMapper testHeroMapperMock;
     private HeroMapper testHeroMapper = new HeroMapper();
     private String accountData;
-    private final String heroId = "162864678";
-    private final int expectedHeroId = 162864678;
+    private final String heroId = "170761702";
+    private final int expectedHeroId = 170761702;
     private final String expectedHeroName = "Barbera";
     private final String expectedHeroClass = "barbarian";
     private final Map<String, Integer> heroKills = new HashMap<String, Integer>() {{
@@ -48,7 +48,7 @@ public class HeroMapperTest {
         put("life", 437161);
         put("damage", 276225);
     }};
-    private final HeroDataModel heroDataModel = new HeroDataModel(162864678, "Barbera", "barbarian", 70, 1111,
+    private final HeroDataModel heroDataModel = new HeroDataModel(170761702, "Barbera", "barbarian", 70, 1111,
             false, false, false, heroKills, heroSkills, heroItems, followers, heroStats);
     @Test
     public void correctHeroFetchedToDataModel() {

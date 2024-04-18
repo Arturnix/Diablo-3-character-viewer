@@ -22,7 +22,7 @@ public class AccountHandlerApiTest {
     public void correctAccountFetchedContainsProvidedBattleTag() {
 
         String battleTag = "Ghall#2523";
-        String urlRequest = "https://eu.api.blizzard.com/d3/profile/Jokefish-2265/?locale=pl_PL&access_token=";
+        String urlRequest = "https://eu.api.blizzard.com/d3/profile/Ghall-2523/?locale=pl_PL&access_token=";
         String token = testObject.requestToken().getAccess_token();
 
         Mockito.when(testObject.fetchAPIResourceRequest(

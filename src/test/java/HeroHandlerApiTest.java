@@ -20,14 +20,14 @@ public class HeroHandlerApiTest {
     @Test
     public void correctAccountFetchedContainsProvidedHeroId() {
 
-        String heroId = "162864678";
+        String heroId = "170761702";
         String token = Token.getAccess_token();
-        String requestUrl = "https://eu.api.blizzard.com/d3/profile/Jokefish-2265/hero/" + heroId +
+        String requestUrl = "https://eu.api.blizzard.com/d3/profile/Ghall-2523/hero/" + heroId +
                 "?locale=pl_PL&access_token=" + token;
 
-        Mockito.when(testObject.fetchAPIResourceRequest(requestUrl)).thenReturn("162864678");
+        Mockito.when(testObject.fetchAPIResourceRequest(requestUrl)).thenReturn("170761702");
 
-        Assertions.assertTrue(testObject.fetchAPIResourceRequest(requestUrl).contains("162864678"));
+        Assertions.assertTrue(testObject.fetchAPIResourceRequest(requestUrl).contains("170761702"));
     }
 
     @Test
@@ -47,14 +47,14 @@ public class HeroHandlerApiTest {
     public void fetchHeroFailedMissedCredentials() {
 
         String requestUrlOK = BaseUrlParts.getBaseProfileApi() + "Ghall-2523"
-                + BaseUrlParts.getBaseHeroApi() + "162864678"
+                + BaseUrlParts.getBaseHeroApi() + "170761702"
                 + BaseUrlParts.getBaseLocaleAndToken() + Token.getAccess_token();
 
         String requestUrlNOK = BaseUrlParts.getBaseProfileApi()
                 + BaseUrlParts.getBaseHeroApi()
                 + BaseUrlParts.getBaseLocaleAndToken();
 
-        Mockito.when(testObject.fetchAPIResourceRequest(requestUrlOK)).thenReturn("162864678");
+        Mockito.when(testObject.fetchAPIResourceRequest(requestUrlOK)).thenReturn("170761702");
         Mockito.when(testObject.fetchAPIResourceRequest(requestUrlNOK)).thenReturn("");
 
         String fetchedHeroOK = testObject.fetchAPIResourceRequest(requestUrlOK);
@@ -66,12 +66,12 @@ public class HeroHandlerApiTest {
     @Test
     public void fetchHeroFailedWrongHeroIdProvided() {
 
-        Mockito.when(testHeroHandlerApi.generateRequest("Ghall-2523", "162864678", testObject))
-                .thenReturn("162864678");
+        Mockito.when(testHeroHandlerApi.generateRequest("Ghall-2523", "170761702", testObject))
+                .thenReturn("170761702");
         Mockito.when(testHeroHandlerApi.generateRequest("Ghall-2523", " ", testObject))
                 .thenReturn("");
 
-        String fetchedHeroOK = testHeroHandlerApi.generateRequest("Ghall-2523", "162864678", testObject);
+        String fetchedHeroOK = testHeroHandlerApi.generateRequest("Ghall-2523", "170761702", testObject);
         String fetchedHeroNOK = testHeroHandlerApi.generateRequest("Ghall-2523", " ", testObject);
 
         Assertions.assertNotEquals(fetchedHeroOK, fetchedHeroNOK);
@@ -80,13 +80,13 @@ public class HeroHandlerApiTest {
     @Test
     public void fetchHeroFailedWrongBattleTagProvided() {
 
-        Mockito.when(testHeroHandlerApi.generateRequest("Ghall-2523", "162864678", testObject))
-                .thenReturn("162864678");
-        Mockito.when(testHeroHandlerApi.generateRequest(" ", "162864678", testObject))
+        Mockito.when(testHeroHandlerApi.generateRequest("Ghall-2523", "170761702", testObject))
+                .thenReturn("170761702");
+        Mockito.when(testHeroHandlerApi.generateRequest(" ", "170761702", testObject))
                 .thenReturn("");
 
-        String fetchedHeroOK = testHeroHandlerApi.generateRequest("Ghall-2523", "162864678", testObject);
-        String fetchedHeroNOK = testHeroHandlerApi.generateRequest(" ", "162864678", testObject);
+        String fetchedHeroOK = testHeroHandlerApi.generateRequest("Ghall-2523", "170761702", testObject);
+        String fetchedHeroNOK = testHeroHandlerApi.generateRequest(" ", "170761702", testObject);
 
         Assertions.assertNotEquals(fetchedHeroOK, fetchedHeroNOK);
     }
@@ -94,12 +94,12 @@ public class HeroHandlerApiTest {
     @Test
     public void fetchHeroFailedNullHeroId() {
 
-        Mockito.when(testHeroHandlerApi.generateRequest("Ghall-2523", "162864678", testObject))
-                .thenReturn("162864678");
+        Mockito.when(testHeroHandlerApi.generateRequest("Ghall-2523", "170761702", testObject))
+                .thenReturn("170761702");
         Mockito.when(testHeroHandlerApi.generateRequest("Ghall-2523", null, testObject))
                 .thenReturn("");
 
-        String fetchedHeroOK = testHeroHandlerApi.generateRequest("Ghall-2523", "162864678", testObject);
+        String fetchedHeroOK = testHeroHandlerApi.generateRequest("Ghall-2523", "170761702", testObject);
         String fetchedHeroNOK = testHeroHandlerApi.generateRequest("Ghall-2523", null, testObject);
 
         Assertions.assertNotEquals(fetchedHeroOK, fetchedHeroNOK);
@@ -109,7 +109,7 @@ public class HeroHandlerApiTest {
     public void fetchHeroFailedNullBattleTagThorwsException() {
 
         HeroHandlerApi testHeroHandlerApi = new HeroHandlerApi();
-        String heroId = "162864678";
+        String heroId = "170761702";
 
         Exception exception = Assertions.assertThrows(NullPointerException.class, ()-> {
             testHeroHandlerApi.generateRequest(null, heroId, testObject);
