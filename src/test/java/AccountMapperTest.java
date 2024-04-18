@@ -19,7 +19,7 @@ public class AccountMapperTest {
     private AccountMapper testAccountMapperMock;
     private String accountData;
     private final AccountMapper testAccountMapper = new AccountMapper();
-    private final String expectedBattleTag = "Jokefish#2265";
+    private final String expectedBattleTag = "Ghall#2523";
     private final int expectedParagonLevel = 1111;
     private final String expectedGuildName = "Phantas Magoria";
     private final ArrayList<HeroDataModel> heroes = new ArrayList<>(Arrays.asList(
@@ -29,7 +29,7 @@ public class AccountMapperTest {
     private final Map<String, Integer> mapKills = new HashMap<String, Integer>() {{
             put("elites",1974);
     }};
-    private final AccountDataModel accountDataModel = new AccountDataModel("Jokefish#2265", 1111, "Phantas Magoria",
+    private final AccountDataModel accountDataModel = new AccountDataModel("Ghall#2523", 1111, "Phantas Magoria",
             heroes, 70, mapKills);
 
    @Test

@@ -21,12 +21,12 @@ public class AccountHandlerApiTest {
     @Test
     public void correctAccountFetchedContainsProvidedBattleTag() {
 
-        String battleTag = "Jokefish#2265";
+        String battleTag = "Ghall#2523";
         String urlRequest = "https://eu.api.blizzard.com/d3/profile/Jokefish-2265/?locale=pl_PL&access_token=";
         String token = testObject.requestToken().getAccess_token();
 
         Mockito.when(testObject.fetchAPIResourceRequest(
-                urlRequest + token)).thenReturn("Jokefish#2265");
+                urlRequest + token)).thenReturn("Ghall#2523");
 
         Assertions.assertTrue(testObject.fetchAPIResourceRequest(
                 urlRequest + token).contains(battleTag));
@@ -48,14 +48,14 @@ public class AccountHandlerApiTest {
     @Test
     public void fetchAccountFailedMissedCredentials() {
 
-        Mockito.when(testObject.fetchAPIResourceRequest(BaseUrlParts.getBaseProfileApi() + "Jokefish-2265"
+        Mockito.when(testObject.fetchAPIResourceRequest(BaseUrlParts.getBaseProfileApi() + "Ghall-2523"
                         + BaseUrlParts.getBaseLocaleAndToken() + Token.getAccess_token()))
-                .thenReturn("Jokefish#2265");
+                .thenReturn("Ghall#2523");
 
         Mockito.when(testObject.fetchAPIResourceRequest(BaseUrlParts.getBaseProfileApi() + BaseUrlParts.getBaseLocaleAndToken()))
                 .thenReturn("");
 
-        String fetchedAccountOK = testObject.fetchAPIResourceRequest(BaseUrlParts.getBaseProfileApi() + "Jokefish-2265"
+        String fetchedAccountOK = testObject.fetchAPIResourceRequest(BaseUrlParts.getBaseProfileApi() + "Ghall-2523"
                 + BaseUrlParts.getBaseLocaleAndToken() + Token.getAccess_token());
 
         String fetchedAccountNOK = testObject.fetchAPIResourceRequest(BaseUrlParts.getBaseProfileApi() + BaseUrlParts.getBaseLocaleAndToken());
@@ -66,13 +66,13 @@ public class AccountHandlerApiTest {
     @Test
     public void fetchAccountFailedWrongBattleTagProvided() {
 
-        Mockito.when(testAccountHandlerApi.generateRequest("Jokefish-2265", testObject))
-                .thenReturn("Jokefish#2265");
+        Mockito.when(testAccountHandlerApi.generateRequest("Ghall-2523", testObject))
+                .thenReturn("Ghall#2523");
 
         Mockito.when(testAccountHandlerApi.generateRequest(" ", testObject))
                 .thenReturn("");
 
-        String fetchedAccountOK = testAccountHandlerApi.generateRequest("Jokefish-2265", testObject);
+        String fetchedAccountOK = testAccountHandlerApi.generateRequest("Ghall-2523", testObject);
         String fetchedAccountNOK = testAccountHandlerApi.generateRequest(" ", testObject);
 
         Assertions.assertNotEquals(fetchedAccountOK, fetchedAccountNOK);
@@ -81,8 +81,8 @@ public class AccountHandlerApiTest {
     @Test
     public void fetchAccountFailedNullBattleTagProvided() {
 
-        Mockito.when(testAccountHandlerApi.generateRequest("Jokefish-2265", testObject))
-                .thenReturn("Jokefish#2265");
+        Mockito.when(testAccountHandlerApi.generateRequest("Ghall-2523", testObject))
+                .thenReturn("Ghall#2523");
 
         /*Mockito.when(testAccountHandlerApi.generateRequest(null, testObject))
                 .thenReturn("");*/
@@ -91,7 +91,7 @@ public class AccountHandlerApiTest {
                 + BaseUrlParts.getBaseLocaleAndToken() + Token.getAccess_token()))
                 .thenReturn("");
 
-        String fetchedAccountOK = testAccountHandlerApi.generateRequest("Jokefish-2265", testObject);
+        String fetchedAccountOK = testAccountHandlerApi.generateRequest("Ghall-2523", testObject);
         String fetchedAccountNOK = testObject.fetchAPIResourceRequest(BaseUrlParts.getBaseProfileApi() + battleTag
                 + BaseUrlParts.getBaseLocaleAndToken() + Token.getAccess_token());
 

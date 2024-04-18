@@ -11,7 +11,7 @@ public class ShareableDataForTests {
     @Mock
     public static FetchToken testFetchTokenMock;
     public static final FetchToken testFetchToken = new FetchToken();
-    public static final String battleTag = "Jokefish#2265";
+    public static final String battleTag = "Ghall#2523";
     public static final String battleTagAsDosentExist = "dsf#123";
     public static final String wrongHeroIdFormatWarning = "Niepoprawny format heroId - tylko cyfry! Spróbuj ponownie.";
     public static final String itemSlugAndIdAsDoesntExist = "";

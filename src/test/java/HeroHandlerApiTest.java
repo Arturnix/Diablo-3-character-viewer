@@ -46,7 +46,7 @@ public class HeroHandlerApiTest {
     @Test
     public void fetchHeroFailedMissedCredentials() {
 
-        String requestUrlOK = BaseUrlParts.getBaseProfileApi() + "Jokefish-2265"
+        String requestUrlOK = BaseUrlParts.getBaseProfileApi() + "Ghall-2523"
                 + BaseUrlParts.getBaseHeroApi() + "162864678"
                 + BaseUrlParts.getBaseLocaleAndToken() + Token.getAccess_token();
 
@@ -66,13 +66,13 @@ public class HeroHandlerApiTest {
     @Test
     public void fetchHeroFailedWrongHeroIdProvided() {
 
-        Mockito.when(testHeroHandlerApi.generateRequest("Jokefish-2265", "162864678", testObject))
+        Mockito.when(testHeroHandlerApi.generateRequest("Ghall-2523", "162864678", testObject))
                 .thenReturn("162864678");
-        Mockito.when(testHeroHandlerApi.generateRequest("Jokefish-2265", " ", testObject))
+        Mockito.when(testHeroHandlerApi.generateRequest("Ghall-2523", " ", testObject))
                 .thenReturn("");
 
-        String fetchedHeroOK = testHeroHandlerApi.generateRequest("Jokefish-2265", "162864678", testObject);
-        String fetchedHeroNOK = testHeroHandlerApi.generateRequest("Jokefish-2265", " ", testObject);
+        String fetchedHeroOK = testHeroHandlerApi.generateRequest("Ghall-2523", "162864678", testObject);
+        String fetchedHeroNOK = testHeroHandlerApi.generateRequest("Ghall-2523", " ", testObject);
 
         Assertions.assertNotEquals(fetchedHeroOK, fetchedHeroNOK);
     }
@@ -80,12 +80,12 @@ public class HeroHandlerApiTest {
     @Test
     public void fetchHeroFailedWrongBattleTagProvided() {
 
-        Mockito.when(testHeroHandlerApi.generateRequest("Jokefish-2265", "162864678", testObject))
+        Mockito.when(testHeroHandlerApi.generateRequest("Ghall-2523", "162864678", testObject))
                 .thenReturn("162864678");
         Mockito.when(testHeroHandlerApi.generateRequest(" ", "162864678", testObject))
                 .thenReturn("");
 
-        String fetchedHeroOK = testHeroHandlerApi.generateRequest("Jokefish-2265", "162864678", testObject);
+        String fetchedHeroOK = testHeroHandlerApi.generateRequest("Ghall-2523", "162864678", testObject);
         String fetchedHeroNOK = testHeroHandlerApi.generateRequest(" ", "162864678", testObject);
 
         Assertions.assertNotEquals(fetchedHeroOK, fetchedHeroNOK);
@@ -94,13 +94,13 @@ public class HeroHandlerApiTest {
     @Test
     public void fetchHeroFailedNullHeroId() {
 
-        Mockito.when(testHeroHandlerApi.generateRequest("Jokefish-2265", "162864678", testObject))
+        Mockito.when(testHeroHandlerApi.generateRequest("Ghall-2523", "162864678", testObject))
                 .thenReturn("162864678");
-        Mockito.when(testHeroHandlerApi.generateRequest("Jokefish-2265", null, testObject))
+        Mockito.when(testHeroHandlerApi.generateRequest("Ghall-2523", null, testObject))
                 .thenReturn("");
 
-        String fetchedHeroOK = testHeroHandlerApi.generateRequest("Jokefish-2265", "162864678", testObject);
-        String fetchedHeroNOK = testHeroHandlerApi.generateRequest("Jokefish-2265", null, testObject);
+        String fetchedHeroOK = testHeroHandlerApi.generateRequest("Ghall-2523", "162864678", testObject);
+        String fetchedHeroNOK = testHeroHandlerApi.generateRequest("Ghall-2523", null, testObject);
 
         Assertions.assertNotEquals(fetchedHeroOK, fetchedHeroNOK);
     }
