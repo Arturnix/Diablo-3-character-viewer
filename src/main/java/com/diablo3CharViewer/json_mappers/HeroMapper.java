@@ -21,8 +21,13 @@ public class HeroMapper {
         if(!isHardcoreCharacter) {
             return heroCreator(node, false,false);
         } else {
-            boolean isDeadCharacter = node.get("dead").asBoolean();
-            return heroCreator(node, true, isDeadCharacter);
+            if(node.get("dead") != null) {
+                boolean isDeadCharacter = node.get("dead").asBoolean();
+                return heroCreator(node, true, isDeadCharacter);
+            } else {
+                boolean isDeadCharacter = node.get("alive").asBoolean();
+                return heroCreator(node, true, !isDeadCharacter);
+            }
         }
     }
 
